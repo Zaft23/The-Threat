@@ -24,7 +24,7 @@ public class Weapon : ScriptableObject
     
 
         //shoot function
-        GameObject bullet = Instantiate(BulletPrefab, GameObject.Find("FirePoint").transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(BulletPrefab, GameObject.Find("FirePoint/Point").transform.position, Quaternion.identity);
 
         //Muzzle Effect
 

@@ -8,9 +8,9 @@ public class PlayerActions : MonoBehaviour
     public Sprite currentWeaponSpr;
     private float _nextTimeOfFire = 0;
 
-    public Transform FirePoint;
-    Vector2 lookDirection;
-    float lookAngle;
+    
+    
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -19,14 +19,22 @@ public class PlayerActions : MonoBehaviour
        
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-        lookDirection = Camera.main.WorldToScreenPoint(Input.mousePosition);
-        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        lookDirection = new Vector2(lookDirection.x - transform.position.x, lookDirection.y - transform.position.y);
-        FirePoint.rotation = Quaternion.Euler(0, 0, lookAngle);
-        
+        Vector3 gunPose = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if(gunPose.x < transform.position.x)
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+        }
+
         if (Input.GetButton("Fire1"))
         {
             if(Time.time >= _nextTimeOfFire)
@@ -40,3 +48,4 @@ public class PlayerActions : MonoBehaviour
 
     }
 }
+

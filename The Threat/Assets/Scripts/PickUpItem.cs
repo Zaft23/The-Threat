@@ -12,7 +12,7 @@ public class PickUpItem : MonoBehaviour
         if(target.tag == "Player")
         {
             target.GetComponent<PlayerActions>().CurrentWeapon = Weapon;
-            target.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = Weapon.Artwork;
+            target.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = Weapon.Artwork;
             Destroy(gameObject);
         }
     }
