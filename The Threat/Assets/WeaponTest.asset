@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: Weapon Test
   Artwork: {fileID: 7482667652216324306, guid: 084c97463686f254a9080ac712be1a36, type: 3}
-  BulletPrefab: {fileID: 8261667502043488022, guid: 7b0276bf4c468a841a326e56be5b42c6, type: 3}
-  Damage: 20
+  BulletPrefab: {fileID: 3295582376259988921, guid: 7b0276bf4c468a841a326e56be5b42c6, type: 3}
+  FirePointTransform: {fileID: 0}
+  Damage: 10
   RateOfFire: 1
   BulletSpread: 1
   BulletsAmount: 5
   Mags: 0
+  BulletSpeed: 20
