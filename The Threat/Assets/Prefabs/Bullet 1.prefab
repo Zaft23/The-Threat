@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5108522154836076635}
   - component: {fileID: -4856609826182485543}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,4 +136,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b994788e61e50499a1ff95293af41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 11400000, guid: 03e6a3117f5151f419efe2d7bd9a54f4, type: 2}
+  Weapon: {fileID: 11400000, guid: 636954c9882ed8146b05fdb18d6c86a8, type: 2}
