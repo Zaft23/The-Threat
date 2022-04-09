@@ -7,16 +7,38 @@ public class PickUpItem : MonoBehaviour
     // Start is called before the first frame update
     public Weapon Weapon;
 
-    private void OnTriggerEnter2D(Collider2D target)
+    private void Start()
     {
-        if(target.tag == "Player")
-        {
-            target.GetComponent<PlayerActions>().CurrentWeapon = Weapon;
-            target.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = Weapon.Artwork;
-            Destroy(gameObject);
-        }
+        StartCoroutine(DestroyGun());
     }
 
+    private void OnCollisionEnter2D(Collision2D target)
+    {
+        if (target.gameObject.tag == "Player" && target.gameObject.GetComponent<PlayerActions>().CurrentPrimaryWeapon == null)
+        {
+            //GameObject.Find("Player Square").GetComponent<PlayerActions>(). = ;
+            //get component and check if weapon is not null
+
+
+            target.gameObject.GetComponent<PlayerActions>().CurrentPrimaryWeapon = Weapon;
+            //GameObject.Find("Hand?").GetComponent<SpriteRenderer>().sprite = CurrentWeapon.Artwork;
+            GameObject.Find("Hand?").GetComponent<SpriteRenderer>().sprite = Weapon.Artwork;
+            Destroy(gameObject);
+
+        }
+
+    }
+
+    //number of mags / bullet remember
+
+    private IEnumerator DestroyGun()
+    {
+        float time = 10f;
+        yield return new WaitForSeconds(time);
+        //_trailRenderer.emitting = false;
+        Destroy(gameObject);
+
+    }
 
 
 }

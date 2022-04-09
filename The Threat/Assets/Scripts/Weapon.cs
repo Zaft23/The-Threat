@@ -9,9 +9,8 @@ public class Weapon : ScriptableObject
     //public string description;
     public Sprite Artwork;
     public GameObject BulletPrefab;
-
     public Transform FirePointTransform = null;
-
+    public GameObject PickAble;
 
     public float Damage;
     public float RateOfFire;

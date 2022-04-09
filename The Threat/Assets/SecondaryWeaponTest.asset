@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 489a1fb50d3bd1d4698c337feae7bcfa, type: 3}
-  m_Name: WeaponTest
+  m_Name: SecondaryWeaponTest
   m_EditorClassIdentifier: 
-  WeaponName: Weapon Test
-  Artwork: {fileID: 21300000, guid: f01632ac8fa0abc4fa5bc257ba230199, type: 3}
-  BulletPrefab: {fileID: 3295582376259988921, guid: 7b0276bf4c468a841a326e56be5b42c6, type: 3}
+  WeaponName: Secondary Weapon Test
+  Artwork: {fileID: 21300000, guid: 94c0117818ff55343bf808398791a4dd, type: 3}
+  BulletPrefab: {fileID: 3295582376259988921, guid: 5c3ee0e99d45f3b49a518da786e041c7, type: 3}
   FirePointTransform: {fileID: 0}
-  PickAble: {fileID: 4427912205877662422, guid: fac102112fdafeb4f96ecadb7080755d, type: 3}
-  Damage: 10
+  PickAble: {fileID: 0}
+  Damage: 1
   RateOfFire: 1
-  BulletSpread: 1
-  BulletsAmount: 5
+  BulletSpread: 0
+  BulletsAmount: 0
   Mags: 0
-  BulletSpeed: 20
+  BulletSpeed: 10

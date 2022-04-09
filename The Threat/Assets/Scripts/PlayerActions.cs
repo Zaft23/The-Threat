@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    public Weapon CurrentWeapon;
-    public Sprite currentWeaponSpr;
+    public Weapon CurrentPrimaryWeapon;
+    public Sprite currentPrimaryWeaponSpr;
     public Transform FirePoint;
     float lookAngle;
-    
-    
-
-    //TEST
-    //public Transform FirePoint;
 
     private float _nextTimeOfFire = 0;
 
-
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = CurrentWeapon.Artwork;
-       
+
+        //this is some lame shit
+        //this cause an error if currentWeapon == null you use awake function instead of start,
+        if(CurrentPrimaryWeapon == null)
+        {
+            Debug.Log("Player has no Weapon");
+        }
+        else
+        {
+            GameObject.Find("Hand?").GetComponent<SpriteRenderer>().sprite = CurrentPrimaryWeapon.Artwork;
+        }
+        
+
     }
 
 
@@ -44,30 +49,39 @@ public class PlayerActions : MonoBehaviour
         {
             if(Time.time >= _nextTimeOfFire)
             {
-                Shoot();
-                _nextTimeOfFire = Time.time + 1 / CurrentWeapon.RateOfFire;
-                //rb = 
+                if (CurrentPrimaryWeapon == null)
+                {
+                    Debug.Log("Player Shooting Blanks");
+                }
+                else
+                {
+                    Shoot();
+                    _nextTimeOfFire = Time.time + 1 / CurrentPrimaryWeapon.RateOfFire;
+                    //rb = 
 
-                //rb.AddForce(FirePoint.up * CurrentWeapon.BulletSpeed, ForceMode2D.Impulse);
-
-                
+                    //rb.AddForce(FirePoint.up * CurrentWeapon.BulletSpeed, ForceMode2D.Impulse);
+                }
             }
-            
+        }
+
+        if(Input.GetButton("Throw"))
+        {
+            if (CurrentPrimaryWeapon != null)
+            {
+                ThrowGun();
+            }
+            else
+            {
+                Debug.Log("Can't Throw Gun");
+            }
         }
 
 
     }
+
     public void Shoot()
     {
-        //Vector3 shootDirection;
-        //shootDirection = Input.mousePosition;s
-        //shootDirection.z = 0.0f;
-        //shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-        //shootDirection = shootDirection - transform.position;
-
-        //shoot function
-
-        // OK i have no i fucking idea why and i don't have the courage to find out how it works
+        // OK i have no fucking idea why and i don't have the courage to find out how it works
         // and it shouldn't have taken me this long
         // but without these lines of codes, the bullet won't go where i want them to go 
         // and you don't actually fucking need look angle variable because i didn't event set it to any value
@@ -78,18 +92,36 @@ public class PlayerActions : MonoBehaviour
         // to create this god forsaken hybrids 
         // ... and i've created god knows how many of them in this project... HELP me
 
+            GameObject bullet = Instantiate(CurrentPrimaryWeapon.BulletPrefab);
+            bullet.transform.position = FirePoint.position;
+            bullet.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
 
-        GameObject bullet = Instantiate(CurrentWeapon.BulletPrefab);
-        bullet.transform.position = FirePoint.position;
-        bullet.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
-
-        bullet.GetComponent<Rigidbody2D>().velocity = FirePoint.right * CurrentWeapon.BulletSpeed;
-
+            bullet.GetComponent<Rigidbody2D>().velocity = FirePoint.right * CurrentPrimaryWeapon.BulletSpeed;
 
         //posisi fire point
         //Muzzle Effect
 
         //destroy on time or on hit object
     }
+
+    //throw gun: there's probably a better and efficient way of doing this.. but Too Bad!
+    public void ThrowGun()
+    {
+        float speed = 5f;
+
+        //give force only exist in this script
+        //Instantiate pickup prefab
+        GameObject gun = Instantiate(CurrentPrimaryWeapon.PickAble);
+        gun.transform.position = FirePoint.position;
+        gun.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        gun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * speed;
+        gameObject.GetComponent<PlayerActions>().CurrentPrimaryWeapon = null;
+        
+
+
+    }
+
+
+
 }
 

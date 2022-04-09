@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
                 _dashingDir = new Vector2(transform.localScale.x, 0);
             }
 
-            StartCoroutine(_StopDashing());
+            StartCoroutine(StopDashing());
 
         }
 
@@ -145,11 +145,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             _fJumpPressedRemember = _fJumpPressedRememberTime;
+            Debug.Log("Jump");
         }
 
         if (Input.GetButtonDown("Jump") && IsGrounded)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
+            Debug.Log("Jump2");
         }
 
         //Allow player to jump a few cm off from ground after jump
@@ -228,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private IEnumerator _StopDashing()
+    private IEnumerator StopDashing()
     {
         yield return new WaitForSeconds(_dashingTime);
         //_trailRenderer.emitting = false;
