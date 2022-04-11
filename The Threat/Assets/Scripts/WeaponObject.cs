@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponObject : MonoBehaviour
 {
 
-    public Weapon _Weapon;
+   // public PrimaryWeapon _Weapon;
 
     
 

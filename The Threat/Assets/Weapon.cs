@@ -7,10 +7,31 @@ public class Weapon : ScriptableObject
 {
     public string WeaponName;
     //public string description;
-    public Sprite Artwork;
+    public Sprite WeaponSprite;
+    public GameObject WeaponPrefab;
     public GameObject BulletPrefab;
     public Transform FirePointTransform = null;
     public GameObject PickAble;
+
+    public _WeaponType WeaponType;
+    public _WeaponSlot WeaponSlot;
+
+    public enum _WeaponType
+    {
+        Rifles,
+        SMG,
+        Shotgun,
+        SniperRifle,
+        Empty,
+    }
+
+    public enum _WeaponSlot
+    {
+        Primary,
+        Secondary,
+        Empty,
+    }
+
 
     public float Damage;
     public float RateOfFire;
