@@ -681,9 +681,9 @@ GameObject:
   - component: {fileID: 290800526}
   - component: {fileID: 290800525}
   - component: {fileID: 290800528}
+  - component: {fileID: 290800529}
   - component: {fileID: 290800523}
   - component: {fileID: 290800527}
-  - component: {fileID: 290800529}
   - component: {fileID: 290800530}
   - component: {fileID: 290800531}
   m_Layer: 0
@@ -859,6 +859,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirePoint: {fileID: 1966968723}
+  weapon: {fileID: 0}
+  MaxPrimaryAmmo: 50
+  MaxSecondaryAmmo: 20
+  ReloadTime: 4
 --- !u!70 &290800528
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -899,8 +903,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f230cbb7246b3b742863ee5e479fc1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentlyEquippedWeapon: 1
+  CurrentWeaponObject: {fileID: 0}
   _weaponHolder: {fileID: 714665075}
-  _defaultPrimaryWeapon: {fileID: 0}
 --- !u!114 &290800531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,7 +1321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &460238115
 Transform:
   m_ObjectHideFlags: 0
@@ -1901,7 +1906,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7751678, y: 1}
+    m_SensorSize: {x: 1.7769784, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2848,6 +2853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714665075}
   - component: {fileID: 714665076}
+  - component: {fileID: 714665077}
   m_Layer: 0
   m_Name: Hand?
   m_TagString: Untagged
@@ -2922,6 +2928,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &714665077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714665074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb5d3db69e08e04e97cba219a843def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &734026833
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    private int _currentlyEquippedWeapon = 1;
-    private GameObject _currentWeaponObject = null;
+    public int CurrentlyEquippedWeapon;
+    public GameObject CurrentWeaponObject = null;
 
 
     [SerializeField] private Transform _weaponHolder = null;
     private Inventory inventory;
 
-    [SerializeField] Weapon _defaultPrimaryWeapon = null;
+    //[SerializeField] Weapon EmptyWeapon = null;
 
     private void Start()
     {
@@ -22,40 +22,42 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1) && _currentlyEquippedWeapon != 0)
+        if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             UnEquipWeapon();
             EquipWeapon(inventory.GetItem(0));
-
+            
         }
         {
 
             
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && _currentlyEquippedWeapon != 1)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             UnEquipWeapon();
             EquipWeapon(inventory.GetItem(1));
+            
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && _currentlyEquippedWeapon != 2)
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             UnEquipWeapon();
+            //CurrentlyEquippedWeapon = 1;
 
         }
     }
 
     private void EquipWeapon(Weapon weapon)
     {
-        _currentlyEquippedWeapon = (int)weapon.WeaponSlot;
-        _currentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
+        CurrentlyEquippedWeapon = (int)weapon.WeaponSlot;
+        CurrentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
 
     }
 
-    private void UnEquipWeapon()
+    public void UnEquipWeapon()
     {
-        Destroy(_currentWeaponObject);
+        Destroy(CurrentWeaponObject);
     }
 
 

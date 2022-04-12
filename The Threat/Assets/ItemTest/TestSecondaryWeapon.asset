@@ -16,13 +16,12 @@ MonoBehaviour:
   WeaponSprite: {fileID: 21300000, guid: eb9ffadb98e02084d9c552f6d0c3335f, type: 3}
   WeaponPrefab: {fileID: 1180486607675005458, guid: 71660bb6ffd860845ae869668f7d36ec, type: 3}
   BulletPrefab: {fileID: 3295582376259988921, guid: 4c58bfb7ca65a3e44a7530075a3fba78, type: 3}
-  FirePointTransform: {fileID: 0}
   PickAble: {fileID: 1180486607675005458, guid: 882edda35a29e9541b2e77570ac8f389, type: 3}
   WeaponType: 0
   WeaponSlot: 1
-  Damage: 0
-  RateOfFire: 0
+  Damage: 5
+  RateOfFire: 2
   BulletSpread: 0
   BulletsAmount: 0
   Mags: 0
-  BulletSpeed: 0
+  BulletSpeed: 10

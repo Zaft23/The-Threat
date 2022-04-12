@@ -141,17 +141,19 @@ public class PlayerMovement : MonoBehaviour
             _coyoteRemember = _coyoteRememberTime;
         }
 
+
+        //better code
         _fJumpPressedRemember -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
             _fJumpPressedRemember = _fJumpPressedRememberTime;
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
         }
 
         if (Input.GetButtonDown("Jump") && IsGrounded)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
-            Debug.Log("Jump2");
+            //Debug.Log("Jump2");
         }
 
         //Allow player to jump a few cm off from ground after jump

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour
+public class AimRotation : MonoBehaviour
 {
     private Camera _mainCam;
     private Vector3 _mousePos;

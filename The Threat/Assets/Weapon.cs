@@ -10,11 +10,20 @@ public class Weapon : ScriptableObject
     public Sprite WeaponSprite;
     public GameObject WeaponPrefab;
     public GameObject BulletPrefab;
-    public Transform FirePointTransform = null;
     public GameObject PickAble;
-
+    
     public _WeaponType WeaponType;
     public _WeaponSlot WeaponSlot;
+
+
+    
+
+
+    public void FirePoint()
+    {
+        Transform FirePointTransform = WeaponPrefab.transform;
+
+    }
 
     public enum _WeaponType
     {
@@ -39,7 +48,6 @@ public class Weapon : ScriptableObject
     public int BulletsAmount;
     public int Mags;
     public float BulletSpeed;
-
 
 
 
