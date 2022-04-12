@@ -679,13 +679,13 @@ GameObject:
   - component: {fileID: 290800522}
   - component: {fileID: 290800521}
   - component: {fileID: 290800526}
-  - component: {fileID: 290800525}
-  - component: {fileID: 290800528}
+  - component: {fileID: 290800533}
   - component: {fileID: 290800529}
   - component: {fileID: 290800523}
   - component: {fileID: 290800527}
   - component: {fileID: 290800530}
   - component: {fileID: 290800531}
+  - component: {fileID: 290800532}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -799,32 +799,6 @@ MonoBehaviour:
   _cornerCorrectLayer:
     serializedVersion: 2
     m_Bits: 0
---- !u!61 &290800525
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290800519}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.017430961, y: 0.45630074}
-  m_SpriteTilingProperty:
-    border: {x: 0.875, y: 0, z: 1, w: 0.125}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6754142, y: 1.2573986}
-  m_EdgeRadius: 0
 --- !u!50 &290800526
 Rigidbody2D:
   serializedVersion: 4
@@ -859,26 +833,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirePoint: {fileID: 1966968723}
-  weapon: {fileID: 0}
-  MaxPrimaryAmmo: 50
-  MaxSecondaryAmmo: 20
-  ReloadTime: 4
---- !u!70 &290800528
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290800519}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.017430961, y: -0.6633974}
-  m_Size: {x: 0.6754142, y: 1.6767949}
-  m_Direction: 0
+  _canShoot: 0
+  CanReload: 1
+  _primaryCurrentAmmo: 0
+  _primaryCurrentStoredAmmo: 0
+  _secondaryCurrentAmmo: 0
+  _secondaryCurrentStoredAmmo: 0
+  _primaryMagIsEmpty: 0
+  _secondaryMagIsEmpty: 0
 --- !u!114 &290800529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,6 +881,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons: []
+--- !u!61 &290800532
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290800519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0040430725, y: 0.5579424}
+  m_SpriteTilingProperty:
+    border: {x: 0.875, y: 0, z: 1, w: 0.125}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7116273, y: 1.625359}
+  m_EdgeRadius: 0
+--- !u!58 &290800533
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290800519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.8288276}
+  serializedVersion: 2
+  m_Radius: 0.67117286
 --- !u!1 &315754544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,7 +1910,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7769784, y: 1}
+    m_SensorSize: {x: 1.7790263, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

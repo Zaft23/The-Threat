@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapons", menuName ="Weapons")]
@@ -11,7 +9,6 @@ public class Weapon : ScriptableObject
     public GameObject WeaponPrefab;
     public GameObject BulletPrefab;
     public GameObject PickAble;
-    
     public _WeaponType WeaponType;
     public _WeaponSlot WeaponSlot;
 
@@ -44,8 +41,10 @@ public class Weapon : ScriptableObject
 
     public float Damage;
     public float RateOfFire;
+    public float ReloadTime;
+    public int StoredAmmo;
+    public int BulletAmount;
     public float BulletSpread;
-    public int BulletsAmount;
     public int Mags;
     public float BulletSpeed;
 

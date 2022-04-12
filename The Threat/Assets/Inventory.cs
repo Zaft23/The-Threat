@@ -7,10 +7,13 @@ public class Inventory : MonoBehaviour
     //0 = primary, 1 = secondary ???
     [SerializeField] private Weapon[] _weapons;
 
+    //
+    private PlayerActions _actions;
     
 
     private void Start()
     {
+        _actions = GetComponent<PlayerActions>();
         IniVariables();
     }
 
@@ -23,7 +26,8 @@ public class Inventory : MonoBehaviour
             RemoveItem(newItemIndex);
         }
         _weapons[newItemIndex] = newItem;
-        
+
+        _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
 
     }
 

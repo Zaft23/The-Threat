@@ -20,8 +20,10 @@ MonoBehaviour:
   WeaponType: 0
   WeaponSlot: 1
   Damage: 5
-  RateOfFire: 2
+  RateOfFire: 0.5
+  ReloadTime: 2
+  StoredAmmo: 24
+  BulletAmount: 12
   BulletSpread: 0
-  BulletsAmount: 0
   Mags: 0
   BulletSpeed: 10
