@@ -10,7 +10,6 @@ public class InventoryManager : MonoBehaviour
     public int CurrentlEquippedWeaponType;
     public GameObject CurrentWeaponObject = null;
 
-
     [SerializeField] private Transform _weaponHolder = null;
     private Inventory inventory;
 
@@ -26,7 +25,7 @@ public class InventoryManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             UnEquipWeapon();
-            EquipWeapon(inventory.GetItem(0));
+            InstantiateWeapon(inventory.GetItem(0));
             
         }
         {
@@ -37,7 +36,7 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             UnEquipWeapon();
-            EquipWeapon(inventory.GetItem(1));
+            InstantiateWeapon(inventory.GetItem(1));
             
         }
 
@@ -49,13 +48,19 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void EquipWeapon(Weapon weapon)
+    private void InstantiateWeapon(Weapon weapon)
     {
-        CurrentlyEquippedWeapon = (int)weapon.WeaponSlot;
-        //CurrentlEquippedWeaponType = (int)weapon.WeaponType;
-        CurrentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
+        if(weapon!=null)
+        {
+            CurrentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
+            CurrentlyEquippedWeapon = (int)weapon.WeaponSlot;
+            CurrentlEquippedWeaponType = (int)weapon.WeaponType;
+        }
 
     }
+
+    
+
 
     public void UnEquipWeapon()
     {

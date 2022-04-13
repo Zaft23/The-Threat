@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: TestShotgun
   WeaponSprite: {fileID: 21300000, guid: d9d955207cd9bf24ca00ed292731333f, type: 3}
-  WeaponPrefab: {fileID: 7927684253491656160, guid: 244544e34e6e9e64cb1f178566e3ee28, type: 3}
-  BulletPrefab: {fileID: 0}
-  PickAble: {fileID: 0}
+  WeaponPrefab: {fileID: 3011785377563771488, guid: 0a2e45cd3bdcdb049895687766e8b227, type: 3}
+  BulletPrefab: {fileID: 3295582376259988921, guid: 6dc794d37d7b8154d9022af7a7966d4b, type: 3}
+  PickAble: {fileID: 7927684253491656160, guid: 244544e34e6e9e64cb1f178566e3ee28, type: 3}
   WeaponType: 2
   WeaponSlot: 0
   Damage: 100
   RateOfFire: 1
-  ReloadTime: 10
+  ReloadTime: 5
   StoredAmmo: 0
   BulletAmount: 6
   BulletSpread: 0

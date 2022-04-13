@@ -5,12 +5,18 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
 
-    public bool IsPrimary;
-    public bool IsSecondary;
+    public bool IsRifle;
+    public bool IsSmg;
+    public bool IsShotgun;
+    public bool IsSniper;
 
     //set random or fix later 
-    private int _primary = 10;
-    private int _secondary = 5;
+    public int Rifle = 10;
+    public int Smg = 15;
+    public int Shotgun = 2;
+    public int Sniper = 2;
+
+
 
     private void Start()
     {
@@ -23,30 +29,51 @@ public class PickUpItem : MonoBehaviour
 
         //also to check if item will exceed player max ammo
         //this is actually retarded but hey as long as it works.
-        if ( PlayerAmmo.PrimaryStoredAmmo < PlayerAmmo.MaxRifleSize  || PlayerAmmo.SecondaryStoredAmmo < PlayerAmmo.MaxSecondaryMags)
+        if ( PlayerAmmo.StoredRifleAmmo < PlayerAmmo.MaxRifleSize  || PlayerAmmo.StoredSmgAmmo < PlayerAmmo.MaxSmgSize || PlayerAmmo.StoredShotgunAmmo < PlayerAmmo.MaxShotgunSize
+                || PlayerAmmo.StoredSniperAmmo < PlayerAmmo.MaxSniperSize)
         {
             if (target.gameObject.tag == "Player")
             {
-                if (IsPrimary == true)
+                if (IsRifle == true)
                 {
-                    PlayerAmmo.PrimaryStoredAmmo += _primary;
-                    if(PlayerAmmo.PrimaryStoredAmmo > PlayerAmmo.MaxRifleSize)
+                    PlayerAmmo.StoredRifleAmmo += Rifle;
+                    if(PlayerAmmo.StoredRifleAmmo > PlayerAmmo.MaxRifleSize)
                     {
-                        PlayerAmmo.PrimaryStoredAmmo = PlayerAmmo.MaxRifleSize;
+                        PlayerAmmo.StoredRifleAmmo = PlayerAmmo.MaxRifleSize;
                     }
 
                 }
 
-                if (IsSecondary == true)
+                if (IsSmg == true)
                 {
-
-                    PlayerAmmo.SecondaryStoredAmmo += _secondary;
-                    if(PlayerAmmo.SecondaryStoredAmmo > PlayerAmmo.MaxSecondaryMags)
+                    PlayerAmmo.StoredSmgAmmo += Smg;
+                    if (PlayerAmmo.StoredSmgAmmo > PlayerAmmo.MaxSmgSize)
                     {
-                        PlayerAmmo.SecondaryStoredAmmo = PlayerAmmo.MaxSecondaryMags;
+                        PlayerAmmo.StoredSmgAmmo = PlayerAmmo.MaxSmgSize;
                     }
 
                 }
+
+                if (IsShotgun == true)
+                {
+                    PlayerAmmo.StoredShotgunAmmo += Shotgun;
+                    if (PlayerAmmo.StoredShotgunAmmo > PlayerAmmo.MaxShotgunSize)
+                    {
+                        PlayerAmmo.StoredShotgunAmmo = PlayerAmmo.MaxShotgunSize;
+                    }
+
+                }
+
+                if (IsRifle == true)
+                {
+                    PlayerAmmo.StoredSniperAmmo += Sniper;
+                    if (PlayerAmmo.StoredSniperAmmo > PlayerAmmo.MaxSniperSize)
+                    {
+                        PlayerAmmo.StoredSniperAmmo = PlayerAmmo.MaxSniperSize;
+                    }
+
+                }
+
 
 
                 Destroy(gameObject);

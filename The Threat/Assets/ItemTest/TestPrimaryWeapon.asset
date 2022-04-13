@@ -21,7 +21,7 @@ MonoBehaviour:
   WeaponSlot: 0
   Damage: 10
   RateOfFire: 1
-  ReloadTime: 5
+  ReloadTime: 2
   StoredAmmo: 180
   BulletAmount: 30
   BulletSpread: 0

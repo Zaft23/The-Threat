@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     //
     private PlayerActions _actions;
-    
+   
 
     private void Start()
     {
@@ -19,11 +19,12 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Weapon newItem)
     {
-        Debug.Log("here");
+
+        
         int newItemIndex = (int)newItem.WeaponSlot;
 
         if (_weapons[newItemIndex] != null)
-        {
+        { 
             //Debug.Log("here!!");
             RemoveItem(newItemIndex);
         }

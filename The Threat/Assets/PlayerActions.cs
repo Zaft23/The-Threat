@@ -26,10 +26,10 @@ public class PlayerActions : MonoBehaviour
     public bool CanReload = true;
 
     //Store primary
-    [SerializeField] private int _storedRifleAmmo;
-    [SerializeField] private int _storedSmgAmmo;
-    [SerializeField] private int _storedShotgunAmmo;
-    [SerializeField] private int _storedSniperAmmo;
+     public int StoredRifleAmmo;
+     public int StoredSmgAmmo;
+     public int StoredShotgunAmmo;
+     public int StoredSniperAmmo;
 
 
 
@@ -46,7 +46,9 @@ public class PlayerActions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D target)
     {
-        if(target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
+        // after the && part apparently that fixes the still can grab weapon problem.. holy fuck i don't know how i did it but thank God.. i did it
+        // praise the Code God!!
+        if(target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") && _inventory.GetItem(_manager.CurrentlEquippedWeaponType) == null)
         {
             Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
             _inventory.AddItem(newItem);
@@ -167,7 +169,7 @@ public class PlayerActions : MonoBehaviour
     {
         
 
-        //primary
+        //primary this is not particularly effiecent aswell as the update for the ammo is a bit late... too bad!
         if (slot == 0)
         {
             if (_primaryCurrentAmmo <= 0)
@@ -177,11 +179,32 @@ public class PlayerActions : MonoBehaviour
                 CheckCanShoot(_manager.CurrentlyEquippedWeapon);
             }
 
-            else
+            else if(_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Rifles)
             {
                 _primaryCurrentAmmo -= currentAmmoUsed;
-                PrimaryStoredAmmo = _storedRifleAmmo;
+                PrimaryStoredAmmo = StoredRifleAmmo;
                 PrimaryStoredAmmo -= currentStoredAmmoUsed;
+            }
+            else if(_inventory.GetItem(0).WeaponType == Weapon._WeaponType.SMG)
+            {
+                _primaryCurrentAmmo -= currentAmmoUsed;
+                PrimaryStoredAmmo = StoredSmgAmmo;
+                PrimaryStoredAmmo -= currentStoredAmmoUsed;
+
+            }
+            else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Shotgun)
+            {
+                _primaryCurrentAmmo -= currentAmmoUsed;
+                PrimaryStoredAmmo = StoredShotgunAmmo;
+                PrimaryStoredAmmo -= currentStoredAmmoUsed;
+
+            }
+            else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.SniperRifle)
+            {
+                _primaryCurrentAmmo -= currentAmmoUsed;
+                PrimaryStoredAmmo = StoredSniperAmmo;
+                PrimaryStoredAmmo -= currentStoredAmmoUsed;
+
             }
 
 
@@ -196,18 +219,34 @@ public class PlayerActions : MonoBehaviour
 
                 CheckCanShoot(_manager.CurrentlyEquippedWeapon);
             }
-            
-            else
+
+            else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.Rifles)
             {
                 _secondaryCurrentAmmo -= currentAmmoUsed;
+                SecondaryStoredAmmo = StoredRifleAmmo;
+                SecondaryStoredAmmo -= currentStoredAmmoUsed;
+            }
+            else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.SMG)
+            {
+                _secondaryCurrentAmmo -= currentAmmoUsed;
+                SecondaryStoredAmmo = StoredSmgAmmo;
+                SecondaryStoredAmmo -= currentStoredAmmoUsed;
+            }
+            else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.Shotgun)
+            {
+                _secondaryCurrentAmmo -= currentAmmoUsed;
+                SecondaryStoredAmmo = StoredShotgunAmmo;
+                SecondaryStoredAmmo -= currentStoredAmmoUsed;
+            }
+            else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.SniperRifle)
+            {
+                _secondaryCurrentAmmo -= currentAmmoUsed;
+                SecondaryStoredAmmo = StoredSniperAmmo;
                 SecondaryStoredAmmo -= currentStoredAmmoUsed;
             }
 
         }
     }
-
-
-    
 
 
     public void BulletShoot(Weapon currentWeapon)
@@ -260,7 +299,6 @@ public class PlayerActions : MonoBehaviour
             if (slot == 0)
             {
                 yield return new WaitForSeconds(_inventory.GetItem(0).ReloadTime);
-
                 int ammoToReload = _inventory.GetItem(0).BulletAmount - _primaryCurrentAmmo;
 
                 if (PrimaryStoredAmmo >= ammoToReload)
@@ -270,17 +308,50 @@ public class PlayerActions : MonoBehaviour
                         Debug.Log("Mag is already full");
                         //return;
                     }
-                    _primaryCurrentAmmo += ammoToReload;
-                    PrimaryStoredAmmo -= ammoToReload;
+                    else if(_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Rifles)
+                    {
+                        _primaryCurrentAmmo += ammoToReload;
+                        StoredRifleAmmo -= ammoToReload;
 
-                    _primaryMagIsEmpty = false;
-                    CheckCanShoot(slot);
+                        _primaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+                    else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.SMG)
+                    {
+                        _primaryCurrentAmmo += ammoToReload;
+                        StoredSmgAmmo -= ammoToReload;
+
+                        _primaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+                    else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Shotgun)
+                    {
+                        _primaryCurrentAmmo += ammoToReload;
+                        StoredShotgunAmmo -= ammoToReload;
+
+                        _primaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+                    else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.SniperRifle)
+                    {
+                        _primaryCurrentAmmo += ammoToReload;
+                        StoredSniperAmmo -= ammoToReload;
+
+                        _primaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+
                 }
                 else
                     Debug.Log("Not enough Ammo!");
 
 
             }
+
 
             if (slot == 1)
             {
@@ -295,11 +366,44 @@ public class PlayerActions : MonoBehaviour
                         Debug.Log("Mag is already full");
                         //return;
                     }
-                    _secondaryCurrentAmmo += ammoToReload;
-                    SecondaryStoredAmmo -= ammoToReload;
+                    else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.Rifles)
+                    {
+                        _secondaryCurrentAmmo += ammoToReload;
+                        StoredRifleAmmo -= ammoToReload;
 
-                    _secondaryMagIsEmpty = false;
-                    CheckCanShoot(slot);
+                        _secondaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+
+                    else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.SMG)
+                    {
+                        _secondaryCurrentAmmo += ammoToReload;
+                        StoredSmgAmmo -= ammoToReload;
+
+                        _secondaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+                    else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.SMG)
+                    {
+                        _secondaryCurrentAmmo += ammoToReload;
+                        StoredShotgunAmmo -= ammoToReload;
+
+                        _secondaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+                    else if (_inventory.GetItem(1).WeaponType == Weapon._WeaponType.SMG)
+                    {
+                        _secondaryCurrentAmmo += ammoToReload;
+                        StoredSniperAmmo -= ammoToReload;
+
+                        _secondaryMagIsEmpty = false;
+                        CheckCanShoot(slot);
+
+                    }
+
                 }
                 else
                     Debug.Log("Not enough Ammo!");
