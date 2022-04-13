@@ -4,50 +4,51 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-
-
     private Inventory _inventory;
     private InventoryManager _manager;
-    public Transform FirePoint;
     float lookAngle;
 
 
-
-    // TEST
-
+    [Header("Weapon Details")]
+    public Transform FirePoint;
+    
     private float _lastShootTime = 0;
 
-    [SerializeField] private bool _canShoot;
-    public bool CanReload = true;
     [SerializeField] private int _primaryCurrentAmmo;
-    [SerializeField] private int _primaryCurrentStoredAmmo;
+    public int PrimaryStoredAmmo;
 
     [SerializeField] private int _secondaryCurrentAmmo;
-    [SerializeField] private int _secondaryCurrentStoredAmmo;
+    public  int SecondaryStoredAmmo;
 
     [SerializeField] private bool _primaryMagIsEmpty = false;
     [SerializeField] private bool _secondaryMagIsEmpty = false;
-    //private float _nextTimeOfFire = 0;
+    [SerializeField] private bool _canShoot;
+    public bool CanReload = true;
 
-    //need magazine
-    //public Weapon weapon;
-    //public int MaxPrimaryAmmo = 50;
-    //private int _currentPrimaryAmmo;
-    //public int MaxSecondaryAmmo = 20;
-    //private int _currentSecondaryAmmo;
-    //public float ReloadTime = 4;
-    //private bool isReloading = false;
-
-    // TEST
+    //Store primary
+    [SerializeField] private int _storedRifleAmmo;
+    [SerializeField] private int _storedSmgAmmo;
+    [SerializeField] private int _storedShotgunAmmo;
+    [SerializeField] private int _storedSniperAmmo;
 
 
+
+
+    //primary
+    public int MaxRifleSize = 300;
+    public int MaxSmgSize = 500;
+    public int MaxShotgunSize = 32;
+    public int MaxSniperSize = 20;
+
+    //secondary
+    public int MaxSecondaryMags = 50;
 
 
     private void OnCollisionEnter2D(Collision2D target)
     {
         if(target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
         {
-            Weapon newItem = target.transform.GetComponent<PickUpItem>().Weapon;
+            Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
             _inventory.AddItem(newItem);
             Destroy(target.transform.gameObject);
 
@@ -76,8 +77,7 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        //float coolDownTime = 5;
-        //float ThrowAgain = 0;
+
 
         Vector3 gunPose = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (gunPose.x < transform.position.x)
@@ -90,19 +90,6 @@ public class PlayerActions : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
         }
 
-        //if (isReloading)
-            //return;
-
-        //to reload
-        //if(_currentPrimaryAmmo < MaxPrimaryAmmo || _currentSecondaryAmmo < MaxSecondaryAmmo)
-        //{
-        //    if(Input.GetKeyDown(KeyCode.R))
-        //    {
-        //        StartCoroutine(Reload());
-        //        return;
-        //    }
-
-        //}
 
         if (Input.GetButton("Fire1"))
         {
@@ -119,12 +106,6 @@ public class PlayerActions : MonoBehaviour
 
         }
 
-
-
-
-
-
-
         if (Input.GetKeyDown(KeyCode.G))
         {
 
@@ -133,26 +114,12 @@ public class PlayerActions : MonoBehaviour
         }
         
 
-
-
     }
 
-    //IEnumerator Reload()
-    //{
-    //    isReloading = true;
-    //    yield return new WaitForSeconds(ReloadTime);
-    //    if(_manager.CurrentlyEquippedWeapon == 0)
-    //    {
-    //        _currentPrimaryAmmo = MaxPrimaryAmmo;
-    //    }
-    //    if (_manager.CurrentlyEquippedWeapon == 1)
-    //    {
-    //        _currentSecondaryAmmo = MaxSecondaryAmmo;
-    //    }
-    //    isReloading = false;
 
-    //}
+    
 
+    //HERE
     private void CheckCanShoot(int slot)
     {
         //primary
@@ -176,10 +143,32 @@ public class PlayerActions : MonoBehaviour
        
     }
 
-    private void UseAmmo(int slot, int currentAmmoUsed, int currentStoredAmmoUsed)
+    //play around with ammo type
+    public void InitAmmo(int slot, Weapon weapon)
     {
         //primary
-        if(slot == 0)
+        if (slot == 0)
+        {
+            _primaryCurrentAmmo = weapon.BulletAmount;
+            
+        }
+
+
+        //secondary
+        if (slot == 1)
+        {
+            _secondaryCurrentAmmo = weapon.BulletAmount;
+            
+        }
+    }
+
+    //HERE
+    private void UseAmmo(int slot, int currentAmmoUsed, int currentStoredAmmoUsed)
+    {
+        
+
+        //primary
+        if (slot == 0)
         {
             if (_primaryCurrentAmmo <= 0)
             {
@@ -187,18 +176,19 @@ public class PlayerActions : MonoBehaviour
 
                 CheckCanShoot(_manager.CurrentlyEquippedWeapon);
             }
-                
+
             else
             {
                 _primaryCurrentAmmo -= currentAmmoUsed;
-                _primaryCurrentStoredAmmo -= currentStoredAmmoUsed;
+                PrimaryStoredAmmo = _storedRifleAmmo;
+                PrimaryStoredAmmo -= currentStoredAmmoUsed;
             }
 
 
         }
 
-        //primary
-        if(slot == 1)
+        //secondary
+        if (slot == 1)
         {
             if (_secondaryCurrentAmmo <= 0)
             {
@@ -210,29 +200,15 @@ public class PlayerActions : MonoBehaviour
             else
             {
                 _secondaryCurrentAmmo -= currentAmmoUsed;
-                _secondaryCurrentStoredAmmo -= currentStoredAmmoUsed;
+                SecondaryStoredAmmo -= currentStoredAmmoUsed;
             }
 
         }
     }
 
-    public void InitAmmo(int slot, Weapon weapon)
-    {
-        //primary
-        if(slot == 0)
-        {
-            _primaryCurrentAmmo = weapon.BulletAmount;
-            _primaryCurrentStoredAmmo = weapon.StoredAmmo;
-        }
 
+    
 
-        //secondary
-        if(slot == 1)
-        {
-            _secondaryCurrentAmmo = weapon.BulletAmount;
-            _secondaryCurrentStoredAmmo = weapon.StoredAmmo;
-        }
-    }
 
     public void BulletShoot(Weapon currentWeapon)
     {
@@ -279,6 +255,7 @@ public class PlayerActions : MonoBehaviour
         if (CanReload)
         {
             //yield return new WaitForSeconds(_inventory.Get)
+            var pAmmoType = _manager.CurrentlEquippedWeaponType;
 
             if (slot == 0)
             {
@@ -286,7 +263,7 @@ public class PlayerActions : MonoBehaviour
 
                 int ammoToReload = _inventory.GetItem(0).BulletAmount - _primaryCurrentAmmo;
 
-                if (_primaryCurrentStoredAmmo >= ammoToReload)
+                if (PrimaryStoredAmmo >= ammoToReload)
                 {
                     if (_primaryCurrentAmmo == _inventory.GetItem(0).BulletAmount)
                     {
@@ -294,7 +271,7 @@ public class PlayerActions : MonoBehaviour
                         //return;
                     }
                     _primaryCurrentAmmo += ammoToReload;
-                    _primaryCurrentStoredAmmo -= ammoToReload;
+                    PrimaryStoredAmmo -= ammoToReload;
 
                     _primaryMagIsEmpty = false;
                     CheckCanShoot(slot);
@@ -307,10 +284,10 @@ public class PlayerActions : MonoBehaviour
 
             if (slot == 1)
             {
-                yield return new WaitForSeconds(_inventory.GetItem(0).ReloadTime);
+                yield return new WaitForSeconds(_inventory.GetItem(1).ReloadTime);
 
                 int ammoToReload = _inventory.GetItem(1).BulletAmount - _secondaryCurrentAmmo;
-                if (_secondaryCurrentStoredAmmo >= ammoToReload)
+                if (SecondaryStoredAmmo >= ammoToReload)
                 {
 
                     if (_secondaryCurrentAmmo == _inventory.GetItem(1).BulletAmount)
@@ -319,7 +296,7 @@ public class PlayerActions : MonoBehaviour
                         //return;
                     }
                     _secondaryCurrentAmmo += ammoToReload;
-                    _secondaryCurrentStoredAmmo -= ammoToReload;
+                    SecondaryStoredAmmo -= ammoToReload;
 
                     _secondaryMagIsEmpty = false;
                     CheckCanShoot(slot);
@@ -337,11 +314,6 @@ public class PlayerActions : MonoBehaviour
         
 
     }
-
-
-
-
-
 
     //throw gun: there's probably a better and efficient way of doing this... Too Bad!
     public void ThrowGun()

@@ -19,15 +19,18 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Weapon newItem)
     {
+        Debug.Log("here");
         int newItemIndex = (int)newItem.WeaponSlot;
 
         if (_weapons[newItemIndex] != null)
         {
+            //Debug.Log("here!!");
             RemoveItem(newItemIndex);
         }
         _weapons[newItemIndex] = newItem;
 
         _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
+        //type?
 
     }
 

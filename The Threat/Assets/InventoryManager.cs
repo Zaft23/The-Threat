@@ -7,6 +7,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public int CurrentlyEquippedWeapon;
+    public int CurrentlEquippedWeaponType;
     public GameObject CurrentWeaponObject = null;
 
 
@@ -51,6 +52,7 @@ public class InventoryManager : MonoBehaviour
     private void EquipWeapon(Weapon weapon)
     {
         CurrentlyEquippedWeapon = (int)weapon.WeaponSlot;
+        //CurrentlEquippedWeaponType = (int)weapon.WeaponType;
         CurrentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
 
     }
