@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
+    //Handles Player actions like firing weapons, melee, and etc
+
+
     private Inventory _inventory;
     private InventoryManager _manager;
     float lookAngle;
-
-
+    #region Weapon Details
     [Header("Weapon Details")]
     public Transform FirePoint;
     
@@ -32,8 +34,6 @@ public class PlayerActions : MonoBehaviour
      public int StoredSniperAmmo;
 
 
-
-
     //primary
     public int MaxRifleSize = 300;
     public int MaxSmgSize = 500;
@@ -41,9 +41,12 @@ public class PlayerActions : MonoBehaviour
     public int MaxSniperSize = 20;
 
     //secondary
-    public int MaxSecondaryMags = 50;
+    //public int MaxSecondaryMags = 50;
+    #endregion
 
+    
 
+    
     private void OnCollisionEnter2D(Collision2D target)
     {
         // after the && part apparently that fixes the still can grab weapon problem.. holy fuck i don't know how i did it but thank God.. i did it
@@ -65,14 +68,11 @@ public class PlayerActions : MonoBehaviour
 
     void Start()
     {
-        GetRefrences();
-        _canShoot = true;
-        CanReload = true;
+        GetRefrences();   
     }
 
     private void OnEnable()
     {
-       // isReloading = false;
 
     }
 
@@ -92,12 +92,19 @@ public class PlayerActions : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
         }
 
-
+        var Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
         if (Input.GetButton("Fire1"))
         {
-  
-                Shooting();
+            Recoil.AddRecoil();
+            
+
+            Shooting();
                
+        }
+        else if(Input.GetButtonUp("Fire1"))
+        {
+            Recoil.StopRecoil();
+
         }
 
         //reload
@@ -119,9 +126,7 @@ public class PlayerActions : MonoBehaviour
     }
 
 
-    
-
-    //HERE
+    #region Check if player can shoot
     private void CheckCanShoot(int slot)
     {
         //primary
@@ -144,8 +149,9 @@ public class PlayerActions : MonoBehaviour
 
        
     }
+    #endregion
 
-    //play around with ammo type
+    #region initalize ammount of bullets guns can hold
     public void InitAmmo(int slot, Weapon weapon)
     {
         //primary
@@ -163,8 +169,9 @@ public class PlayerActions : MonoBehaviour
             
         }
     }
+    #endregion
 
-    //HERE
+    #region Use type of ammo correctly
     private void UseAmmo(int slot, int currentAmmoUsed, int currentStoredAmmoUsed)
     {
         
@@ -247,8 +254,9 @@ public class PlayerActions : MonoBehaviour
 
         }
     }
+    #endregion
 
-
+    #region Gun Shoots bullets
     public void BulletShoot(Weapon currentWeapon)
     {
         //lame set up shit again ffs
@@ -258,13 +266,15 @@ public class PlayerActions : MonoBehaviour
  
             GameObject fire = Instantiate(currWeapon.BulletPrefab);
 
-            fire.transform.position = GameObject.Find("FirePoint/NewPoint").transform.position;
+            fire.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
 
             fire.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
             fire.GetComponent<Rigidbody2D>().velocity = FirePoint.right * currWeaponSpeed;
 
     }
+    #endregion
 
+    #region shoot logic
     void Shooting()
     {
         CheckCanShoot(_manager.CurrentlyEquippedWeapon);
@@ -288,7 +298,11 @@ public class PlayerActions : MonoBehaviour
 
 
     }
+    #endregion
 
+   
+
+    #region reload logic
     IEnumerator Reload(int slot)
     {
         if (CanReload)
@@ -418,7 +432,9 @@ public class PlayerActions : MonoBehaviour
         
 
     }
+    #endregion
 
+    #region throw or remove gun from slot
     //throw gun: there's probably a better and efficient way of doing this... Too Bad!
     public void ThrowGun()
     {
@@ -433,7 +449,7 @@ public class PlayerActions : MonoBehaviour
 
         //limit = limit - 1;
 
-        PickAbleGun.transform.position = GameObject.Find("FirePoint/NewPoint").transform.position;
+        PickAbleGun.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
         PickAbleGun.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
         PickAbleGun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * force;
 
@@ -442,16 +458,22 @@ public class PlayerActions : MonoBehaviour
         _manager.UnEquipWeapon();
 
     }
-
+    #endregion
 
     private void GetRefrences()
     {
-        //_currentPrimaryAmmo = MaxPrimaryAmmo;
-        //_currentSecondaryAmmo = MaxSecondaryAmmo;
-
+        _canShoot = true;
+        CanReload = true;
         _inventory = GetComponent<Inventory>();
         _manager = GetComponent<InventoryManager>();
         var cam = GetComponentInChildren<AimRotation>();
+
+        //Test
+        
+
+
+        //Test
+
 
     }
 
