@@ -43,10 +43,16 @@ public class PlayerActions : MonoBehaviour
     //secondary
     //public int MaxSecondaryMags = 50;
     #endregion
+    // public Animator Animator;
 
+    public float MeleeDamage = 10;
+    public Transform MeleePoint;
+    public float AttackRange = 0.5f;
+    public LayerMask EnemyLayers;
     
 
-    
+
+    //collision for weapon system
     private void OnCollisionEnter2D(Collision2D target)
     {
         // after the && part apparently that fixes the still can grab weapon problem.. holy fuck i don't know how i did it but thank God.. i did it
@@ -76,10 +82,23 @@ public class PlayerActions : MonoBehaviour
 
     }
 
+    private void OnDrawGizmos()
+    {
+
+        if (MeleePoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(MeleePoint.position, AttackRange);
+
+    }
 
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            MeleeAttack();
+        }
 
         Vector3 gunPose = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (gunPose.x < transform.position.x)
@@ -93,6 +112,9 @@ public class PlayerActions : MonoBehaviour
         }
 
         var Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
+        if (Recoil == null)
+            return;
+        
         if (Input.GetButton("Fire1"))
         {
             Recoil.AddRecoil();
@@ -121,6 +143,13 @@ public class PlayerActions : MonoBehaviour
                 ThrowGun();
                 
         }
+
+
+
+
+        
+
+
         
 
     }
@@ -300,8 +329,6 @@ public class PlayerActions : MonoBehaviour
     }
     #endregion
 
-   
-
     #region reload logic
     IEnumerator Reload(int slot)
     {
@@ -460,8 +487,45 @@ public class PlayerActions : MonoBehaviour
     }
     #endregion
 
+    #region Melee
+    void MeleeAttack()
+    {
+        //animation setup followw https://www.youtube.com/watch?v=sPiVz1k-fEs&ab_channel=Brackeys
+        //animator.SetTrigger("Attack");
+
+
+        //detect range
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(MeleePoint.position, AttackRange, EnemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            //rewrite  name
+            enemy.GetComponent<EnemyHealthTest>().TakeDamage(MeleeDamage);
+
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+    #endregion
+
+
+
+
+
     private void GetRefrences()
     {
+
+
+
         _canShoot = true;
         CanReload = true;
         _inventory = GetComponent<Inventory>();

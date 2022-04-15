@@ -6,22 +6,28 @@ public class EnemyHealthTest : MonoBehaviour
 {
 
     public float Health;
+    private float _currentHealth;
     //public Weapon PlayersWeapon;
 
     //public death effect
 
     void Start()
     {
+        _currentHealth = Health;
+
         //var PDamage = PlayersWeapon.Damage;
     }
 
     public void TakeDamage (float Damage)
     {
 
-        Health -= Damage;
+        _currentHealth -= Damage;
 
-        if (Health <= 0)
+        //do animation
+
+        if (_currentHealth <= 0)
         {
+
             Die();
         }
 
