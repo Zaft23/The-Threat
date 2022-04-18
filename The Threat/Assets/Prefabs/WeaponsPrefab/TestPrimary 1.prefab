@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3495415152151633867}
   - component: {fileID: 3495415152151633844}
   m_Layer: 0
-  m_Name: TestPrimary
+  m_Name: TestPrimary 1
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

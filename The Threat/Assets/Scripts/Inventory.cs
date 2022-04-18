@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
 
     private void IniVariables()
     {
-        _weapons = new Weapon[3];
+        _weapons = new Weapon[2];
     }
 
 }
