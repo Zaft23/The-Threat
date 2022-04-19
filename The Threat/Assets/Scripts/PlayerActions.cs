@@ -101,15 +101,18 @@ public class PlayerActions : MonoBehaviour
         }
 
         Vector3 gunPose = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 characterScale = transform.localScale;
         if (gunPose.x < transform.position.x)
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-
+            //characterScale.x = -1;
         }
         else
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            //characterScale.x = 1;
         }
+        //transform.localScale = characterScale;
 
         var Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
         if (Recoil == null)
