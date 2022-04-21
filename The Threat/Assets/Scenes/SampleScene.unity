@@ -844,13 +844,13 @@ MonoBehaviour:
   _secondaryMagIsEmpty: 0
   _canShoot: 0
   CanReload: 1
-  StoredRifleAmmo: 500
-  StoredSmgAmmo: 200
-  StoredShotgunAmmo: 0
-  StoredSniperAmmo: 0
-  MaxRifleSize: 500
-  MaxSmgSize: 500
-  MaxShotgunSize: 32
+  StoredRifleAmmo: 300
+  StoredSmgAmmo: 400
+  StoredShotgunAmmo: 68
+  StoredSniperAmmo: 32
+  MaxRifleSize: 300
+  MaxSmgSize: 400
+  MaxShotgunSize: 68
   MaxSniperSize: 20
   MeleeDamage: 10
   MeleePoint: {fileID: 426798643}
