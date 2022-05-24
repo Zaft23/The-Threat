@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 342ca855cae8dc7499e5eba6f7d41213
+guid: 138b5a555ffc7244db1fef1fb5d6952c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,23 +100,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IdleZaki-Sheet_0
+      name: spritejumpanimation-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e82dc594dfbe8b4487341b758ef193b
-      internalID: -800227397
+      spriteID: 9305f404420208d4abd8f852cb0e465c
+      internalID: -1700780745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_1
+      name: spritejumpanimation-Sheet_1
       rect:
         serializedVersion: 2
         x: 48
@@ -151,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90fb98828f2012946b74ac9c067a7179
-      internalID: 2047814899
+      spriteID: 366a30b57571e81428f87d82cb8f8104
+      internalID: 408251478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_2
+      name: spritejumpanimation-Sheet_2
       rect:
         serializedVersion: 2
         x: 96
@@ -172,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 456f5a539256f114caa9c8ef8f1b0b06
-      internalID: -1840234983
+      spriteID: 1ee7e6f900c13ff42b5b62d103f79cb7
+      internalID: 258024527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_3
+      name: spritejumpanimation-Sheet_3
       rect:
         serializedVersion: 2
         x: 144
@@ -193,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dae1c93ff050a9046ab990466b543a78
-      internalID: 156999614
+      spriteID: be9c52ce999873644aae58166f45e610
+      internalID: 1742447076
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_4
+      name: spritejumpanimation-Sheet_4
       rect:
         serializedVersion: 2
         x: 192
@@ -214,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e7c6030a495e1c4689bfab3463d4df3
-      internalID: -1443322763
+      spriteID: 7493cce3ac4670145a31017dce252810
+      internalID: 16964532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_5
+      name: spritejumpanimation-Sheet_5
       rect:
         serializedVersion: 2
         x: 240
@@ -235,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c439a1bb605de34694f41f3ed6ef2eb
-      internalID: -797319110
+      spriteID: 06ccf907a678abe408dde569d0bfc086
+      internalID: 1174711959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_6
+      name: spritejumpanimation-Sheet_6
       rect:
         serializedVersion: 2
         x: 288
@@ -256,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 613e22b213767984f9a33457b0d8dfc1
-      internalID: 797866311
+      spriteID: af638773c4dc1c741ac37b5e038fe0fe
+      internalID: 1528056619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_7
+      name: spritejumpanimation-Sheet_7
       rect:
         serializedVersion: 2
         x: 336
@@ -277,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f3825a53e0b87a4d823104b515d77d3
-      internalID: 837018388
+      spriteID: 55b5ca04352e74742ba21bd93084b52b
+      internalID: 1581174027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_8
+      name: spritejumpanimation-Sheet_8
       rect:
         serializedVersion: 2
         x: 384
@@ -298,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af3e2bd88da5d7e43bd1b59f0b6fc7b5
-      internalID: -1488048211
+      spriteID: 726134aa61abe0841ba3fdc68881af29
+      internalID: 2028088528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IdleZaki-Sheet_9
+      name: spritejumpanimation-Sheet_9
       rect:
         serializedVersion: 2
         x: 432
@@ -319,113 +307,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2a680175e1b15e4d944602da52bdc89
-      internalID: 586002797
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IdleZaki-Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9daa67c17e1fb534bb4e97712cc453d7
-      internalID: 1717058063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IdleZaki-Sheet_11
-      rect:
-        serializedVersion: 2
-        x: 528
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77af74d27e8871848b18f09dc48dcfdc
-      internalID: 1683855288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IdleZaki-Sheet_12
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1797de20bb6da4e43979728ce89641c9
-      internalID: -1430773833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IdleZaki-Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 624
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97c7d4c06882e7d42b8f71b730b4cf67
-      internalID: -892591118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IdleZaki-Sheet_14
-      rect:
-        serializedVersion: 2
-        x: 672
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d71e7d8f2cf1e824fbace98d0bd77cf0
-      internalID: 705260880
+      spriteID: ccfcf7dcc2257e848873f35587e0f6b2
+      internalID: 1194028448
       vertices: []
       indices: 
       edges: []
@@ -441,21 +324,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IdleZaki-Sheet_3: 156999614
-      IdleZaki-Sheet_4: -1443322763
-      IdleZaki-Sheet_10: 1717058063
-      IdleZaki-Sheet_14: 705260880
-      IdleZaki-Sheet_12: -1430773833
-      IdleZaki-Sheet_1: 2047814899
-      IdleZaki-Sheet_11: 1683855288
-      IdleZaki-Sheet_5: -797319110
-      IdleZaki-Sheet_2: -1840234983
-      IdleZaki-Sheet_8: -1488048211
-      IdleZaki-Sheet_7: 837018388
-      IdleZaki-Sheet_0: -800227397
-      IdleZaki-Sheet_6: 797866311
-      IdleZaki-Sheet_13: -892591118
-      IdleZaki-Sheet_9: 586002797
+      spritejumpanimation-Sheet_9: 1194028448
+      spritejumpanimation-Sheet_7: 1581174027
+      spritejumpanimation-Sheet_8: 2028088528
+      spritejumpanimation-Sheet_6: 1528056619
+      spritejumpanimation-Sheet_0: -1700780745
+      spritejumpanimation-Sheet_3: 1742447076
+      spritejumpanimation-Sheet_1: 408251478
+      spritejumpanimation-Sheet_4: 16964532
+      spritejumpanimation-Sheet_5: 1174711959
+      spritejumpanimation-Sheet_2: 258024527
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
