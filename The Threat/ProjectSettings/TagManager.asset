@@ -8,6 +8,10 @@ TagManager:
   - ShootPoint
   - Bullet
   - Enemy
+  - PatrolWayPoint
+  - Edge
+  - Sight
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,11 +22,11 @@ TagManager:
   - Enemy
   - Player
   - PickUp
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Bullet
+  - Sight
+  - WayPoint
+  - AiBullet
+  - EnemyGroundCheck
   - 
   - 
   - 

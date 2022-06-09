@@ -111,9 +111,15 @@ public class PlayerActions : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
         }
 
-        var Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
-        if (Recoil == null)
-            return;
+        //if(GameObject.Find("Recoil") == null)
+        //{
+        //    Debug.Log("No recoil");
+        //}
+   
+            var Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
+            if (Recoil == null)
+                return;
+
         
         if (Input.GetButton("Fire1"))
         {
@@ -499,7 +505,8 @@ public class PlayerActions : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //rewrite  name
-            enemy.GetComponent<EnemyHealthTest>().TakeDamage(MeleeDamage);
+            //enemy stats component
+            enemy.GetComponent<EnemyStats>().TakeDamage(MeleeDamage);
 
         }
 

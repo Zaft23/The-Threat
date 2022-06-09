@@ -174,10 +174,10 @@ public class PlayerMovement : MonoBehaviour
             rb2D.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        if (Input.GetButtonUp("Jump") && rb2D.velocity.y > 0)
-        {
-            rb2D.velocity = new Vector2(rb2D.velocity.x, y:rb2D.velocity.y / _yVelJumpReleasedMod);
-        }
+        //if (Input.GetButtonUp("Jump") && rb2D.velocity.y > 0)
+        //{
+        //    rb2D.velocity = new Vector2(rb2D.velocity.x, y:rb2D.velocity.y / _yVelJumpReleasedMod);
+        //}
 
         //Corner Correction
         if (_canCornerCorrect) CornerCorrect(rb2D.velocity.y);
