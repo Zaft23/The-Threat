@@ -12,6 +12,7 @@ TagManager:
   - Edge
   - Sight
   - Ground
+  - Cover
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - WayPoint
   - AiBullet
   - EnemyGroundCheck
-  - 
+  - Cover
   - 
   - 
   - 

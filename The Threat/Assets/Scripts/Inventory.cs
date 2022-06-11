@@ -5,16 +5,25 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     //0 = primary, 1 = secondary ???
-    [SerializeField] private Weapon[] _weapons;
-
+    //[SerializeField] 
+    public Weapon[] Weapons;
+    private InventoryManager _slot;
     //
     private PlayerActions _actions;
-   
+
+    public bool PrimaryExist;
+    public bool SecondaryExist;
+
 
     private void Start()
     {
         _actions = GetComponent<PlayerActions>();
         IniVariables();
+
+        //
+        PrimaryExist = false;
+        SecondaryExist = false;
+
     }
 
     public void AddItem(Weapon newItem)
@@ -23,14 +32,42 @@ public class Inventory : MonoBehaviour
         
         int newItemIndex = (int)newItem.WeaponSlot;
 
-        if (_weapons[newItemIndex] != null)
-        { 
-            //Debug.Log("here!!");
-            RemoveItem(newItemIndex);
-        }
-        _weapons[newItemIndex] = newItem;
 
-        _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
+        //if (_weapons[newItemIndex] != null)
+        //{ 
+        //    //Debug.Log("here!!");
+        //  RemoveItem(newItemIndex);
+        //}
+
+        if(Weapons[0] == null)
+        //if (Weapons[0] == null && PrimaryExist == false)
+        //if (PrimaryExist == false)
+        {
+            //RemoveItem(newItemIndex);
+
+            Weapons[newItemIndex] = newItem;
+
+            _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
+
+            PrimaryExist = true;
+
+        }
+
+        if(Weapons[1] == null)
+        //else if (Weapons[1] == null && SecondaryExist == false)
+        //if (Weapons[1] == null && SecondaryExist == false)
+        //else if (SecondaryExist == false)
+        {
+            //RemoveItem(newItemIndex);
+
+            Weapons[newItemIndex] = newItem;
+
+            _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
+
+            SecondaryExist = true;
+        }
+
+        
         //type?
 
     }
@@ -38,18 +75,18 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(int index)
     {
         //better actions
-        _weapons[index] = null;
+        Weapons[index] = null;
 
     }
 
     public Weapon GetItem(int index)
     {
-        return _weapons[index];
+        return Weapons[index];
     }
 
     private void IniVariables()
     {
-        _weapons = new Weapon[2];
+        Weapons = new Weapon[2];
     }
 
 }

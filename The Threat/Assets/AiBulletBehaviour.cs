@@ -34,16 +34,11 @@ public class AiBulletBehaviour : MonoBehaviour
 
     private void Update()
     {
-        //var dir= _soldier.Direction;
-        
-        //transform.position = _rb2D.AddForce(dir * 55);
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //effect
-        //GameObject bullet = Weapon.BulletPrefab;
-        
 
         if (other.CompareTag("Player"))
         {

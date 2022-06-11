@@ -7,7 +7,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public int CurrentlyEquippedWeapon;
-    public int CurrentlEquippedWeaponType;
+    public int CurrentlyEquippedWeaponType;
     public GameObject CurrentWeaponObject = null;
 
     [SerializeField] private Transform _weaponHolder = null;
@@ -54,7 +54,7 @@ public class InventoryManager : MonoBehaviour
         {
             CurrentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
             CurrentlyEquippedWeapon = (int)weapon.WeaponSlot;
-            CurrentlEquippedWeaponType = (int)weapon.WeaponType;
+            CurrentlyEquippedWeaponType = (int)weapon.WeaponType;
         }
 
     }
