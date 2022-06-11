@@ -5,24 +5,30 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     //0 = primary, 1 = secondary ???
-    //[SerializeField] 
-    public Weapon[] Weapons;
-    private InventoryManager _slot;
+    [SerializeField] public Weapon[] IWeapons;
+
     //
     private PlayerActions _actions;
-
-    public bool PrimaryExist;
-    public bool SecondaryExist;
-
+   
 
     private void Start()
     {
         _actions = GetComponent<PlayerActions>();
         IniVariables();
+    }
 
-        //
-        PrimaryExist = false;
-        SecondaryExist = false;
+
+    private void Update()
+    {
+        if(IWeapons[0] == null)
+        {
+            _actions.PrimaryExist = false;
+        }
+
+        if(IWeapons[1] == null)
+        {
+            _actions.SecondaryExist = false;
+        }
 
     }
 
@@ -32,42 +38,24 @@ public class Inventory : MonoBehaviour
         
         int newItemIndex = (int)newItem.WeaponSlot;
 
+        //if (IWeapons[0] == null)
+        //{
+        //    IWeapons[newItemIndex] = newItem;
 
-        //if (_weapons[newItemIndex] != null)
-        //{ 
-        //    //Debug.Log("here!!");
-        //  RemoveItem(newItemIndex);
+        //    _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
         //}
 
-        if(Weapons[0] == null)
-        //if (Weapons[0] == null && PrimaryExist == false)
-        //if (PrimaryExist == false)
-        {
-            //RemoveItem(newItemIndex);
 
-            Weapons[newItemIndex] = newItem;
+            IWeapons[newItemIndex] = newItem;
 
             _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
-
-            PrimaryExist = true;
-
-        }
-
-        if(Weapons[1] == null)
-        //else if (Weapons[1] == null && SecondaryExist == false)
-        //if (Weapons[1] == null && SecondaryExist == false)
-        //else if (SecondaryExist == false)
-        {
-            //RemoveItem(newItemIndex);
-
-            Weapons[newItemIndex] = newItem;
-
-            _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
-
-            SecondaryExist = true;
-        }
 
         
+
+
+        //IWeapons[newItemIndex] = newItem;
+
+        //_actions.InitAmmo((int)newItem.WeaponSlot, newItem);
         //type?
 
     }
@@ -75,18 +63,19 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(int index)
     {
         //better actions
-        Weapons[index] = null;
+        IWeapons[index] = null;
 
     }
 
     public Weapon GetItem(int index)
     {
-        return Weapons[index];
+        return IWeapons[index];
     }
 
     private void IniVariables()
     {
-        Weapons = new Weapon[2];
+        IWeapons = new Weapon[2];
     }
 
 }
+ 

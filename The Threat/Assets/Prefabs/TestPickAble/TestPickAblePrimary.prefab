@@ -164,7 +164,7 @@ MonoBehaviour:
   IsSmg: 0
   IsShotgun: 0
   IsSniper: 0
-  isPrimary: 1
+  IsPrimary: 1
   isSecondary: 0
   Rifle: 10
   Smg: 15

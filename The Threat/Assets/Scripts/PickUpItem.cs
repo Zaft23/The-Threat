@@ -10,7 +10,7 @@ public class PickUpItem : MonoBehaviour
     public bool IsShotgun;
     public bool IsSniper;
 
-    public bool isPrimary;
+    public bool IsPrimary;
     public bool isSecondary;
 
     //set random or fix later 

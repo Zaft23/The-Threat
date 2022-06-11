@@ -7,7 +7,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public int CurrentlyEquippedWeapon;
-    public int CurrentlyEquippedWeaponType;
+    public int CurrentlEquippedWeaponType;
     public GameObject CurrentWeaponObject = null;
 
     [SerializeField] private Transform _weaponHolder = null;
@@ -26,7 +26,7 @@ public class InventoryManager : MonoBehaviour
         {
             UnEquipWeapon();
             InstantiateWeapon(inventory.GetItem(0));
-            
+            //inventory.RemoveItem(0);
         }
         {
 
@@ -37,7 +37,8 @@ public class InventoryManager : MonoBehaviour
         {
             UnEquipWeapon();
             InstantiateWeapon(inventory.GetItem(1));
-            
+            //inventory.RemoveItem(1);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -54,7 +55,7 @@ public class InventoryManager : MonoBehaviour
         {
             CurrentWeaponObject = Instantiate(weapon.WeaponPrefab, _weaponHolder);
             CurrentlyEquippedWeapon = (int)weapon.WeaponSlot;
-            CurrentlyEquippedWeaponType = (int)weapon.WeaponType;
+            CurrentlEquippedWeaponType = (int)weapon.WeaponType;
         }
 
     }

@@ -13,8 +13,7 @@ public class PlayerActions : MonoBehaviour
     #region Weapon Details
     [Header("Weapon Details")]
     public Transform FirePoint;
-    public Transform ThrowPoint;
-
+    
     private float _lastShootTime = 0;
 
     [SerializeField] private int _primaryCurrentAmmo;
@@ -50,50 +49,52 @@ public class PlayerActions : MonoBehaviour
     public Transform MeleePoint;
     public float AttackRange = 0.5f;
     public LayerMask EnemyLayers;
-    
 
+    public bool PrimaryExist = false;
+    public bool SecondaryExist = false;
 
     //collision for weapon system
     private void OnCollisionEnter2D(Collision2D target)
     {
         Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
-        var slot = target.transform.GetComponent<PickUpItem>();
+        var  newSlot = target.transform.GetComponent<PickUpItem>();
         // after the && part apparently that fixes the still can grab weapon problem.. holy fuck i don't know how i did it but thank God.. i did it
         // praise the Code God!!
-        //if(target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") )
-        //if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") && _inventory.GetItem(_manager.CurrentlyEquippedWeaponType) == null)
-        //if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") && _inventory.GetItem(_manager.CurrentlyEquippedWeapon) == null)
+        
+        if(target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
         //if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
-        if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") && _inventory.PrimaryExist == false)
-        //if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") &&_inventory.Weapons != null)
         {
+            if(newSlot.IsPrimary == true && _inventory.IWeapons[0] == null && PrimaryExist == false)
+            {
+                Debug.Log("1");
+                //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
+                _inventory.AddItem(newItem);
+                Destroy(target.transform.gameObject);
+                PrimaryExist = true;
+            }
 
-            _inventory.AddItem(newItem);
-            Destroy(target.transform.gameObject);
-            _inventory.PrimaryExist = true;
+            else if(newSlot.isSecondary == true && _inventory.IWeapons[1] == null && SecondaryExist == false)
+            {
+                Debug.Log("1");
+                //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
+                _inventory.AddItem(newItem);
+                Destroy(target.transform.gameObject);
+                SecondaryExist = true;
+            }
+            
+            
 
+        }
 
-
-
+        //else if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") && _inventory.IWeapons[1] == null)
+        ////if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
+        //{
+        //    Debug.Log("2");
         //    //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
-        //    //_inventory.AddItem(newItem);
-        //    //Destroy(target.transform.gameObject);
-
-        }
-        else if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp") && _inventory.SecondaryExist == false)
-        {
-
-            _inventory.AddItem(newItem);
-            Destroy(target.transform.gameObject);
-            _inventory.SecondaryExist = true;
-
-        }
-        //{        
-            //_inventory.AddItem(newItem);
-            //(target.transform.gameObject);
+        //    _inventory.AddItem(newItem);
+        //    Destroy(target.transform.gameObject);
 
         //}
-
 
     }
 
@@ -178,7 +179,15 @@ public class PlayerActions : MonoBehaviour
 
                 ThrowGun();
                 
-        }   
+        }
+
+
+
+
+        
+
+
+        
 
     }
 
@@ -363,7 +372,7 @@ public class PlayerActions : MonoBehaviour
         if (CanReload)
         {
             //yield return new WaitForSeconds(_inventory.Get)
-            var pAmmoType = _manager.CurrentlyEquippedWeaponType;
+            var pAmmoType = _manager.CurrentlEquippedWeaponType;
 
             if (slot == 0)
             {
@@ -499,37 +508,17 @@ public class PlayerActions : MonoBehaviour
 
         float force = 5f;
         var currWeapon = _inventory.GetItem(_manager.CurrentlyEquippedWeapon);
+        gameObject.GetComponent<Inventory>().RemoveItem(_manager.CurrentlyEquippedWeapon);
+        GameObject PickAbleGun = Instantiate(currWeapon.PickAble);
 
-        if(_manager.CurrentlyEquippedWeapon == 0)
-        {
-            gameObject.GetComponent<Inventory>().RemoveItem(_manager.CurrentlyEquippedWeapon);
-            gameObject.GetComponent<Inventory>().RemoveItem(_manager.CurrentlyEquippedWeaponType);
-            GameObject PickAbleGun = Instantiate(currWeapon.PickAble);
-            //limit = limit - 1;
-            //PickAbleGun.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
-            PickAbleGun.transform.position = ThrowPoint.transform.position;
-            PickAbleGun.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
-            PickAbleGun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * force;
-            
-            _inventory.PrimaryExist = false;
-        }
+        //limit = limit - 1;
 
-        else if (_manager.CurrentlyEquippedWeapon == 1)
-        {
-            gameObject.GetComponent<Inventory>().RemoveItem(_manager.CurrentlyEquippedWeapon);
-            gameObject.GetComponent<Inventory>().RemoveItem(_manager.CurrentlyEquippedWeaponType);
-            GameObject PickAbleGun = Instantiate(currWeapon.PickAble);
-            //limit = limit - 1;
-            //PickAbleGun.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
-            PickAbleGun.transform.position = ThrowPoint.transform.position;
-            PickAbleGun.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
-            PickAbleGun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * force;
-            _inventory.SecondaryExist = false;
-        }
+        PickAbleGun.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
+        PickAbleGun.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        PickAbleGun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * force;
 
 
-
-
+        
         _manager.UnEquipWeapon();
 
     }

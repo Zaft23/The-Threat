@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -157221573235764792}
   - component: {fileID: -7208359876173100996}
   - component: {fileID: 708365257653758645}
+  - component: {fileID: -573637520338723383}
   m_Layer: 8
   m_Name: TestPickAbleShotgun
   m_TagString: Weapon
@@ -147,3 +148,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 11400000, guid: d99bc92745ae0aa4085da5054d3ea7a1, type: 2}
+--- !u!114 &-573637520338723383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927684253491656160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d2db1260443ab40bd73e0a2774b99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsRifle: 0
+  IsSmg: 0
+  IsShotgun: 1
+  IsSniper: 0
+  IsPrimary: 1
+  isSecondary: 0
+  Rifle: 10
+  Smg: 15
+  Shotgun: 2
+  Sniper: 2
