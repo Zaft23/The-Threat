@@ -74,19 +74,32 @@ public class SniperBossMoveState : IESniperBossStates
 
     public void OntriggerEnter(Collider2D other)
     {
-    //    if (other.tag == "PatrolWayPoint" )
-    //    {
-    //        //_enemy.CanTakeDamage = true;
-    //        //_enemy.CanTakeSupression = false;
-    //        if (_enemy.transform.position == _enemy.Waypoints[_enemy.WaypointIndex].transform.position)
-    //        {
-    //            Debug.Log("ayyyyyyyyyyyyyyyy");
-    //            //_enemy.ChangeNumber = false;
-    //            //_enemy.CanShoot = true;
-    //            _enemy.ChangeState(new SniperBossAttackState());
-    //        }
 
-    //    }
+        if (other.tag == "PatrolWayPoint")
+        {
+
+            Debug.Log("ayyyyyyyyyyyyyyyy");
+            //_enemy.CanShoot = true;
+            _enemy.ChangeState(new SniperBossAttackState());
+        }
+
+
+
+
+
+        //    if (other.tag == "PatrolWayPoint" )
+        //    {
+        //        //_enemy.CanTakeDamage = true;
+        //        //_enemy.CanTakeSupression = false;
+        //        if (_enemy.transform.position == _enemy.Waypoints[_enemy.WaypointIndex].transform.position)
+        //        {
+        //            Debug.Log("ayyyyyyyyyyyyyyyy");
+        //            //_enemy.ChangeNumber = false;
+        //            //_enemy.CanShoot = true;
+        //            _enemy.ChangeState(new SniperBossAttackState());
+        //        }
+
+        //    }
 
         //if (other.CompareTag("Bullet"))
         //{

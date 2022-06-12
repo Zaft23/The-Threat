@@ -291,6 +291,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &59170368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 59170369}
+  m_Layer: 7
+  m_Name: ThrowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &59170369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59170368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 290800522}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &118230725
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +721,7 @@ GameObject:
   - component: {fileID: 226134147}
   m_Layer: 6
   m_Name: SniperBossTest
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,7 +739,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 0}
-  Damage: 50
+  Player: {fileID: 0}
+  EnemyStats: {fileID: 0}
+  SuppressionHealth: 10
+  RSuppressionHealth: 0
+  CurrentSuppressionHealth: 0
+  CanTakeDamage: 0
+  CanTakeSupression: 0
+  CanAttack: 0
   MoveSpeed: 4
   MoveSpeedR: 0
   FiringTime: 0
@@ -718,7 +756,7 @@ MonoBehaviour:
   FirePoint: {fileID: 2025538800}
   Direction: {x: 0, y: 0, z: 0}
   Gun: {fileID: 0}
-  RateOfFire: 3
+  RateOfFire: 1.5
   ShootingTime: 0
   StartShootingTime: 1
   EngagementTime: 0
@@ -728,10 +766,13 @@ MonoBehaviour:
   Target: {fileID: 0}
   GroundCheck: {fileID: 0}
   CurrentPosition: {fileID: 0}
-  _waypoints:
+  Waypoints:
   - {fileID: 983470251}
   - {fileID: 1753718055}
   - {fileID: 1911046500}
+  WaypointIndex: 0
+  RandomWayPoint: 0
+  ChangeNumber: 0
 --- !u!50 &226134148
 Rigidbody2D:
   serializedVersion: 4
@@ -765,7 +806,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee35d5116c2f5a044b7bb6236d87050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHealth: 100
+  EnemyHealth: 500
+  EnemyDamage: 0
+  CanMove: 0
 --- !u!61 &226134150
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1101,6 +1144,7 @@ Transform:
   - {fileID: 293699872}
   - {fileID: 888236018}
   - {fileID: 1249798982}
+  - {fileID: 59170369}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1190,12 +1234,15 @@ MonoBehaviour:
   MaxSmgSize: 400
   MaxShotgunSize: 68
   MaxSniperSize: 20
+  ThrowPoint: {fileID: 0}
   MeleeDamage: 10
   MeleePoint: {fileID: 426798643}
   AttackRange: 1
   EnemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  PrimaryExist: 0
+  SecondaryExist: 0
 --- !u!114 &290800529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,6 +1256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  BaseDamage: 0
 --- !u!114 &290800530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,7 +1270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentlyEquippedWeapon: 1
-  CurrentlyEquippedWeaponType: 0
+  CurrentlEquippedWeaponType: 0
   CurrentWeaponObject: {fileID: 0}
   _weaponHolder: {fileID: 714665075}
 --- !u!114 &290800531
@@ -1237,9 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f00f38423a781c4d8d9687a37340b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapons:
-  - {fileID: 0}
-  - {fileID: 0}
+  IWeapons: []
 --- !u!61 &290800532
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2279,7 +2325,7 @@ Camera:
   far clip plane: 100
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2303,7 +2349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.86, y: 2.048, z: -10}
+  m_LocalPosition: {x: 3.86, y: 2.048, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2652,17 +2698,17 @@ MonoBehaviour:
   m_Priority: 1
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 293699872}
+  m_Follow: {fileID: 290800522}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 5
+    OrthographicSize: 10
     NearClipPlane: -30
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7774725, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2679,7 +2725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582991303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.86, y: 2.048, z: -10}
+  m_LocalPosition: {x: 3.86, y: 2.048, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6262,7 +6308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 11400000, guid: bc795941dece0d64ea63b009d58e0ddf, type: 2}
-  Damage: 0
   MoveSpeed: 3
   ChaseSpeed: 2
   ChaseSpeedR: 2
@@ -6393,6 +6438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 100
+  EnemyDamage: 0
+  CanMove: 0
 --- !u!1 &1504869842
 GameObject:
   m_ObjectHideFlags: 0
@@ -7145,6 +7192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 100
+  EnemyDamage: 0
+  CanMove: 0
 --- !u!1 &1560939127
 GameObject:
   m_ObjectHideFlags: 0
@@ -8618,7 +8667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025538799}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.38, y: -0.001, z: 0}
+  m_LocalPosition: {x: 1.83, y: -0.001, z: 0}
   m_LocalScale: {x: 1, y: 0.3046169, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -130,11 +130,12 @@ public class AiSniperBoss : MonoBehaviour
             //ChangeNumber = true;
         }
 
-        if (transform.position == Waypoints[WaypointIndex].transform.position)
-        {
-            ChangeNumber = false;
-            ChangeState(new SniperBossAttackState());
-        }
+        //was trying to check if you go to intended waypoint but fuck it
+        //if (transform.position == Waypoints[WaypointIndex].transform.position)
+        //{
+            //ChangeNumber = false;
+           //ChangeState(new SniperBossAttackState());
+        //}
 
         //if(SuppressionHealth != 0)
         //ignore collision

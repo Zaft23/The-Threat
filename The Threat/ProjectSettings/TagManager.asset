@@ -13,6 +13,7 @@ TagManager:
   - Sight
   - Ground
   - Cover
+  - Boss
   layers:
   - Default
   - TransparentFX
