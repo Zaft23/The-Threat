@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump details")]
     public float JumpForce;
-    [SerializeField] private float _yVelJumpReleasedMod = 2F;
+    //[SerializeField] private float _yVelJumpReleasedMod = 2F;
     [SerializeField] private float _fJumpPressedRememberTime = 0.2f;
     [SerializeField] private float _fJumpPressedRemember = 0;
     [SerializeField] float _coyoteRemember = 0;
@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
         //Allow player to jump a few cm off from ground after jump
         if ((_fJumpPressedRemember > 0) && (_coyoteRemember > 0))
         {
-            _fJumpPressedRemember = 0;
+           _fJumpPressedRemember = 0;
             _coyoteRemember = 0;
             rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
 
