@@ -5,7 +5,7 @@ using UnityEngine;
 public class SniperBossIdleState : IESniperBossStates
 {
     private AiSniperBoss _enemy;
-
+    private EnemyStats _stats;
     private float _idleTimer;
     private float _idleDuration = 4;
 
@@ -13,6 +13,7 @@ public class SniperBossIdleState : IESniperBossStates
     {
 
         this._enemy = enemy;
+        //this._stats = stats;
     }
 
     public void Execute()

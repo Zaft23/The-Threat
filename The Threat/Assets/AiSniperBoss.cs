@@ -5,10 +5,22 @@ using UnityEngine;
 public class AiSniperBoss : MonoBehaviour
 {
     public Weapon Weapon;
+    public Player Player;
+
+    public EnemyStats EnemyStats;
+
+    //
+    public float SuppressionHealth;
+    public float RSuppressionHealth;
+    public float CurrentSuppressionHealth;
+    public bool CanTakeDamage;
+    public bool CanTakeSupression;
+    public bool CanAttack;
+
 
     //public float EnemyHealth;
     //private float _currentHealth;
-    public float Damage;
+    //public float Damage;
     public float MoveSpeed;
     public float MoveSpeedR;
     public float FiringTime;
@@ -48,15 +60,22 @@ public class AiSniperBoss : MonoBehaviour
 
     public Transform CurrentPosition;
     [SerializeField]
-    Transform[] _waypoints;
-    private int _waypointIndex;
-    private int _randomWaypoint;
-    private bool _changeNumber;
+    public Transform[] Waypoints;
+    [SerializeField]
+    public int WaypointIndex;
+    //public Transform WPintIndex;
+    public int RandomWayPoint;
+    public bool ChangeNumber;
+    private int rand;
 
     private void Awake()
     {
 
         Rb2d = GetComponent<Rigidbody2D>();
+        //transform.position = _waypoints[rand].transform.position;
+        //WPintIndex.transform.position = _waypoints[rand].transform.position;
+        //rand = Random.Range(1, 3);
+        RandomWayPoint = Random.Range(0, 3);
     }
 
 
@@ -69,14 +88,27 @@ public class AiSniperBoss : MonoBehaviour
         //_currentHealth = EnemyHealth;
         _facingRight = true;
         ShootingTime = StartShootingTime;
-        ChangeState(new SniperBossMoveState());
-        //CanShoot = true;
+        ChangeState(new SniperBossAttackState());
+        //ChangeState(new SniperBossMoveState());
 
+        //CanShoot = true;
+        CanTakeDamage = false;
 
         //
-  
-        transform.position = _waypoints[_waypointIndex].transform.position;
-        _changeNumber = false;
+        
+
+        //transform.position = _waypoints[rand.transform.position;
+        //transform.position = _waypoints[1];
+        transform.position = Waypoints[WaypointIndex].transform.position;
+        //WPintIndex.transform.position = _waypoints[rand].transform.position;
+        ChangeNumber = false;
+        
+        //
+        RSuppressionHealth = SuppressionHealth;
+
+
+
+
     }
 
 
@@ -87,53 +119,123 @@ public class AiSniperBoss : MonoBehaviour
         _currentState.Execute();
         LookAtTarget();
 
-        if(_changeNumber == true)
+        if(ChangeNumber == true)
         {
-            _randomWaypoint = Random.Range(0, 3);
+            RandomWayPoint = Random.Range(0, 3);
         }
         
+        if(SuppressionHealth == 0)
+        {
+            CanTakeSupression = false;
+            //ChangeNumber = true;
+        }
 
+        if (transform.position == Waypoints[WaypointIndex].transform.position)
+        {
+            ChangeNumber = false;
+            ChangeState(new SniperBossAttackState());
+        }
+
+        //if(SuppressionHealth != 0)
         //ignore collision
 
-        //if (GroundCheck == null)
-        //{
-        //    ChaseSpeed = 0;
-        //}
+            //if (GroundCheck == null)
+            //{
+            //    ChaseSpeed = 0;
+            //}
 
-        //if (ChaseSpeed == 0 && Target == null)
-        //{
-        //    StartCoroutine(ResetChaseSpeed());
+            //if (ChaseSpeed == 0 && Target == null)
+            //{
+            //    StartCoroutine(ResetChaseSpeed());
 
-        //    Debug.Log("target dissapear");
-        //}
+            //    Debug.Log("target dissapear");
+            //}
 
-        //if (_canShoot == false)
-        //{
-        //    StartCoroutine(ResetShootingTime());
-        //}
-
+            //if (_canShoot == false)
+            //{
+            //    StartCoroutine(ResetShootingTime());
+            //}
 
 
     }
 
+    public void AiShoot()
+    {
+
+        var Player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //if (CanShoot == true)
+        //{
+        if (ShootingTime <= 0)
+        {
+            Debug.Log("amkiiiiiiiiiiiiiinh");
+            GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+
+            ShootingTime = RateOfFire;
+
+            //StartCoroutine(BooleanShootingTime());
+
+        }
+        else
+        {
+            ShootingTime -= Time.deltaTime;
+        }
+        //}
+
+    }
     //void RandomNumber()
     //{
     //    _randomWaypoint = Random.Range(0, 3);
     //}
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        _currentState.OntriggerEnter(other);
 
+
+    }
+
+    public void TakeSupressionDamage(float Damage)
+    {
+        SuppressionHealth -= Damage;
+        CurrentSuppressionHealth = SuppressionHealth;
+        //do animation
+
+        if (SuppressionHealth <= 0)
+        {
+            Debug.Log("enemy supressed");
+            //do animation
+
+            if (CurrentSuppressionHealth <= 0)
+            {
+                ChangeState(new SniperBossMoveState());
+                SuppressionHealth = RSuppressionHealth;
+                //ChangeNumber = true;
+            }
+
+        }
+
+
+    }
 
 
 
     public void MoveToCover()
     {
-        this.transform.position = Vector2.MoveTowards(transform.position, _waypoints[_waypointIndex].transform.position,
-        MoveSpeed * Time.deltaTime);
+        if(WaypointIndex < 3)
+        { 
+           //WPintIndex.transform.position = _waypoints[WaypointIndex].transform.position;
+            this.transform.position = Vector2.MoveTowards(transform.position, Waypoints[WaypointIndex].transform.position,
+                MoveSpeed * Time.deltaTime);
 
-        if(transform.position == _waypoints[_waypointIndex].transform.position)
+        }
+
+
+        if(transform.position == Waypoints[WaypointIndex].transform.position)
         {
-            _waypointIndex = _randomWaypoint;
-            _changeNumber = true;
+            WaypointIndex = RandomWayPoint;
+            ChangeNumber = true;
+            //WPintIndex.transform.position = Waypoints[WaypointIndex].transform.position;
             //CanShoot = true;
         }
 
@@ -194,41 +296,13 @@ public class AiSniperBoss : MonoBehaviour
 
 
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        _currentState.OntriggerEnter(other);
-    }
-
-
-    public void AiShoot()
-    {
-
-        var Player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        //if (CanShoot == true)
-        //{
-            if (ShootingTime <= 0)
-            {
-                Debug.Log("amkiiiiiiiiiiiiiinh");
-                GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
-
-                ShootingTime = RateOfFire;
-
-                //StartCoroutine(BooleanShootingTime());
-
-            }
-            else
-            {
-                ShootingTime -= Time.deltaTime;
-            }
-        //}
+  //  private void OnTriggerEnter2D(Collider2D other)
+   // {
+        //_currentState.OntriggerEnter(other);
+   // }
 
 
 
-
-
-
-    }
 
     public void Stop()
     {

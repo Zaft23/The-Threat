@@ -45,6 +45,9 @@ public class PlayerActions : MonoBehaviour
     #endregion
     // public Animator Animator;
 
+    public Transform ThrowPoint;
+
+
     public float MeleeDamage = 10;
     public Transform MeleePoint;
     public float AttackRange = 0.5f;
@@ -513,7 +516,7 @@ public class PlayerActions : MonoBehaviour
 
         //limit = limit - 1;
 
-        PickAbleGun.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
+        PickAbleGun.transform.position = ThrowPoint.position;
         PickAbleGun.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
         PickAbleGun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * force;
 

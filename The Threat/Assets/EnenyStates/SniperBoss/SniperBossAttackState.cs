@@ -5,6 +5,7 @@ using UnityEngine;
 public class SniperBossAttackState : IESniperBossStates
 {
     private AiSniperBoss _enemy;
+    private EnemyStats _stats;
 
     private float _engageTimer;
     private float _engageDuration = 4;
@@ -19,18 +20,24 @@ public class SniperBossAttackState : IESniperBossStates
     public void Enter(AiSniperBoss enemy)
     {
         this._enemy = enemy;
+        //this._stats = stats;
     }
 
     public void Execute()
     {
-        
+        Debug.Log("Can't Take Damage");
 
-        if (_enemy.Target != null)
+        _enemy.CanTakeDamage = false;
+        _enemy.CanTakeSupression = true;
+        _enemy.CanAttack = true;
+
+        //_enemy.CurrentSuppressionHealth = _enemy.SuppressionHealth;
+        if (_enemy.Target != null && _enemy.CanAttack == true)
         {
             //_enemy.CanShoot = true;
             Debug.Log("AI shooting");
             _enemy.AiShoot();
-            EngageDuration();
+            //EngageDuration();
 
 
 

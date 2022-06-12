@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float Health;
-   
+    public float BaseDamage;
+
     public static Player Instance { get; private set; }
 
     // Start is called before the first frame update

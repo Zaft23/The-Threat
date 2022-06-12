@@ -10,7 +10,7 @@ public class AiSoldier : MonoBehaviour
 
     //public float EnemyHealth;
     //private float _currentHealth;
-    public float Damage;
+    //public float Damage;
     public float MoveSpeed;
     public float ChaseSpeed;
     public float ChaseSpeedR;

@@ -6,12 +6,24 @@ public class EnemyStats : MonoBehaviour
 {
     [SerializeField]
     public float EnemyHealth;
+    public float EnemyDamage;
     private float _currentHealth;
+
+    private AiSniperBoss SniperBoss;
+
+    //
+
+    
+    public bool CanMove;
+
 
     // Start is called before the first frame update
     void Start()
     {
         
+        CanMove = false;
+
+        //CurrentSuppressionHealth = SuppressionHealth;
     }
 
     // Update is called once per frame
@@ -20,27 +32,64 @@ public class EnemyStats : MonoBehaviour
         
     }
 
+
     public void TakeDamage(float Damage)
     {
 
-        EnemyHealth -= Damage;
-        _currentHealth = EnemyHealth;
-        //do animation
-
-        if (EnemyHealth <= 0)
-        {
-            Debug.Log("enemy die");
+            EnemyHealth -= Damage;
+            _currentHealth = EnemyHealth;
             //do animation
 
-            if (_currentHealth <= 0)
+            if (EnemyHealth <= 0)
             {
+                Debug.Log("enemy die");
+                //do animation
 
-                Die();
+                if (_currentHealth <= 0)
+                {
+
+                    Die();
+                }
+
             }
-
-        }
+        
+           
 
     }
+
+    public void SniperTakeDamage(float Damage)
+    {
+        //if (SniperBoss.CanTakeDamage == true)
+        //{
+            EnemyHealth -= Damage;
+            _currentHealth = EnemyHealth;
+            //do animation
+
+            if (EnemyHealth <= 0)
+            {
+                Debug.Log("enemy die");
+                //do animation
+
+                if (_currentHealth <= 0)
+                {
+
+                    Die();
+                }
+
+            }
+        //}
+
+
+
+
+
+    }
+
+
+
+
+
+
 
     void Die()
     {

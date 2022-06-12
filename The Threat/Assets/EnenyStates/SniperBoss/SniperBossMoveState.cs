@@ -5,7 +5,7 @@ using UnityEngine;
 public class SniperBossMoveState : IESniperBossStates
 {
     private AiSniperBoss _enemy;
-
+    private EnemyStats _stats;
     //private float _ShootTimer;
     //private float _ShootCoolDown;
     // private float _shootingRange = 5f;
@@ -17,14 +17,37 @@ public class SniperBossMoveState : IESniperBossStates
     public void Enter(AiSniperBoss enemy)
     {
         this._enemy = enemy;
+       //this._stats = stats;
     }
 
     public void Execute()
     {
+        _enemy.CanTakeDamage = true;
+        _enemy.CanTakeSupression = false;
+        //if (_enemy.ChangeNumber == true)
+        //{
+        //_enemy.RandomNumber();
+        //_enemy.ChangeNumber = false;
+        //}
+        //_enemy.CanTakeDamage = true;
+        //if (_enemy.transform.position != _enemy.Waypoints[_enemy.WaypointIndex].transform.position)
+        //{
+            _enemy.MoveToCover();
+        //if (_enemy.transform.position == _enemy.Waypoints[_enemy.WaypointIndex].transform.position)
+        //{
+        //    _enemy.ChangeNumber = false;
+        //    _enemy.ChangeState(new SniperBossAttackState());
+        //}
+        //}
+
+        //_enemy.ChangeNumber = true;
 
 
-        _enemy.MoveToCover();
-
+        //if (_enemy.transform.position == _enemy.Waypoints[_enemy.WaypointIndex].transform.position)
+        //{
+        // _enemy.WaypointIndex = _enemy.RandomWayPoint;
+        //_enemy.ChangeNumber = true;
+        //}
 
 
 
@@ -51,13 +74,19 @@ public class SniperBossMoveState : IESniperBossStates
 
     public void OntriggerEnter(Collider2D other)
     {
-        if (other.tag == "PatrolWayPoint")
-        {
+    //    if (other.tag == "PatrolWayPoint" )
+    //    {
+    //        //_enemy.CanTakeDamage = true;
+    //        //_enemy.CanTakeSupression = false;
+    //        if (_enemy.transform.position == _enemy.Waypoints[_enemy.WaypointIndex].transform.position)
+    //        {
+    //            Debug.Log("ayyyyyyyyyyyyyyyy");
+    //            //_enemy.ChangeNumber = false;
+    //            //_enemy.CanShoot = true;
+    //            _enemy.ChangeState(new SniperBossAttackState());
+    //        }
 
-            Debug.Log("ayyyyyyyyyyyyyyyy");
-            //_enemy.CanShoot = true;
-            _enemy.ChangeState(new SniperBossAttackState());
-        }
+    //    }
 
         //if (other.CompareTag("Bullet"))
         //{

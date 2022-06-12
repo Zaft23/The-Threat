@@ -34,7 +34,7 @@ public class AiBulletBehaviour : MonoBehaviour
 
     private void Update()
     {
-
+        Physics2D.IgnoreLayerCollision(6, 12);
     }
 
     void OnTriggerEnter2D(Collider2D other)

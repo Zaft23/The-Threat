@@ -46,6 +46,31 @@ public class BulletBehaviour : MonoBehaviour
 
 
         }
+
+
+        else if (other.CompareTag("Boss"))
+        {
+            //need better logic than this
+            var enemyStats = other.GetComponent<EnemyStats>();
+            var enemy = other.GetComponent<AiSniperBoss>();
+
+            if(enemy.CanTakeDamage == true)
+            {
+                //enemy.CanTakeSupression = false;
+                enemyStats.SniperTakeDamage(Weapon.Damage);
+            }
+            else if(enemy.CanTakeSupression == true)
+            {
+                enemy.TakeSupressionDamage(Weapon.Damage);
+            }
+            else
+            {
+                Debug.Log("taiiiiiiiiiiiiiii");
+            }
+
+
+
+        }
         Destroy(gameObject);
         //Destroy(effect,5f);
 
