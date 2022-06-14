@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1531294636815042863}
   - component: {fileID: 8469033859454271365}
   - component: {fileID: 5108522154836076635}
-  - component: {fileID: -1247878844024002986}
+  - component: {fileID: 3156475234113467874}
   m_Layer: 12
   m_Name: Ai Bullet 1
   m_TagString: Bullet
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &-1247878844024002986
+--- !u!114 &3156475234113467874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,9 +133,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3295582376259988921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1363479802f876c4596cb3ddd20ba13c, type: 3}
+  m_Script: {fileID: 11500000, guid: 02aad9602c5bdc54e89c719ea80d0dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 11400000, guid: bc795941dece0d64ea63b009d58e0ddf, type: 2}
-  BulletSpeed: 60
+  BulletSpeed: 100
   Damage: 50

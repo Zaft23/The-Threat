@@ -10,6 +10,11 @@ public class InventoryManager : MonoBehaviour
     public int CurrentlEquippedWeaponType;
     public GameObject CurrentWeaponObject = null;
 
+    public GameObject Arm1;
+    public GameObject Arm2;
+
+    public Player Player;
+
     [SerializeField] private Transform _weaponHolder = null;
     private Inventory inventory;
 
@@ -18,6 +23,8 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         inventory = GetComponent<Inventory>();
+
+        Player = GetComponent<Player>();
     }
 
     private void Update()
@@ -26,6 +33,10 @@ public class InventoryManager : MonoBehaviour
         {
             UnEquipWeapon();
             InstantiateWeapon(inventory.GetItem(0));
+
+            Player.Holstered = false;
+            Arm1.SetActive(true);
+            Arm2.SetActive(true);
             //inventory.RemoveItem(0);
         }
         {
@@ -38,12 +49,19 @@ public class InventoryManager : MonoBehaviour
             UnEquipWeapon();
             InstantiateWeapon(inventory.GetItem(1));
             //inventory.RemoveItem(1);
+            Player.Holstered = false;
+            Arm1.SetActive(true);
+            Arm2.SetActive(true);
+            
 
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             UnEquipWeapon();
+            Player.Holstered = true;
+            Arm1.SetActive(false);
+            Arm2.SetActive(false);
             //CurrentlyEquippedWeapon = 1;
 
         }

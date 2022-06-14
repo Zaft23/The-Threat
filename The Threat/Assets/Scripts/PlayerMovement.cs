@@ -9,12 +9,19 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     private Rigidbody2D rb2D;
+    private Animator MyAnimator;
+    public PlayerActions Actions;
+
+
     //private Animator myAnimator;
     //will need animator when we have proper assets
 
     [Header("Movement Details")]
     public float Speed;
     public float horizontalMovement;
+    public bool IsRunning;
+
+
 
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck;
@@ -53,7 +60,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _cornerCorrectLayer;
     private bool _canCornerCorrect;
 
-
+    //
+    public Transform CrossHair;
 
 
 
@@ -61,9 +69,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //
         rb2D = GetComponent<Rigidbody2D>();
+        MyAnimator = GetComponent<Animator>();
+        Actions = GetComponent<PlayerActions>();
         //myAnimator = GetComponent<Animator>();
         //_trailRenderer = GetComponent<TrailRenderer>();
-
+        IsRunning = false;
 
     }
 
@@ -95,8 +105,46 @@ public class PlayerMovement : MonoBehaviour
     {
         
         var dashInput = Input.GetButtonDown("Dash");
+        float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
+        //if(Actions.)
+        //
+        //else if(eulerAngY == -180 && Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && eulerAngY == 0)
+        {
 
-        if(dashInput && _canDash)
+            Debug.Log("Forward1");
+            //MyAnimator.SetBool("IsRunning", true);
+            MyAnimator.SetFloat("speed", 1.0f);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.A) && eulerAngY == -180)
+        {
+            Debug.Log("Forward2");
+            //MyAnimator.SetBool("IsRunning", true);
+            MyAnimator.SetFloat("speed", 1.0f);
+        }
+        else if (Input.GetKeyDown(KeyCode.A) && eulerAngY == 0)
+        {
+            
+                Debug.Log("BackWard1");
+                //MyAnimator.SetBool("IsRunning", true);
+                MyAnimator.SetFloat("speed", -1.0f);
+
+        }
+        else if(Input.GetKeyDown(KeyCode.D) && eulerAngY == -180)
+        {
+            Debug.Log("BackWard2");
+            //MyAnimator.SetBool("IsRunning", true);
+            MyAnimator.SetFloat("speed", -1.0f);
+        }
+
+
+        XMovement();
+
+
+
+
+        if (dashInput && _canDash)
         {
             _isDashing = true;
             _canDash = false;
@@ -128,9 +176,9 @@ public class PlayerMovement : MonoBehaviour
        
 
         CheckCollisions();
+        //
+        
 
-        //Handles basic X axis Movement
-        rb2D.velocity = new Vector2(horizontalMovement * Speed, rb2D.velocity.y);
 
         // Jump Physics
         IsGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radOCircle, _whatIsGround);
@@ -241,8 +289,50 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void XMovement()
+    {
+        //Handles basic X axis Movement
+        
 
-  
+        rb2D.velocity = new Vector2(horizontalMovement * Speed, rb2D.velocity.y);
+        //float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
+
+        if (horizontalMovement == 0)
+        {
+            MyAnimator.SetBool("IsRunning", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("IsRunning", true);
+
+            //if (eulerAngY == 0 && horizontalMovement == 1)
+
+
+            //    if (horizontalMovement == 1)
+            //    {
+            //        MyAnimator.SetFloat("speed", 1.0f);
+            //    }
+
+
+            ////if(horizontalMovement == 1)
+            //if (eulerAngY == 180 || eulerAngY == 0)
+            //{
+            //    //Debug.Log("Right!!!!!!!!!!");
+            //    MyAnimator.SetBool("IsFacingRight", true);
+
+
+            //}
+            //else if(eulerAngY == -180)
+            //{
+            //    //Debug.Log("Left!!!!!!!!!!");
+            //    MyAnimator.SetBool("IsFacingRight", false);
+            //    MyAnimator.speed = -1;
+            //}
+
+        }
+
+    }
+
 
 
 

@@ -15,7 +15,7 @@ public class AiBulletBehaviour : MonoBehaviour
 
     public float Damage;
 
-    private AiSoldier _soldier;
+    //private AiSoldier _soldier;
     private Rigidbody2D _rb2D;
 
     private void Start()

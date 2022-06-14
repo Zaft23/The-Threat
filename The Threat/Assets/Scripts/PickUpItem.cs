@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
 {
+    //PlayerActions PlayerAmmo;
 
     public bool IsRifle;
     public bool IsSmg;
@@ -28,6 +29,11 @@ public class PickUpItem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D target)
     {
+        //if(PlayerAmmo == null)
+        //{
+        //    return;
+        //}
+
         var PlayerAmmo = target.gameObject.GetComponent<PlayerActions>();
 
         //also to check if item will exceed player max ammo

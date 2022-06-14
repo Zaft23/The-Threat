@@ -6,6 +6,8 @@ public class AiSniperBoss : MonoBehaviour
 {
     public Weapon Weapon;
     public Player Player;
+    //public AiBossBulletBehaviour AiBullet;
+
 
     public EnemyStats EnemyStats;
 
@@ -41,7 +43,11 @@ public class AiSniperBoss : MonoBehaviour
     public float EngagementTime;
     public float StartEngagementTime;
 
+    //
+   // public AiBossBulletBehaviour BulletStats;
     public GameObject Bullet;
+    public GameObject Bullet2;
+
 
     public bool Attack { get; set; }
     private bool _facingRight;
@@ -76,6 +82,7 @@ public class AiSniperBoss : MonoBehaviour
         //WPintIndex.transform.position = _waypoints[rand].transform.position;
         //rand = Random.Range(1, 3);
         RandomWayPoint = Random.Range(0, 3);
+        //BulletStats = Bullet.GetComponent<AiBossBulletBehaviour>();
     }
 
 
@@ -106,10 +113,15 @@ public class AiSniperBoss : MonoBehaviour
         //
         RSuppressionHealth = SuppressionHealth;
 
+        //
+        EnemyStats = GetComponent<EnemyStats>();
+        //BulletStats = Bullet.GetComponent<AiBossBulletBehaviour>;
+        //var bBullet = Bullet.GetComponent<AiBossBulletBehaviour>();
+        
+        //public GameObject Bullet;
 
 
-
-    }
+}
 
 
 
@@ -128,6 +140,20 @@ public class AiSniperBoss : MonoBehaviour
         {
             CanTakeSupression = false;
             //ChangeNumber = true;
+        }
+
+        //move mod and rate of fire
+        if(EnemyStats.EnemyHealth <= EnemyStats.SecondStageHealth)
+        {
+            //AiBossBulletBehaviour bbullet = Bullet.GetComponent<AiBossBulletBehaviour>(); 
+               // AiBossBulletBehaviour bbulet.GetComponent<AiBossBulletBehaviour>();
+            //AiBullet = Bullet.GetComponent<AiBossBulletBehaviour>();
+            Debug.Log("Second Stage");
+            MoveSpeed = 10f;
+           // BulletStats.Damage = 60f;
+           // BulletStats.BulletSpeed = 100f;
+            RateOfFire = 1f;
+
         }
 
         //was trying to check if you go to intended waypoint but fuck it
@@ -167,20 +193,45 @@ public class AiSniperBoss : MonoBehaviour
 
         //if (CanShoot == true)
         //{
-        if (ShootingTime <= 0)
+        if (EnemyStats.EnemyHealth > EnemyStats.SecondStageHealth)
         {
-            Debug.Log("amkiiiiiiiiiiiiiinh");
-            GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+            if (ShootingTime <= 0)
+            {
+                Debug.Log("amkiiiiiiiiiiiiiinh");
+                GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
 
-            ShootingTime = RateOfFire;
+                ShootingTime = RateOfFire;
 
-            //StartCoroutine(BooleanShootingTime());
+                //StartCoroutine(BooleanShootingTime());
 
+            }
+            else
+            {
+                ShootingTime -= Time.deltaTime;
+            }
         }
         else
         {
-            ShootingTime -= Time.deltaTime;
+            
+                if (ShootingTime <= 0)
+                {
+                    Debug.Log("second Staaaaaaaaaaage");
+                    GameObject bullet = Instantiate(Bullet2, FirePoint.position, Quaternion.identity);
+
+                    ShootingTime = RateOfFire;
+
+                    //StartCoroutine(BooleanShootingTime());
+
+                }
+                else
+                {
+                    ShootingTime -= Time.deltaTime;
+                }
+            
         }
+
+        
+        
         //}
 
     }

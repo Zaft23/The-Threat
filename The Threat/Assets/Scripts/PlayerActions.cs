@@ -9,18 +9,27 @@ public class PlayerActions : MonoBehaviour
 
     private Inventory _inventory;
     private InventoryManager _manager;
+    private Player _player;
+
+    WeaponRecoil Recoil;
+    Weapon newItem;
+    private Animator MyAnimator;
+
+    public bool IsMelee;
+    public float MeleeTime;
+
     float lookAngle;
     #region Weapon Details
     [Header("Weapon Details")]
     public Transform FirePoint;
-    
+
     private float _lastShootTime = 0;
 
     [SerializeField] private int _primaryCurrentAmmo;
     public int PrimaryStoredAmmo;
 
     [SerializeField] private int _secondaryCurrentAmmo;
-    public  int SecondaryStoredAmmo;
+    public int SecondaryStoredAmmo;
 
     [SerializeField] private bool _primaryMagIsEmpty = false;
     [SerializeField] private bool _secondaryMagIsEmpty = false;
@@ -28,10 +37,10 @@ public class PlayerActions : MonoBehaviour
     public bool CanReload = true;
 
     //Store primary
-     public int StoredRifleAmmo;
-     public int StoredSmgAmmo;
-     public int StoredShotgunAmmo;
-     public int StoredSniperAmmo;
+    public int StoredRifleAmmo;
+    public int StoredSmgAmmo;
+    public int StoredShotgunAmmo;
+    public int StoredSniperAmmo;
 
 
     //primary
@@ -59,15 +68,21 @@ public class PlayerActions : MonoBehaviour
     //collision for weapon system
     private void OnCollisionEnter2D(Collision2D target)
     {
-        Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
-        var  newSlot = target.transform.GetComponent<PickUpItem>();
+        //if(newItem == null)
+        //{
+        //    return;
+        //}
+
+        newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
+
+        var newSlot = target.transform.GetComponent<PickUpItem>();
         // after the && part apparently that fixes the still can grab weapon problem.. holy fuck i don't know how i did it but thank God.. i did it
         // praise the Code God!!
-        
-        if(target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
+
+        if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
         //if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
         {
-            if(newSlot.IsPrimary == true && _inventory.IWeapons[0] == null && PrimaryExist == false)
+            if (newSlot.IsPrimary == true && _inventory.IWeapons[0] == null && PrimaryExist == false)
             {
                 Debug.Log("1");
                 //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
@@ -76,7 +91,7 @@ public class PlayerActions : MonoBehaviour
                 PrimaryExist = true;
             }
 
-            else if(newSlot.isSecondary == true && _inventory.IWeapons[1] == null && SecondaryExist == false)
+            else if (newSlot.isSecondary == true && _inventory.IWeapons[1] == null && SecondaryExist == false)
             {
                 Debug.Log("1");
                 //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
@@ -84,8 +99,8 @@ public class PlayerActions : MonoBehaviour
                 Destroy(target.transform.gameObject);
                 SecondaryExist = true;
             }
-            
-            
+
+
 
         }
 
@@ -103,12 +118,12 @@ public class PlayerActions : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-      
+
     }
 
     void Start()
     {
-        GetRefrences();   
+        GetRefrences();
     }
 
     private void OnEnable()
@@ -128,11 +143,23 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
+        
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && IsMelee == false)
         {
+            StartCoroutine(MeleeCooldown());
+            IsMelee = true;
+            _manager.Arm1.SetActive(false);
+            _manager.Arm2.SetActive(false);
+
             MeleeAttack();
+
         }
+        //if(Input.GetKeyUp(KeyCode.E))
+        //{
+        //    _manager.Arm1.SetActive(true);
+        //    _manager.Arm2.SetActive(true);
+        //}
 
         Vector3 gunPose = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (gunPose.x < transform.position.x)
@@ -145,34 +172,47 @@ public class PlayerActions : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
         }
 
-        //if(GameObject.Find("Recoil") == null)
+        //if(Recoil == null)
         //{
-        //    Debug.Log("No recoil");
+        //    return;
+        ////    Debug.Log("No recoil");
         //}
-   
-            var Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
-            if (Recoil == null)
-                return;
 
-        
-        if (Input.GetButton("Fire1"))
+        Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
+
+        //try
+        if (Recoil != null)
         {
-            Recoil.AddRecoil();
-            
+            if (Input.GetButton("Fire1"))
+            {
+                Recoil.AddRecoil();
 
-            Shooting();
-               
+
+                Shooting();
+
+            }
+            else if (Input.GetButtonUp("Fire1"))
+            {
+                Recoil.StopRecoil();
+
+            }
+
         }
-        else if(Input.GetButtonUp("Fire1"))
+        else
+        //catch
         {
-            Recoil.StopRecoil();
-
+            Debug.Log("69");
         }
+        //if (!Recoil)
+        //return;
+
+
+
 
         //reload
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine (Reload(_manager.CurrentlyEquippedWeapon));
+            StartCoroutine(Reload(_manager.CurrentlyEquippedWeapon));
             return;
 
         }
@@ -180,17 +220,17 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
 
-                ThrowGun();
-                
+            ThrowGun();
+
         }
 
 
 
 
-        
 
 
-        
+
+
 
     }
 
@@ -199,7 +239,7 @@ public class PlayerActions : MonoBehaviour
     private void CheckCanShoot(int slot)
     {
         //primary
-        if(slot == 0)
+        if (slot == 0)
         {
             if (_primaryMagIsEmpty)
                 _canShoot = false;
@@ -208,7 +248,7 @@ public class PlayerActions : MonoBehaviour
         }
 
         //secondary
-        if(slot == 1)
+        if (slot == 1)
         {
             if (_secondaryMagIsEmpty)
                 _canShoot = false;
@@ -216,7 +256,7 @@ public class PlayerActions : MonoBehaviour
                 _canShoot = true;
         }
 
-       
+
     }
     #endregion
 
@@ -227,7 +267,7 @@ public class PlayerActions : MonoBehaviour
         if (slot == 0)
         {
             _primaryCurrentAmmo = weapon.BulletAmount;
-            
+
         }
 
 
@@ -235,7 +275,7 @@ public class PlayerActions : MonoBehaviour
         if (slot == 1)
         {
             _secondaryCurrentAmmo = weapon.BulletAmount;
-            
+
         }
     }
     #endregion
@@ -243,7 +283,7 @@ public class PlayerActions : MonoBehaviour
     #region Use type of ammo correctly
     private void UseAmmo(int slot, int currentAmmoUsed, int currentStoredAmmoUsed)
     {
-        
+
 
         //primary this is not particularly effiecent aswell as the update for the ammo is a bit late... too bad!
         if (slot == 0)
@@ -255,13 +295,13 @@ public class PlayerActions : MonoBehaviour
                 CheckCanShoot(_manager.CurrentlyEquippedWeapon);
             }
 
-            else if(_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Rifles)
+            else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Rifles)
             {
                 _primaryCurrentAmmo -= currentAmmoUsed;
                 PrimaryStoredAmmo = StoredRifleAmmo;
                 PrimaryStoredAmmo -= currentStoredAmmoUsed;
             }
-            else if(_inventory.GetItem(0).WeaponType == Weapon._WeaponType.SMG)
+            else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.SMG)
             {
                 _primaryCurrentAmmo -= currentAmmoUsed;
                 PrimaryStoredAmmo = StoredSmgAmmo;
@@ -332,13 +372,13 @@ public class PlayerActions : MonoBehaviour
         var currWeapon = _inventory.GetItem(_manager.CurrentlyEquippedWeapon);
         var currWeaponSpeed = currWeapon.BulletSpeed;
 
- 
-            GameObject fire = Instantiate(currWeapon.BulletPrefab);
 
-            fire.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
+        GameObject fire = Instantiate(currWeapon.BulletPrefab);
 
-            fire.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
-            fire.GetComponent<Rigidbody2D>().velocity = FirePoint.right * currWeaponSpeed;
+        fire.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
+
+        fire.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        fire.GetComponent<Rigidbody2D>().velocity = FirePoint.right * currWeaponSpeed;
 
     }
     #endregion
@@ -389,7 +429,7 @@ public class PlayerActions : MonoBehaviour
                         Debug.Log("Mag is already full");
                         //return;
                     }
-                    else if(_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Rifles)
+                    else if (_inventory.GetItem(0).WeaponType == Weapon._WeaponType.Rifles)
                     {
                         _primaryCurrentAmmo += ammoToReload;
                         StoredRifleAmmo -= ammoToReload;
@@ -494,9 +534,9 @@ public class PlayerActions : MonoBehaviour
         }
         else
             Debug.Log("Can't reload now");
-        
 
-        
+
+
 
     }
     #endregion
@@ -521,7 +561,7 @@ public class PlayerActions : MonoBehaviour
         PickAbleGun.GetComponent<Rigidbody2D>().velocity = FirePoint.right * force;
 
 
-        
+
         _manager.UnEquipWeapon();
 
     }
@@ -530,8 +570,9 @@ public class PlayerActions : MonoBehaviour
     #region Melee
     void MeleeAttack()
     {
+
         //animation setup followw https://www.youtube.com/watch?v=sPiVz1k-fEs&ab_channel=Brackeys
-        //animator.SetTrigger("Attack");
+        MyAnimator.SetTrigger("sword");
 
 
         //detect range
@@ -545,10 +586,44 @@ public class PlayerActions : MonoBehaviour
         }
 
 
+    }
+
+
+    public void ActivateHand()
+    {
+        if(_player.Holstered == false)
+        {
+            _manager.Arm1.SetActive(true);
+            _manager.Arm2.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Player not is Holstered");
+        }
+
+    }
+    public void DeactivateHand()
+    {
+        _manager.Arm1.SetActive(true);
+        _manager.Arm2.SetActive(true);
+    }
+
+
+    private IEnumerator MeleeCooldown()
+    {
+        yield return new WaitForSeconds(MeleeTime);
+
+        IsMelee = false;
+
+        //if(_player.Holstered == false)
+        //{
+        //    _manager.Arm1.SetActive(true);
+        //    _manager.Arm2.SetActive(true);
+        //}
+
 
 
     }
-
 
 
 
@@ -571,10 +646,12 @@ public class PlayerActions : MonoBehaviour
         CanReload = true;
         _inventory = GetComponent<Inventory>();
         _manager = GetComponent<InventoryManager>();
+        _player = GetComponent<Player>();
         var cam = GetComponentInChildren<AimRotation>();
 
+        MyAnimator = GetComponent<Animator>();
         //Test
-        
+        IsMelee = false;
 
 
         //Test
