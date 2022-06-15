@@ -147,12 +147,14 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && IsMelee == false)
         {
+            MyAnimator.SetTrigger("sword");
             StartCoroutine(MeleeCooldown());
             IsMelee = true;
             _manager.Arm1.SetActive(false);
             _manager.Arm2.SetActive(false);
-
-            MeleeAttack();
+            _manager.WeaponHand.SetActive(false);
+            
+            //MeleeAttack();
 
         }
         //if(Input.GetKeyUp(KeyCode.E))
@@ -572,7 +574,7 @@ public class PlayerActions : MonoBehaviour
     {
 
         //animation setup followw https://www.youtube.com/watch?v=sPiVz1k-fEs&ab_channel=Brackeys
-        MyAnimator.SetTrigger("sword");
+        //MyAnimator.SetTrigger("sword");
 
 
         //detect range
@@ -593,8 +595,10 @@ public class PlayerActions : MonoBehaviour
     {
         if(_player.Holstered == false)
         {
+            _manager.WeaponHand.SetActive(true);
             _manager.Arm1.SetActive(true);
             _manager.Arm2.SetActive(true);
+            
         }
         else
         {

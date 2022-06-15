@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject Arm1;
     public GameObject Arm2;
+    public GameObject WeaponHand;
 
     public Player Player;
 
