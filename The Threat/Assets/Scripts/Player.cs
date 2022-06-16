@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using TMPro;
+
 
 public class Player : MonoBehaviour
 {
+    #region
     public float Health;
     public float BaseDamage;
-
     public Vector3 Direction;
 
     public Transform MyRotation;
@@ -20,21 +23,41 @@ public class Player : MonoBehaviour
 
     public bool Holstered;
 
+    //
+    
+
+
     [SerializeField]
     private bool _facingRight;
 
 
-
     public static Player Instance { get; private set; }
+    #endregion
+
+    //private LevelSystemAnimator _levelSystemAnimator;
+    //private LevelSystem _levelSystem;
+    //
+    //public TMPro.TextMeshProUGUI levelText;
+
+    public GameMaster Gm;
+
+    [SerializeField] private PlayerMovement _playerMovement;
+    // [SerializeField] private PlayerActions _playerActions;
+    // PlayerUpgrades PlayerUpgrades;
+
+    //delegate
+    public int SkillPoint;
+    public int LvlUpSkillPoint = 10;
+
+    private void Awake()
+    {
+        GetAwakeRefrence();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        //_facingRight = true;
-        Actions = GetComponent<PlayerActions>();
-        Holstered = true;
-
-        MyAnimator = GetComponent<Animator>();
+        GetRefrence();
 
     }
 
@@ -43,6 +66,7 @@ public class Player : MonoBehaviour
     {
 
 
+        #region
         float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
 
         if (Input.GetKeyDown(KeyCode.D) && eulerAngY == 0)
@@ -102,14 +126,74 @@ public class Player : MonoBehaviour
         //{
         //ChangeDirection();
         //}
+        #endregion
 
     }
 
-    public Vector3 GetPosition()
+    public void GiveSkillPoints()
     {
-        return transform.position;
+        //(int skillpoint/level)
+        //some other logic if following the guys tutorial
+        SkillPoint += LvlUpSkillPoint;
+        
     }
 
+
+
+
+
+
+
+
+
+
+
+    void OnUpgradeMenuToggle(bool active)
+    {
+        //handle what happens when menu open
+       Actions.enabled = !active;
+       _playerMovement.enabled = !active;
+    }
+
+    #region Handles Levelling old and shit
+    //public void SetLevelSystemAnimator(LevelSystemAnimator levelSystemAnimator)
+    //{
+    //    this._levelSystemAnimator = levelSystemAnimator;
+
+    //    levelSystemAnimator.OnLevelChanged += LevelSystem_OnLevelChanged;
+
+    //    //here can change stats
+
+    //}
+
+    //private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
+    //{
+    //    //play sound probable later add lah
+    //    Debug.Log("Your Level Increase");
+
+    //}
+
+    //public PlayerUpgrades GetPlayerUpgrades()
+    //{
+    //    return PlayerUpgrades;
+    //}
+
+
+    //public bool TestIncreaseHealth()
+    //{
+    //    return PlayerUpgrades.IsUpgradesUnlocked(PlayerUpgrades.Upgrades.TestIncreaseHealth);
+    //}
+
+    //public bool CanTestIncreaseHealth()
+    //{
+    //    return true;
+    //}
+
+
+    #endregion
+
+
+    #region Handles Damage
     public void TakeDamage(float Damage)
     {
 
@@ -124,7 +208,13 @@ public class Player : MonoBehaviour
         }
 
     }
+    #endregion
 
+    #region misc
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
 
     public Vector2 GetDirection()
     {
@@ -136,8 +226,27 @@ public class Player : MonoBehaviour
         _facingRight = !_facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
+    #endregion
+
+    private void GetRefrence()
+    {
+        //_facingRight = true;
+        
+        Holstered = true;
+        MyAnimator = GetComponent<Animator>();
+        Gm.OnToggleUpgradeMenu += OnUpgradeMenuToggle;
+    }
+
+    private void GetAwakeRefrence()
+    {
+        Actions = GetComponent<PlayerActions>();
+        _playerMovement = GetComponent<PlayerMovement>();
+
+        //PlayerUpgrades = new PlayerUpgrades();
+        //_levelSystem = new LevelSystem();
+        //_levelSystemAnimator = new LevelSystemAnimator(_levelSystem);
 
 
-
+    }
 
 }

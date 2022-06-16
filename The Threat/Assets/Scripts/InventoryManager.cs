@@ -30,6 +30,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+
+
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             UnEquipWeapon();

@@ -8,22 +8,35 @@ public class EnemyStats : MonoBehaviour
     public float EnemyHealth;
     public float EnemyDamage;
     public float SecondStageHealth;
-
     private float _currentHealth;
-
     private AiSniperBoss SniperBoss;
-
     //
-
-    
     public bool CanMove;
+
+    public float enemyXp;
+
+    public float XpMultiplier;
+    public float Dunno;
+
+    public GameObject _player;
+    public LevelSystem _playerLevel;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
         CanMove = false;
+
+         _player = GameObject.FindGameObjectWithTag("Player");
+         _playerLevel = _player.GetComponent<LevelSystem>();
+
+        //enemyXp = Mathf.Round(Dunno * 6 * XpMultiplier);
+
+
+
+
+
 
         //CurrentSuppressionHealth = SuppressionHealth;
     }
@@ -87,7 +100,10 @@ public class EnemyStats : MonoBehaviour
 
     }
 
-
+    void OnUpgradeMenuToggle(bool active)
+    {
+//GetComponent<>
+    }
 
 
 
@@ -96,6 +112,7 @@ public class EnemyStats : MonoBehaviour
     void Die()
     {
         //Instantiate()
+        _playerLevel.GainExperienceScalable(enemyXp, 1);
         Destroy(gameObject);
     }
 

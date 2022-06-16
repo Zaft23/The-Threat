@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
+    #region
+
     //Handles Player actions like firing weapons, melee, and etc
 
 
@@ -64,6 +66,8 @@ public class PlayerActions : MonoBehaviour
 
     public bool PrimaryExist = false;
     public bool SecondaryExist = false;
+    #endregion
+
 
     //collision for weapon system
     private void OnCollisionEnter2D(Collision2D target)
@@ -143,8 +147,11 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        
 
+
+
+
+        #region
         if (Input.GetKeyDown(KeyCode.E) && IsMelee == false)
         {
             MyAnimator.SetTrigger("sword");
@@ -226,15 +233,19 @@ public class PlayerActions : MonoBehaviour
 
         }
 
-
-
-
-
-
-
+        #endregion
 
 
     }
+
+
+    void OnUpgradeMenuToggle(bool active)
+    {
+        //handle what happens when menu open
+
+    }
+
+
 
 
     #region Check if player can shoot

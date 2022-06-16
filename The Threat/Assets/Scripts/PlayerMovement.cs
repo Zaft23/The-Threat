@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    #region
     [Header("Components")]
     private Rigidbody2D rb2D;
     private Animator MyAnimator;
@@ -59,10 +59,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 _innerRaycastOffset;
     [SerializeField] private LayerMask _cornerCorrectLayer;
     private bool _canCornerCorrect;
-
     //
     public Transform CrossHair;
+    #endregion
 
+    
 
 
     void Awake()
@@ -74,6 +75,13 @@ public class PlayerMovement : MonoBehaviour
         //myAnimator = GetComponent<Animator>();
         //_trailRenderer = GetComponent<TrailRenderer>();
         IsRunning = false;
+
+    }
+
+    private void Start()
+    {
+
+       
 
     }
 
@@ -103,7 +111,13 @@ public class PlayerMovement : MonoBehaviour
    
     void FixedUpdate()
     {
-        
+
+
+
+
+
+
+        #region
         var dashInput = Input.GetButtonDown("Dash");
         float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
         //if(Actions.)
@@ -230,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         //Corner Correction
         if (_canCornerCorrect) CornerCorrect(rb2D.velocity.y);
 
-      
+
 
 
 
@@ -239,9 +253,14 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    transform.localScale = new Vector3(x: Mathf.Sign(horizontalMovement), y: 1, z: 1);
         //}
+        #endregion
 
     }
 
+
+    
+
+    #region
     //Corner Correction
     void CornerCorrect(float yVelocity)
     {
@@ -332,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
+    #endregion
 
 
 
