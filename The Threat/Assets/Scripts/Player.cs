@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 {
     #region
     public float Health;
+    public float MaxHealth;
     public float BaseDamage;
+    public float BaseSpeed;
     public Vector3 Direction;
 
     public Transform MyRotation;
@@ -24,7 +26,6 @@ public class Player : MonoBehaviour
     public bool Holstered;
 
     //
-    
 
 
     [SerializeField]
@@ -42,12 +43,26 @@ public class Player : MonoBehaviour
     public GameMaster Gm;
 
     [SerializeField] private PlayerMovement _playerMovement;
-    // [SerializeField] private PlayerActions _playerActions;
+    [SerializeField] private PlayerActions _playerActions;
     // PlayerUpgrades PlayerUpgrades;
+    private PlayerSkills playerSkills;
+
+    //public event EventHandler OnHealthMaxChanged;
+    //public event EventHandler OnHealthChanged;
+
+
+
+
+
+
 
     //delegate
     public int SkillPoint;
     public int LvlUpSkillPoint = 10;
+
+
+
+
 
     private void Awake()
     {
@@ -102,7 +117,7 @@ public class Player : MonoBehaviour
         {
             MyAnimator.SetBool("holstered", false);
         }
-        else if(Holstered == true)
+        else if (Holstered == true)
         {
             MyAnimator.SetBool("holstered", true);
         }
@@ -114,7 +129,7 @@ public class Player : MonoBehaviour
             Debug.Log("Right!!!!!!!!!!");
             _facingRight = true;
         }
-        else if(eulerAngY == -180 )
+        else if (eulerAngY == -180)
         {
             Debug.Log("Left!!!!!!!!!!");
             _facingRight = false;
@@ -135,118 +150,86 @@ public class Player : MonoBehaviour
         //(int skillpoint/level)
         //some other logic if following the guys tutorial
         SkillPoint += LvlUpSkillPoint;
-        
+
     }
 
 
-
-
-
-
-
-
-
-
-
-    void OnUpgradeMenuToggle(bool active)
+    public PlayerSkills GetPlayerSkills()
     {
-        //handle what happens when menu open
-       Actions.enabled = !active;
-       _playerMovement.enabled = !active;
+        return playerSkills;
     }
 
-    #region Handles Levelling old and shit
-    //public void SetLevelSystemAnimator(LevelSystemAnimator levelSystemAnimator)
-    //{
-    //    this._levelSystemAnimator = levelSystemAnimator;
 
-    //    levelSystemAnimator.OnLevelChanged += LevelSystem_OnLevelChanged;
-
-    //    //here can change stats
-
-    //}
-
-    //private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
-    //{
-    //    //play sound probable later add lah
-    //    Debug.Log("Your Level Increase");
-
-    //}
-
-    //public PlayerUpgrades GetPlayerUpgrades()
-    //{
-    //    return PlayerUpgrades;
-    //}
-
-
-    //public bool TestIncreaseHealth()
-    //{
-    //    return PlayerUpgrades.IsUpgradesUnlocked(PlayerUpgrades.Upgrades.TestIncreaseHealth);
-    //}
-
-    //public bool CanTestIncreaseHealth()
-    //{
-    //    return true;
-    //}
-
-
-    #endregion
-
-
-    #region Handles Damage
-    public void TakeDamage(float Damage)
-    {
-
-        Health -= Damage;
-
-        //do animation
-
-        if (Health <= 0)
+        void OnUpgradeMenuToggle(bool active)
         {
-            Debug.Log("i die");
-            //Die();
+            //handle what happens when menu open
+            Actions.enabled = !active;
+            _playerMovement.enabled = !active;
         }
 
-    }
-    #endregion
-
-    #region misc
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
-
-    public Vector2 GetDirection()
-    {
-        return _facingRight ? Vector2.right : Vector2.left;
-    }
-
-    public void ChangeDirection()
-    {
-        _facingRight = !_facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-    }
-    #endregion
-
-    private void GetRefrence()
-    {
-        //_facingRight = true;
-        
-        Holstered = true;
-        MyAnimator = GetComponent<Animator>();
-        Gm.OnToggleUpgradeMenu += OnUpgradeMenuToggle;
-    }
-
-    private void GetAwakeRefrence()
-    {
-        Actions = GetComponent<PlayerActions>();
-        _playerMovement = GetComponent<PlayerMovement>();
-
-        //PlayerUpgrades = new PlayerUpgrades();
-        //_levelSystem = new LevelSystem();
-        //_levelSystemAnimator = new LevelSystemAnimator(_levelSystem);
 
 
-    }
 
+        #region Handles Damage
+        public void TakeDamage(float Damage)
+        {
+
+            Health -= Damage;
+
+            //do animation
+
+            if (Health <= 0)
+            {
+                Debug.Log("i die");
+                //Die();
+            }
+
+        }
+        #endregion
+
+        #region misc
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+
+        public Vector2 GetDirection()
+        {
+            return _facingRight ? Vector2.right : Vector2.left;
+        }
+
+        public void ChangeDirection()
+        {
+            _facingRight = !_facingRight;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+        #endregion
+
+        private void GetRefrence()
+        {
+            //_facingRight = true;
+
+            Holstered = true;
+            MyAnimator = GetComponent<Animator>();
+            Gm.OnToggleUpgradeMenu += OnUpgradeMenuToggle;
+        }
+
+        private void GetAwakeRefrence()
+        {
+            Actions = GetComponent<PlayerActions>();
+            _playerMovement = GetComponent<PlayerMovement>();
+            playerSkills = new PlayerSkills();
+            
+
+
+
+
+            //PlayerUpgrades = new PlayerUpgrades();
+            //_levelSystem = new LevelSystem();
+            //_levelSystemAnimator = new LevelSystemAnimator(_levelSystem);
+
+
+        }
+
+    
 }

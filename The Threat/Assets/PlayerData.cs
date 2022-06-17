@@ -18,6 +18,8 @@ public class PlayerData
     //Upgrades use array maybe?
     //later damage or something
 
+    //save player's ammo data
+    //save gameobject
  
     public PlayerData(Player player, LevelSystem level)
     {

@@ -15,7 +15,7 @@ MonoBehaviour:
   WeaponName: TestPrimaryWeapon
   WeaponSprite: {fileID: 21300000, guid: b6beb03896e93214b8246a79626e2c0c, type: 3}
   WeaponPrefab: {fileID: 3495415152151633840, guid: 240955326a9eb66408bc0bf4693128af, type: 3}
-  BulletPrefab: {fileID: 3295582376259988921, guid: 7b0276bf4c468a841a326e56be5b42c6, type: 3}
+  BulletPrefab: {fileID: 3295582376259988921, guid: d5e1f38fd088ab649bdb9f059b8d280e, type: 3}
   PickAble: {fileID: 3495415152151633840, guid: b8cad5c5cac9e5e468c51ffd96dfb9a8, type: 3}
   WeaponType: 0
   WeaponSlot: 0

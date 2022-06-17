@@ -594,7 +594,7 @@ public class PlayerActions : MonoBehaviour
         {
             //rewrite  name
             //enemy stats component
-            enemy.GetComponent<EnemyStats>().TakeDamage(MeleeDamage);
+            enemy.GetComponent<EnemyStats>().TakeDamage(MeleeDamage + _player.BaseDamage);
 
         }
 
@@ -613,7 +613,7 @@ public class PlayerActions : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player not is Holstered");
+            Debug.Log("Player is not Holstered");
         }
 
     }

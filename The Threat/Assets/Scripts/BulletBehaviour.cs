@@ -6,7 +6,8 @@ public class BulletBehaviour : MonoBehaviour
 {
     public Weapon Weapon;
     private float _BulletDestroy = 5f;
-    
+    private GameObject _player;
+    Player playerStats;
 
 
     private void Awake()
@@ -15,6 +16,8 @@ public class BulletBehaviour : MonoBehaviour
     }
     private void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = _player.GetComponent<Player>();
 
         StartCoroutine(DestroyBullet());
         
@@ -41,7 +44,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             //need better logic than this
             var enemy = other.GetComponent<EnemyStats>();
-            enemy.TakeDamage(Weapon.Damage);
+            enemy.TakeDamage(Weapon.Damage + playerStats.BaseDamage);
 
 
 
@@ -57,11 +60,11 @@ public class BulletBehaviour : MonoBehaviour
             if(enemy.CanTakeDamage == true)
             {
                 //enemy.CanTakeSupression = false;
-                enemyStats.SniperTakeDamage(Weapon.Damage);
+                enemyStats.SniperTakeDamage(Weapon.Damage + playerStats.BaseDamage);
             }
             else if(enemy.CanTakeSupression == true)
             {
-                enemy.TakeSupressionDamage(Weapon.Damage);
+                enemy.TakeSupressionDamage(Weapon.Damage + playerStats.BaseDamage);
             }
             else
             {

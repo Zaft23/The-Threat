@@ -63,11 +63,15 @@ public class PlayerMovement : MonoBehaviour
     public Transform CrossHair;
     #endregion
 
+    private Player player;
+
     
 
 
     void Awake()
     {
+        player = GetComponent<Player>();
+
         //
         rb2D = GetComponent<Rigidbody2D>();
         MyAnimator = GetComponent<Animator>();
@@ -313,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
         //Handles basic X axis Movement
         
 
-        rb2D.velocity = new Vector2(horizontalMovement * Speed, rb2D.velocity.y);
+        rb2D.velocity = new Vector2(horizontalMovement * (Speed + player.BaseSpeed), rb2D.velocity.y);
         //float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
 
         if (horizontalMovement == 0)

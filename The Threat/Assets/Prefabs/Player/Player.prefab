@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 500
+  MaxHealth: 500
   BaseDamage: 0
   Direction: {x: 0, y: 0, z: 0}
   MyRotation: {fileID: 3414017805676298682}
@@ -390,7 +391,8 @@ MonoBehaviour:
   _facingRight: 0
   Gm: {fileID: 0}
   _playerMovement: {fileID: 0}
-  SkillPoint: 0
+  _playerActions: {fileID: 0}
+  SkillPoint: 10
   LvlUpSkillPoint: 10
 --- !u!114 &3414017805676298662
 MonoBehaviour:
@@ -405,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillPoints: 0
-  level: 1
+  Level: 1
   maxLevel: 50
   currentXp: 0
   nextLevelXp: 100

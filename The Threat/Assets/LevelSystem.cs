@@ -51,6 +51,8 @@ public class LevelSystem : MonoBehaviour
 
     void Update()
     {
+        levelText.text = "Level " + Level;
+
         UpdateXpUI();
         if (Level != maxLevel)
         {
