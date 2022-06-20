@@ -87,28 +87,28 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && eulerAngY == 0)
         {
 
-            Debug.Log("Forward1");
+            //Debug.Log("Forward1");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", 1.0f);
 
         }
         else if (Input.GetKeyDown(KeyCode.A) && eulerAngY == -180)
         {
-            Debug.Log("Forward2");
+            //Debug.Log("Forward2");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", 1.0f);
         }
         else if (Input.GetKeyDown(KeyCode.A) && eulerAngY == 0)
         {
 
-            Debug.Log("BackWard1");
+            //Debug.Log("BackWard1");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", -1.0f);
 
         }
         else if (Input.GetKeyDown(KeyCode.D) && eulerAngY == -180)
         {
-            Debug.Log("BackWard2");
+            //Debug.Log("BackWard2");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", -1.0f);
         }
@@ -126,12 +126,12 @@ public class Player : MonoBehaviour
 
         if (eulerAngY == 180 || eulerAngY == 0)
         {
-            Debug.Log("Right!!!!!!!!!!");
+            //Debug.Log("Right!!!!!!!!!!");
             _facingRight = true;
         }
         else if (eulerAngY == -180)
         {
-            Debug.Log("Left!!!!!!!!!!");
+            //Debug.Log("Left!!!!!!!!!!");
             _facingRight = false;
         }
 

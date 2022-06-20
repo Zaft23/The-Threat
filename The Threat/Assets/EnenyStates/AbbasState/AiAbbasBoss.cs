@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiZombie : MonoBehaviour
+public class AiAbbasBoss : MonoBehaviour
 {
-
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
@@ -18,17 +17,24 @@ public class AiZombie : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
 
-    private Player playerHealth;
-
+    [SerializeField] private Player playerHealth;
+    [SerializeField] private EnemyStats enemyStats;
 
     public float Damage;
-    public float MoveSpeed;
+    public float RushDamage;
+    public float RushSpeed;
     public float ChaseSpeed;
     public float ChaseSpeedR;
 
+    public float AttackDuration;
+    public float RushDuration;
+    public float IdleDuration;
+
+
+
+
     public float AttackRange;
     public float RetreatDistance;
-
 
     public Vector3 Direction;
 
@@ -36,8 +42,8 @@ public class AiZombie : MonoBehaviour
 
     public GameObject Gun;
 
-    public float AttackTimer;
-    public float AttackCooldown;
+    //public float AttackTimer;
+    //public float AttackCooldown;
 
 
 
@@ -45,7 +51,7 @@ public class AiZombie : MonoBehaviour
     public bool Attack { get; set; }
     private bool _facingRight;
 
-    
+
     //public Animator Animator;
     private Rigidbody2D Rb2d;
     public GameObject Target;
@@ -55,7 +61,7 @@ public class AiZombie : MonoBehaviour
     public bool CanAttack;
     //public bool CanGiveDamage;
 
-    private IEZombieStates _currentState;
+    private IEAbbasBossStates _currentState;
 
 
 
@@ -65,7 +71,7 @@ public class AiZombie : MonoBehaviour
 
     private void Awake()
     {
-
+        enemyStats = GetComponent<EnemyStats>();
         Rb2d = GetComponent<Rigidbody2D>();
 
     }
@@ -78,54 +84,60 @@ public class AiZombie : MonoBehaviour
         //Physics2D.IgnoreLayerCollision(6, 7);
         //_currentHealth = EnemyHealth;
         _facingRight = true;
-        
-        ChangeState(new ZombieIdleState());
+
+        ChangeState(new AbbasAttackState());
 
         CanAttack = true;
-        
-}
+
+    }
 
 
 
     // Update is called once per frame
     void Update()
     {
-        
+
 
         //ignore collision
 
 
         _currentState.Execute();
-        LookAtTarget();
+        //LookAtTarget();
 
-        if (GroundCheck == null)
+
+        if (enemyStats.EnemyHealth <= enemyStats.SecondStageHealth)
         {
+           
+            Debug.Log("Second Stage");
 
-            //MoveSpeed = 0;
 
-            ChaseSpeed = 0;
+            RushSpeed = 10f;
+            RushDamage = 100f;
+            Damage = 40f;
+            ChaseSpeed = 5f;
+            AttackDuration = 10f;
+            IdleDuration = 2f;
+            RushDuration = 7f;
+
 
         }
 
 
 
-
-
-        if (ChaseSpeed == 0 && Target == null )
-        {
-            StartCoroutine(ResetChaseSpeed());
-            
-            Debug.Log("target dissapear");
-        }
 
 
 
 
     }
 
+    //stage phase
+
+
+
+
 
     #region
-    private void LookAtTarget()
+    public void LookAtTarget()
     {
         if (Target != null)
         {
@@ -141,10 +153,10 @@ public class AiZombie : MonoBehaviour
 
     }
 
-    public void MovePatrol()
+    public void RushMove()
     {
 
-        transform.Translate(GetDirection() * (MoveSpeed * Time.deltaTime));
+        transform.Translate(GetDirection() * (RushSpeed * Time.deltaTime));
 
     }
 
@@ -162,7 +174,7 @@ public class AiZombie : MonoBehaviour
 
 
 
-    public void ChangeState(IEZombieStates newState)
+    public void ChangeState(IEAbbasBossStates newState)
     {
         if (_currentState != null)
         {
@@ -197,7 +209,7 @@ public class AiZombie : MonoBehaviour
 
     }
 
-    #endregion 
+    #endregion
 
     public void AiChase()
     {
@@ -211,7 +223,7 @@ public class AiZombie : MonoBehaviour
         //if enemy too far away to shoot
         if (Vector2.Distance(transform.position, Player.position) > range)
         {
-            Debug.Log("too far");
+            //Debug.Log("too far");
             transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
         }
         //if enemy in range to engage player
@@ -220,7 +232,7 @@ public class AiZombie : MonoBehaviour
         {
 
 
-            Debug.Log("engage");
+            //Debug.Log("engage");
             transform.position = this.transform.position;
         }
 
@@ -228,7 +240,7 @@ public class AiZombie : MonoBehaviour
         //if enemy too close to player
         else if (Vector2.Distance(transform.position, Player.position) < RetreatDistance)
         {
-            Debug.Log("too close");
+           // Debug.Log("too close");
             transform.position = Vector2.MoveTowards(transform.position, Player.position, -ChaseSpeed * Time.deltaTime);
         }
     }
@@ -286,15 +298,17 @@ public class AiZombie : MonoBehaviour
 
 
     }
-    
+
+    public void RushMelee()
+    {
+
+        if (PlayerInSight())
+            playerHealth.TakeDamage(RushDamage);
 
 
-
-
-
+    }
 
 
 
 
 }
-

@@ -88,7 +88,7 @@ public class PlayerActions : MonoBehaviour
         {
             if (newSlot.IsPrimary == true && _inventory.IWeapons[0] == null && PrimaryExist == false)
             {
-                Debug.Log("1");
+                //Debug.Log("1");
                 //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
                 _inventory.AddItem(newItem);
                 Destroy(target.transform.gameObject);
@@ -97,7 +97,7 @@ public class PlayerActions : MonoBehaviour
 
             else if (newSlot.isSecondary == true && _inventory.IWeapons[1] == null && SecondaryExist == false)
             {
-                Debug.Log("1");
+                //Debug.Log("1");
                 //Weapon newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
                 _inventory.AddItem(newItem);
                 Destroy(target.transform.gameObject);

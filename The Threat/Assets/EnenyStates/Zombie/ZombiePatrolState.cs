@@ -7,7 +7,7 @@ public class ZombiePatrolState : IEZombieStates
     private AiZombie _enemy;
 
     private float _patrolTimer;
-    private float _patrolDuration = 10;
+    private float _patrolDuration = 10f;
 
 
     public void Enter(AiZombie enemy)

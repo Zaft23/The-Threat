@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossEnemySight : MonoBehaviour
+public class AbbasBossSight : MonoBehaviour
 {
     [SerializeField]
-    private AiSniperBoss _enemy;
+    private AiAbbasBoss _enemy;
 
 
 
@@ -19,16 +19,6 @@ public class BossEnemySight : MonoBehaviour
 
     }
 
-    //private void OnCollisionStay2D(Collision2D other)
-    //{
-    //        if (other.gameObject.tag == "Player")
-    //        {
-    //            _enemy.Target = other.gameObject;
-
-    //        }
-
-    //}
-
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -37,5 +27,4 @@ public class BossEnemySight : MonoBehaviour
         }
 
     }
-
 }

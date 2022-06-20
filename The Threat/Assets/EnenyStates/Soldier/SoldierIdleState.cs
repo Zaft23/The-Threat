@@ -8,7 +8,7 @@ public class SoldierIdleState : IESoldierStates
     private AiSoldier _enemy;
 
     private float _idleTimer;
-    private float _idleDuration = 4;
+    private float _idleDuration = 4f;
 
     public void Enter(AiSoldier enemy)
     {

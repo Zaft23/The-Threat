@@ -49,7 +49,8 @@ public class AiSoldier : MonoBehaviour
     //public Animator Animator;
     private Rigidbody2D Rb2d;
     public GameObject Target;
-    public GameObject GroundCheck;
+    public GameObject GroundCheck1;
+    public GameObject GroundCheck2;
 
     [SerializeField]
     private bool _canShoot;
@@ -96,7 +97,14 @@ public class AiSoldier : MonoBehaviour
         _currentState.Execute();
         LookAtTarget();
 
-        if (GroundCheck == null)
+        if (GroundCheck1 == null)
+        {
+
+
+            ChaseSpeed = 0;
+
+        }
+        if (GroundCheck2 == null)
         {
 
 

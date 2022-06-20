@@ -15,9 +15,9 @@ public class ZombieAttackState : IEZombieStates
     {
         if (_enemy.Target != null)
         {
-            Debug.Log("ATAAAACK");
+           // Debug.Log("ATAAAACK");
+            _enemy.AiChase();
             _enemy.AiMelee();
-
 
 
         }
@@ -40,6 +40,7 @@ public class ZombieAttackState : IEZombieStates
         
     }
 
+    
 
 
 
