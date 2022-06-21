@@ -7,7 +7,7 @@ public class ZombiePatrolState : IEZombieStates
     private AiZombie _enemy;
 
     private float _patrolTimer;
-    private float _patrolDuration = 10f;
+    //private float _patrolDuration = 10f;
 
 
     public void Enter(AiZombie enemy)
@@ -58,7 +58,7 @@ public class ZombiePatrolState : IEZombieStates
 
         _patrolTimer += Time.deltaTime;
 
-        if (_patrolTimer >= _patrolDuration)
+        if (_patrolTimer >= _enemy.PatrolDuration)
         {
             _enemy.ChangeState(new ZombieIdleState());
         }

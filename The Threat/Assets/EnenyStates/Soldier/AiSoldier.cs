@@ -11,6 +11,9 @@ public class AiSoldier : MonoBehaviour
     //public float EnemyHealth;
     //private float _currentHealth;
     //public float Damage;
+
+    public Animator MyAnimator;
+
     public float MoveSpeed;
     public float ChaseSpeed;
     public float ChaseSpeedR;
@@ -34,9 +37,12 @@ public class AiSoldier : MonoBehaviour
 
     public float RateOfFire;
     public float ShootingTime;
+    public float IdleDuration;
+    public float PatrolDuration;
+
     public float StartShootingTime;
-    public float EngagementTime;
-    public float StartEngagementTime;
+    //public float EngagementTime;
+    //public float StartEngagementTime;
 
     public GameObject Bullet;
     
@@ -66,9 +72,7 @@ public class AiSoldier : MonoBehaviour
 
     private void Awake()
     {
-        
-        //_state = State.Patrol;
-        //_state = State.Patrol;
+        MyAnimator = GetComponent<Animator>();
         Rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -97,20 +101,14 @@ public class AiSoldier : MonoBehaviour
         _currentState.Execute();
         LookAtTarget();
 
-        if (GroundCheck1 == null)
+        if (GroundCheck1 == null || GroundCheck2 == null)
         {
 
 
             ChaseSpeed = 0;
 
         }
-        if (GroundCheck2 == null)
-        {
 
-
-            ChaseSpeed = 0;
-
-        }
 
         if (ChaseSpeed == 0 && Target == null)
         {
@@ -121,6 +119,8 @@ public class AiSoldier : MonoBehaviour
 
         if(_canShoot == false)
         {
+            MyAnimator.SetBool("isAttacking", false);
+            MyAnimator.SetBool("isReloading", true);
             StartCoroutine(ResetShootingTime());
         }
         
@@ -148,9 +148,9 @@ public class AiSoldier : MonoBehaviour
 
     public void MovePatrol()
     {
-
+        MyAnimator.SetFloat("speed", 1);
         transform.Translate(GetDirection() * (MoveSpeed * Time.deltaTime));
-
+        MyAnimator.SetBool("isAttacking", false);
     }
 
 
@@ -225,6 +225,10 @@ public class AiSoldier : MonoBehaviour
             {
                 if (ShootingTime <= 0)
                 {
+                //Animation
+                    MyAnimator.SetBool("isReloading", false);
+                    MyAnimator.SetBool("isAttacking", true);
+
 
                     GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
 
@@ -235,6 +239,7 @@ public class AiSoldier : MonoBehaviour
                 }
                 else
                 {
+                    
                     ShootingTime -= Time.deltaTime;
                 }
             }

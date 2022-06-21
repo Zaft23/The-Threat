@@ -7,7 +7,7 @@ public class ZombieIdleState : IEZombieStates
     private AiZombie _enemy;
 
     private float _idleTimer;
-    private float _idleDuration = 4;
+    //private float _idleDuration = 4;
 
     public void Enter(AiZombie enemy)
     {
@@ -46,10 +46,10 @@ public class ZombieIdleState : IEZombieStates
 
     private void Idle()
     {
-
+        _enemy.MyAnimator.SetFloat("speed", 0);
         _idleTimer += Time.deltaTime;
 
-        if (_idleTimer >= _idleDuration)
+        if (_idleTimer >= _enemy.IdleDuration)
         {
             _enemy.ChangeState(new ZombiePatrolState());
         }

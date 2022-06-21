@@ -6,12 +6,7 @@ public class SoldierShootState : IESoldierStates
 {
     private AiSoldier _enemy;
 
-    //private float _ShootTimer;
-    //private float _ShootCoolDown;
-   // private float _shootingRange = 5f;
 
-    //private bool _canShoot;
-    
 
 
     public void Enter(AiSoldier enemy)
@@ -34,7 +29,8 @@ public class SoldierShootState : IESoldierStates
 
         else
         {
-            _enemy.ChangeState(new SoldierIdleState());
+            //_enemy.ChangeState(new SoldierIdleState());
+            _enemy.ChangeState(new SoldierPatrolState());
         }
         
 

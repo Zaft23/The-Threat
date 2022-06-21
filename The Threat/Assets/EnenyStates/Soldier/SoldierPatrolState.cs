@@ -7,7 +7,7 @@ public class SoldierPatrolState : IESoldierStates
     private AiSoldier _enemy;
 
     private float _patrolTimer;
-    private float _patrolDuration = 10;
+    //private float _patrolDuration = 10;
 
 
     public void Enter(AiSoldier enemy)
@@ -57,7 +57,7 @@ public class SoldierPatrolState : IESoldierStates
 
         _patrolTimer += Time.deltaTime;
 
-        if (_patrolTimer >= _patrolDuration)
+        if (_patrolTimer >= _enemy.PatrolDuration)
         {
             _enemy.ChangeState(new SoldierIdleState());
         }

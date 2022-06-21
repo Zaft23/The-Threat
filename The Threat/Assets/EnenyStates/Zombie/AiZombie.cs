@@ -18,8 +18,9 @@ public class AiZombie : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
 
-    private Player playerHealth;
+    public Animator MyAnimator;
 
+    private Player playerHealth;
 
     public float Damage;
     public float MoveSpeed;
@@ -38,7 +39,8 @@ public class AiZombie : MonoBehaviour
 
     public float AttackTimer;
     public float AttackCooldown;
-
+    public float IdleDuration;
+    public float PatrolDuration;
 
 
 
@@ -49,7 +51,8 @@ public class AiZombie : MonoBehaviour
     //public Animator Animator;
     private Rigidbody2D Rb2d;
     public GameObject Target;
-    public GameObject GroundCheck;
+    public GameObject GroundCheck1;
+    public GameObject GroundCheck2;
 
     [SerializeField]
     public bool CanAttack;
@@ -65,7 +68,7 @@ public class AiZombie : MonoBehaviour
 
     private void Awake()
     {
-
+        MyAnimator = GetComponent<Animator>();
         Rb2d = GetComponent<Rigidbody2D>();
 
     }
@@ -98,10 +101,9 @@ public class AiZombie : MonoBehaviour
         _currentState.Execute();
         LookAtTarget();
 
-        if (GroundCheck == null)
+        if (GroundCheck1 == null || GroundCheck2 == null)
         {
 
-            //MoveSpeed = 0;
 
             ChaseSpeed = 0;
 
@@ -143,7 +145,7 @@ public class AiZombie : MonoBehaviour
 
     public void MovePatrol()
     {
-
+        MyAnimator.SetFloat("speed", 1);
         transform.Translate(GetDirection() * (MoveSpeed * Time.deltaTime));
 
     }
@@ -204,6 +206,7 @@ public class AiZombie : MonoBehaviour
 
         var Player = GameObject.FindGameObjectWithTag("Player").transform;
 
+        MyAnimator.SetFloat("speed", 1);
 
         //Behaviour
         //if withing line of sight 
@@ -266,6 +269,7 @@ public class AiZombie : MonoBehaviour
     {
         if (PlayerInSight())
             playerHealth.TakeDamage(Damage);
+        MyAnimator.SetBool("isAttacking", false);
     }
 
     public void AiMelee()
@@ -278,9 +282,15 @@ public class AiZombie : MonoBehaviour
         {
             if (cooldownTimer >= attackCooldown)
             {
+                MyAnimator.SetBool("isAttacking", true);
+
                 cooldownTimer = 0;
-                DamagePlayer();
+                //DamagePlayer();
                 //anim.SetTrigger("meleeAttack");
+            }
+            else
+            {
+                //MyAnimator.SetBool("isAttacking", false);
             }
         }
 

@@ -8,7 +8,7 @@ public class SoldierIdleState : IESoldierStates
     private AiSoldier _enemy;
 
     private float _idleTimer;
-    private float _idleDuration = 4f;
+    //private float _idleDuration = 4f;
 
     public void Enter(AiSoldier enemy)
     {
@@ -50,10 +50,12 @@ public class SoldierIdleState : IESoldierStates
         //access component of enemy
         //enemy.*something
 
+        _enemy.MyAnimator.SetFloat("speed", 0);
+        _enemy.MyAnimator.SetBool("isAttacking", false);
 
         _idleTimer += Time.deltaTime;
 
-        if(_idleTimer >= _idleDuration)
+        if(_idleTimer >= _enemy.IdleDuration)
         {
             _enemy.ChangeState(new SoldierPatrolState());
         }

@@ -24,7 +24,8 @@ public class ZombieAttackState : IEZombieStates
 
         else
         {
-            _enemy.ChangeState(new ZombieIdleState());
+            //_enemy.ChangeState(new ZombieIdleState());
+            _enemy.ChangeState(new ZombiePatrolState());
         }
 
 

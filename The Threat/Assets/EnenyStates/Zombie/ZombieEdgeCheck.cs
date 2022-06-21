@@ -11,7 +11,12 @@ public class ZombieEdgeCheck : MonoBehaviour
     {
         if (other.tag == "Ground")
         {
-            _enemy.GroundCheck = other.gameObject;
+            _enemy.GroundCheck1 = other.gameObject;
+
+        }
+        if (other.tag == "Ground")
+        {
+            _enemy.GroundCheck2 = other.gameObject;
 
         }
 
@@ -21,7 +26,11 @@ public class ZombieEdgeCheck : MonoBehaviour
     {
         if (other.tag == "Ground")
         {
-            _enemy.GroundCheck = null;
+            _enemy.GroundCheck1 = null;
+        }
+        if (other.tag == "Ground")
+        {
+            _enemy.GroundCheck2 = null;
         }
 
     }
