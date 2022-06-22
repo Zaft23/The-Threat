@@ -78,7 +78,7 @@ public class SniperBossMoveState : IESniperBossStates
         if (other.tag == "PatrolWayPoint")
         {
 
-            Debug.Log("ayyyyyyyyyyyyyyyy");
+            //Debug.Log("ayyyyyyyyyyyyyyyy");
             //_enemy.CanShoot = true;
             _enemy.ChangeState(new SniperBossAttackState());
         }

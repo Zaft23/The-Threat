@@ -6,7 +6,7 @@ public class EnemyStats : MonoBehaviour
 {
     [SerializeField]
     public float EnemyHealth;
-    public float EnemyDamage;
+    //public float EnemyDamage;
     public float SecondStageHealth;
     private float _currentHealth;
     private AiSniperBoss SniperBoss;
@@ -15,8 +15,8 @@ public class EnemyStats : MonoBehaviour
 
     public float enemyXp;
 
-    public float XpMultiplier;
-    public float Dunno;
+    //public float XpMultiplier;
+    //public float Dunno;
 
     public GameObject _player;
     public LevelSystem _playerLevel;

@@ -6,8 +6,8 @@ public class AiSniperBoss : MonoBehaviour
 {
     public Weapon Weapon;
     public Player Player;
-    //public AiBossBulletBehaviour AiBullet;
 
+    public Animator MyAnimator;
 
     public EnemyStats EnemyStats;
 
@@ -20,13 +20,9 @@ public class AiSniperBoss : MonoBehaviour
     public bool CanAttack;
 
 
-    //public float EnemyHealth;
-    //private float _currentHealth;
-    //public float Damage;
+
     public float MoveSpeed;
-    public float MoveSpeedR;
-    public float FiringTime;
-    public float ReloadingTime;
+
 
     //stoping distance
     public float ShootingRange;
@@ -38,13 +34,15 @@ public class AiSniperBoss : MonoBehaviour
     public GameObject Gun;
 
     public float RateOfFire;
-    public float ShootingTime;
-    public float StartShootingTime;
     public float EngagementTime;
-    public float StartEngagementTime;
+    public float ReloadingTime;
 
-    //
-   // public AiBossBulletBehaviour BulletStats;
+
+
+
+    private float _ShootingTIme;
+    private float _startShootingTIme;
+
     public GameObject Bullet;
     public GameObject Bullet2;
 
@@ -54,13 +52,13 @@ public class AiSniperBoss : MonoBehaviour
 
     public float BulletSpeed;
 
-    //public Animator Animator;
+
     private Rigidbody2D Rb2d;
     public GameObject Target;
     public GameObject GroundCheck;
 
-    [SerializeField]
-    //public bool CanShoot;
+    //[SerializeField]
+    public bool CanShoot;
 
     private IESniperBossStates _currentState;
 
@@ -78,11 +76,12 @@ public class AiSniperBoss : MonoBehaviour
     {
 
         Rb2d = GetComponent<Rigidbody2D>();
+        MyAnimator = GetComponent<Animator>();
         //transform.position = _waypoints[rand].transform.position;
         //WPintIndex.transform.position = _waypoints[rand].transform.position;
         //rand = Random.Range(1, 3);
         RandomWayPoint = Random.Range(0, 3);
-        //BulletStats = Bullet.GetComponent<AiBossBulletBehaviour>();
+        
     }
 
 
@@ -92,16 +91,15 @@ public class AiSniperBoss : MonoBehaviour
         //spawn here/location
 
         Physics2D.IgnoreLayerCollision(6, 7);
-        //_currentHealth = EnemyHealth;
+        
         _facingRight = true;
-        ShootingTime = StartShootingTime;
+        _ShootingTIme = _startShootingTIme;
         ChangeState(new SniperBossAttackState());
-        //ChangeState(new SniperBossMoveState());
-
-        //CanShoot = true;
+  
         CanTakeDamage = false;
 
         //
+        CanShoot = true;
         
 
         //transform.position = _waypoints[rand.transform.position;
@@ -115,10 +113,7 @@ public class AiSniperBoss : MonoBehaviour
 
         //
         EnemyStats = GetComponent<EnemyStats>();
-        //BulletStats = Bullet.GetComponent<AiBossBulletBehaviour>;
-        //var bBullet = Bullet.GetComponent<AiBossBulletBehaviour>();
-        
-        //public GameObject Bullet;
+
 
 
 }
@@ -142,99 +137,197 @@ public class AiSniperBoss : MonoBehaviour
             //ChangeNumber = true;
         }
 
-        //move mod and rate of fire
-        if(EnemyStats.EnemyHealth <= EnemyStats.SecondStageHealth)
+
+        if (CanShoot == false)
         {
-            //AiBossBulletBehaviour bbullet = Bullet.GetComponent<AiBossBulletBehaviour>(); 
-               // AiBossBulletBehaviour bbulet.GetComponent<AiBossBulletBehaviour>();
-            //AiBullet = Bullet.GetComponent<AiBossBulletBehaviour>();
+            MyAnimator.SetBool("isAttacking", false);
+            MyAnimator.SetBool("isAttacking2", false);
+            MyAnimator.SetBool("isReloading", true);
+            StartCoroutine(ResetShootingTime());
+        }
+
+
+
+        //move mod and rate of fire
+        if (EnemyStats.EnemyHealth <= EnemyStats.SecondStageHealth)
+        {
+
             Debug.Log("Second Stage");
             MoveSpeed = 10f;
-           // BulletStats.Damage = 60f;
-           // BulletStats.BulletSpeed = 100f;
             RateOfFire = 1f;
+            
+            //longer
+            //EngagementTime = ;
+            //faster
+            //ReloadingTIme = ;
 
         }
 
+        #region comment
         //was trying to check if you go to intended waypoint but fuck it
         //if (transform.position == Waypoints[WaypointIndex].transform.position)
         //{
-            //ChangeNumber = false;
-           //ChangeState(new SniperBossAttackState());
+        //ChangeNumber = false;
+        //ChangeState(new SniperBossAttackState());
         //}
 
         //if(SuppressionHealth != 0)
         //ignore collision
 
-            //if (GroundCheck == null)
-            //{
-            //    ChaseSpeed = 0;
-            //}
+        //if (GroundCheck == null)
+        //{
+        //    ChaseSpeed = 0;
+        //}
 
-            //if (ChaseSpeed == 0 && Target == null)
-            //{
-            //    StartCoroutine(ResetChaseSpeed());
+        //if (ChaseSpeed == 0 && Target == null)
+        //{
+        //    StartCoroutine(ResetChaseSpeed());
 
-            //    Debug.Log("target dissapear");
-            //}
+        //    Debug.Log("target dissapear");
+        //}
 
-            //if (_canShoot == false)
-            //{
-            //    StartCoroutine(ResetShootingTime());
-            //}
 
+        #endregion
 
     }
+
+    public void AiShoot1()
+    {
+        Debug.Log("amkiiiiiiiiiiiiiinh");
+        GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+
+        _ShootingTIme = RateOfFire;
+
+        //StartCoroutine(BooleanShootingTime());
+
+    }
+
+    public void AiShoot2()
+    {
+        Debug.Log("second Staaaaaaaaaaage");
+        GameObject bullet = Instantiate(Bullet2, FirePoint.position, Quaternion.identity);
+
+        _ShootingTIme = RateOfFire;
+
+        //StartCoroutine(BooleanShootingTime());
+
+    }
+
+    //private float _engageTimer;
+    //private void ReloadCountDown()
+    //{
+       
+       
+    //        _engageTimer += Time.deltaTime;
+
+    //        if (_engageTimer >= EngagementTime)
+    //        {
+    //        MyAnimator.SetBool("isAttacking", false);
+    //        MyAnimator.SetBool("isAttacking2", false);
+    //        CanShoot = false;
+    //        }
+        
+      
+    //}
+    //private void RShootinTime()
+    //{
+
+    //       _engageTimer += Time.deltaTime;
+
+    //        if (_engageTimer >= EngagementTime)
+    //        {
+    //            //MyAnimator.SetBool("isAttacking", false);
+    //            //MyAnimator.SetBool("isAttacking2", false);
+    //             CanShoot = true;
+    //        }
+        
+    //}
 
     public void AiShoot()
     {
+        
 
-        var Player = GameObject.FindGameObjectWithTag("Player").transform;
+        //var Player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (CanShoot == true)
+        {
+            //ReloadCountDown();
+            if (EnemyStats.EnemyHealth > EnemyStats.SecondStageHealth )
+            {
+                Debug.Log("CanShoot");
+               
+                MyAnimator.SetBool("isAttacking", true);
+                //MyAnimator.SetBool("isAttacking2", false);
+                MyAnimator.SetFloat("speed", 0);
+                MyAnimator.SetFloat("rateoffire", 1f);
+                StartCoroutine(BooleanShootingTime());
+                //ReloadCountDown();
+            }
+            else if(EnemyStats.EnemyHealth <= EnemyStats.SecondStageHealth)
+            {
+                
+                //MyAnimator.SetBool("isAttacking", false);
+                MyAnimator.SetBool("isAttacking2", true);
+                MyAnimator.SetFloat("speed", 0);
+                MyAnimator.SetFloat("rateoffire", 3f);
+                StartCoroutine(BooleanShootingTime());
+                //ReloadCountDown();
+            }
 
+
+
+        }
+
+        #region Shoot not based on animation
         //if (CanShoot == true)
         //{
-        if (EnemyStats.EnemyHealth > EnemyStats.SecondStageHealth)
-        {
-            if (ShootingTime <= 0)
-            {
-                Debug.Log("amkiiiiiiiiiiiiiinh");
-                GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+        //    MyAnimator.SetBool("isAttacking", true);
+        //    MyAnimator.SetFloat("speed", 0);
 
-                ShootingTime = RateOfFire;
+        //    if (EnemyStats.EnemyHealth > EnemyStats.SecondStageHealth)
+        //    {
+        //        if (_ShootingTIme <= 0)
+        //        {
 
-                //StartCoroutine(BooleanShootingTime());
+        //            Debug.Log("amkiiiiiiiiiiiiiinh");
+        //            GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
 
-            }
-            else
-            {
-                ShootingTime -= Time.deltaTime;
-            }
-        }
-        else
-        {
-            
-                if (ShootingTime <= 0)
-                {
-                    Debug.Log("second Staaaaaaaaaaage");
-                    GameObject bullet = Instantiate(Bullet2, FirePoint.position, Quaternion.identity);
+        //            _ShootingTIme = RateOfFire;
 
-                    ShootingTime = RateOfFire;
+        //            StartCoroutine(BooleanShootingTime());
 
-                    //StartCoroutine(BooleanShootingTime());
+        //        }
+        //        else
+        //        {
+        //            _ShootingTIme -= Time.deltaTime;
+        //        }
 
-                }
-                else
-                {
-                    ShootingTime -= Time.deltaTime;
-                }
-            
-        }
+        //    }
+        //    else
+        //    {
 
-        
-        
+        //        if (_ShootingTIme <= 0)
+        //        {
+        //           Debug.Log("second Staaaaaaaaaaage");
+        //           GameObject bullet = Instantiate(Bullet2, FirePoint.position, Quaternion.identity);
+
+        //           _ShootingTIme = RateOfFire;
+
+        //           StartCoroutine(BooleanShootingTime());
+
+        //        }
+        //        else
+        //        {
+        //           _ShootingTIme -= Time.deltaTime;
+        //        }
+
+
+        //    }
+
         //}
+        #endregion
 
     }
+
     //void RandomNumber()
     //{
     //    _randomWaypoint = Random.Range(0, 3);
@@ -255,7 +348,7 @@ public class AiSniperBoss : MonoBehaviour
 
         if (SuppressionHealth <= 0)
         {
-            Debug.Log("enemy supressed");
+            //Debug.Log("enemy supressed");
             //do animation
 
             if (CurrentSuppressionHealth <= 0)
@@ -274,9 +367,13 @@ public class AiSniperBoss : MonoBehaviour
 
     public void MoveToCover()
     {
+
         if(WaypointIndex < 3)
-        { 
-           //WPintIndex.transform.position = _waypoints[WaypointIndex].transform.position;
+        {
+            MyAnimator.SetFloat("speed", 1);
+            //MyAnimator.SetBool("isAttacking", false);
+            //MyAnimator.SetBool("isAttacking2", false);
+            //WPintIndex.transform.position = _waypoints[WaypointIndex].transform.position;
             this.transform.position = Vector2.MoveTowards(transform.position, Waypoints[WaypointIndex].transform.position,
                 MoveSpeed * Time.deltaTime);
 
@@ -285,10 +382,11 @@ public class AiSniperBoss : MonoBehaviour
 
         if(transform.position == Waypoints[WaypointIndex].transform.position)
         {
+            MyAnimator.SetFloat("speed", 0);
             WaypointIndex = RandomWayPoint;
             ChangeNumber = true;
             //WPintIndex.transform.position = Waypoints[WaypointIndex].transform.position;
-            //CanShoot = true;
+            
         }
 
     }
@@ -347,15 +445,6 @@ public class AiSniperBoss : MonoBehaviour
     }
 
 
-
-  //  private void OnTriggerEnter2D(Collider2D other)
-   // {
-        //_currentState.OntriggerEnter(other);
-   // }
-
-
-
-
     public void Stop()
     {
         transform.position = this.transform.position;
@@ -367,35 +456,28 @@ public class AiSniperBoss : MonoBehaviour
         return transform.position;
     }
 
-    //private IEnumerator ResetChaseSpeed()
-    //{
-    //    yield return new WaitForSeconds(7);
-    //    ChaseSpeed = ChaseSpeedR;
-    //    //ChangeDirection();
 
-    //}
+    //EngagementTime
+    private IEnumerator BooleanShootingTime()
+    {
+        
+        yield return new WaitForSeconds(EngagementTime);
+        Debug.Log("FIRING!!!");
+        CanShoot = false;
+        
 
-    //private IEnumerator BooleanShootingTime()
-    //{
-    //    yield return new WaitForSeconds(FiringTime);
+    }
 
-    //    CanShoot = false;
-    //    //ChangeDirection();
+    //reset EngagementTime
+    public IEnumerator ResetShootingTime()
+    {
 
-    //}
+        
+        yield return new WaitForSeconds(ReloadingTime);
+        Debug.Log("Reloading!!!");
+        CanShoot = true;
 
-    //private IEnumerator ResetShootingTime()
-    //{
-    //    yield return new WaitForSeconds(ReloadingTime);
-
-    //    CanShoot = true;
-
-    //}
-
-
-
-
-
+    }
 
 
 

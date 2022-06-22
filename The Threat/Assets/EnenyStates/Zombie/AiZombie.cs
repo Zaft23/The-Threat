@@ -222,7 +222,7 @@ public class AiZombie : MonoBehaviour
             Vector2.Distance(transform.position, Player.position) > RetreatDistance)
         {
 
-
+            MyAnimator.SetFloat("speed", 0);
             Debug.Log("engage");
             transform.position = this.transform.position;
         }
@@ -269,6 +269,7 @@ public class AiZombie : MonoBehaviour
     {
         if (PlayerInSight())
             playerHealth.TakeDamage(Damage);
+        MyAnimator.SetBool("isStopping", true);
         MyAnimator.SetBool("isAttacking", false);
     }
 
@@ -282,16 +283,17 @@ public class AiZombie : MonoBehaviour
         {
             if (cooldownTimer >= attackCooldown)
             {
+                MyAnimator.SetBool("isStopping", false);
                 MyAnimator.SetBool("isAttacking", true);
-
+                
                 cooldownTimer = 0;
                 //DamagePlayer();
                 //anim.SetTrigger("meleeAttack");
             }
-            else
-            {
+            //else
+            //{
                 //MyAnimator.SetBool("isAttacking", false);
-            }
+            //}
         }
 
 
