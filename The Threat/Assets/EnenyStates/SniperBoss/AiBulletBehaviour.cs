@@ -10,7 +10,7 @@ public class AiBulletBehaviour : MonoBehaviour
     //public float 
     private Transform player;
 
-    Player _target;
+    public GameObject Target;
     Vector2 _moveDirection;
 
     public float Damage;
@@ -21,13 +21,13 @@ public class AiBulletBehaviour : MonoBehaviour
     private void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
-        _target = GameObject.FindObjectOfType<Player>();
-        _moveDirection = (_target.transform.position - transform.position).normalized * BulletSpeed;
+        Target = GameObject.FindGameObjectWithTag("Player");
+        _moveDirection = (Target.transform.position - transform.position).normalized * BulletSpeed;
         _rb2D.velocity = new Vector2(_moveDirection.x, _moveDirection.y);
         //https://www.youtube.com/watch?v=kOzhE3_P2Mk&ab_channel=AlexanderZotov
 
         StartCoroutine(DestroyBullet());
-        var player = GameObject.FindGameObjectWithTag("Player").transform;
+        //var player = GameObject.FindGameObjectWithTag("Player").transform;
 
         //target = new Vector2(player.position.x, player.position.y);
     }

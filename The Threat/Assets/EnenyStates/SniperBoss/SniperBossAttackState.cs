@@ -29,14 +29,16 @@ public class SniperBossAttackState : IESniperBossStates
 
         _enemy.CanTakeDamage = false;
         _enemy.CanTakeSupression = true;
-        _enemy.CanAttack = true;
+        //_enemy.CanAttack = true;
+        
 
         //_enemy.CurrentSuppressionHealth = _enemy.SuppressionHealth;
-        if (_enemy.Target != null && _enemy.CanAttack == true)
+        if (_enemy.Target != null)
         {
+
             //_enemy.MyAnimator.SetFloat("speed", 0);
             //_enemy.CanShoot = true;
-            //Debug.Log("AI shooting");
+            Debug.Log("AI shooting");
     
              _enemy.AiShoot();
             //EngageDuration();

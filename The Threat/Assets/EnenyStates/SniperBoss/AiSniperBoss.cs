@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
+
 
 public class AiSniperBoss : MonoBehaviour
 {
@@ -55,6 +57,7 @@ public class AiSniperBoss : MonoBehaviour
 
     private Rigidbody2D Rb2d;
     public GameObject Target;
+    public GameObject Sight;
     public GameObject GroundCheck;
 
     //[SerializeField]
@@ -89,7 +92,7 @@ public class AiSniperBoss : MonoBehaviour
     void Start()
     {
         //spawn here/location
-
+        cooldownTimer = EngagementTime;
         Physics2D.IgnoreLayerCollision(6, 7);
         
         _facingRight = true;
@@ -135,15 +138,6 @@ public class AiSniperBoss : MonoBehaviour
         {
             CanTakeSupression = false;
             //ChangeNumber = true;
-        }
-
-
-        if (CanShoot == false)
-        {
-            MyAnimator.SetBool("isAttacking", false);
-            MyAnimator.SetBool("isAttacking2", false);
-            MyAnimator.SetBool("isReloading", true);
-            StartCoroutine(ResetShootingTime());
         }
 
 
@@ -213,69 +207,68 @@ public class AiSniperBoss : MonoBehaviour
 
     }
 
-    //private float _engageTimer;
-    //private void ReloadCountDown()
-    //{
-       
-       
-    //        _engageTimer += Time.deltaTime;
 
-    //        if (_engageTimer >= EngagementTime)
-    //        {
-    //        MyAnimator.SetBool("isAttacking", false);
-    //        MyAnimator.SetBool("isAttacking2", false);
-    //        CanShoot = false;
-    //        }
-        
-      
-    //}
-    //private void RShootinTime()
-    //{
-
-    //       _engageTimer += Time.deltaTime;
-
-    //        if (_engageTimer >= EngagementTime)
-    //        {
-    //            //MyAnimator.SetBool("isAttacking", false);
-    //            //MyAnimator.SetBool("isAttacking2", false);
-    //             CanShoot = true;
-    //        }
-        
-    //}
-
+    //public bool IsReloading;
+    [SerializeField]
+    private float cooldownTimer;
     public void AiShoot()
     {
+
+       
+
+        MyAnimator.SetFloat("speed", 0);
+
+        //if (CanShoot == false)
+        //{
+        //    MyAnimator.SetBool("isAttacking", false);
+        //    MyAnimator.SetBool("isAttacking2", false);
+
         
 
-        //var Player = GameObject.FindGameObjectWithTag("Player").transform;
-        if (CanShoot == true)
+
+        cooldownTimer -= Time.deltaTime;
+        if(cooldownTimer <= 0)
         {
-            //ReloadCountDown();
-            if (EnemyStats.EnemyHealth > EnemyStats.SecondStageHealth )
+            CanShoot = false;
+            MyAnimator.SetBool("isAttacking", false);
+            MyAnimator.SetBool("isAttacking2", false);
+        }
+        if(cooldownTimer <= -ReloadingTime)
+        {
+            CanShoot = true;
+            cooldownTimer = EngagementTime;
+        }
+
+        if (EnemyStats.EnemyHealth > EnemyStats.SecondStageHealth && CanShoot == true)
             {
                 Debug.Log("CanShoot");
                
                 MyAnimator.SetBool("isAttacking", true);
                 //MyAnimator.SetBool("isAttacking2", false);
-                MyAnimator.SetFloat("speed", 0);
+                
                 MyAnimator.SetFloat("rateoffire", 1f);
-                StartCoroutine(BooleanShootingTime());
+                
+                
                 //ReloadCountDown();
             }
-            else if(EnemyStats.EnemyHealth <= EnemyStats.SecondStageHealth)
+            else if(EnemyStats.EnemyHealth <= EnemyStats.SecondStageHealth && CanShoot == true)
             {
                 
                 //MyAnimator.SetBool("isAttacking", false);
                 MyAnimator.SetBool("isAttacking2", true);
-                MyAnimator.SetFloat("speed", 0);
+                //MyAnimator.SetFloat("speed", 0);
                 MyAnimator.SetFloat("rateoffire", 3f);
-                StartCoroutine(BooleanShootingTime());
+
+               
                 //ReloadCountDown();
             }
+    
+
+
+        
 
 
 
-        }
 
         #region Shoot not based on animation
         //if (CanShoot == true)
@@ -328,6 +321,7 @@ public class AiSniperBoss : MonoBehaviour
 
     }
 
+    #region
     //void RandomNumber()
     //{
     //    _randomWaypoint = Random.Range(0, 3);
@@ -367,12 +361,13 @@ public class AiSniperBoss : MonoBehaviour
 
     public void MoveToCover()
     {
-
-        if(WaypointIndex < 3)
+        //CanShoot = false;
+        MyAnimator.SetFloat("speed", 1);
+        if (WaypointIndex < 3)
         {
-            MyAnimator.SetFloat("speed", 1);
-            //MyAnimator.SetBool("isAttacking", false);
-            //MyAnimator.SetBool("isAttacking2", false);
+            
+            MyAnimator.SetBool("isAttacking", false);
+            MyAnimator.SetBool("isAttacking2", false);
             //WPintIndex.transform.position = _waypoints[WaypointIndex].transform.position;
             this.transform.position = Vector2.MoveTowards(transform.position, Waypoints[WaypointIndex].transform.position,
                 MoveSpeed * Time.deltaTime);
@@ -382,19 +377,20 @@ public class AiSniperBoss : MonoBehaviour
 
         if(transform.position == Waypoints[WaypointIndex].transform.position)
         {
-            MyAnimator.SetFloat("speed", 0);
+            //MyAnimator.SetFloat("speed", 0);
             WaypointIndex = RandomWayPoint;
             ChangeNumber = true;
+            //CanShoot = true;
             //WPintIndex.transform.position = Waypoints[WaypointIndex].transform.position;
             
         }
 
     }
+    #endregion
 
 
 
-
-
+    #region
     public void ChangeState(IESniperBossStates newState)
     {
         if (_currentState != null)
@@ -455,16 +451,20 @@ public class AiSniperBoss : MonoBehaviour
     {
         return transform.position;
     }
-
+    #endregion
 
     //EngagementTime
     private IEnumerator BooleanShootingTime()
     {
-        
+   
         yield return new WaitForSeconds(EngagementTime);
         Debug.Log("FIRING!!!");
+
         CanShoot = false;
+            
         
+
+
 
     }
 
@@ -473,11 +473,15 @@ public class AiSniperBoss : MonoBehaviour
     {
 
         
-        yield return new WaitForSeconds(ReloadingTime);
-        Debug.Log("Reloading!!!");
-        CanShoot = true;
+       yield return new WaitForSeconds(ReloadingTime);
+
+       CanShoot = true;
+       Debug.Log("Reloading!!!");
+
+
 
     }
+
 
 
 

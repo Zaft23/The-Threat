@@ -17,7 +17,7 @@ public class AiSoldier : MonoBehaviour
     public float MoveSpeed;
     public float ChaseSpeed;
     public float ChaseSpeedR;
-    public float FiringTime;
+    public float EngagementTime;
     public float ReloadingTime;
 
     //stoping distance
@@ -81,6 +81,7 @@ public class AiSoldier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cooldownTimer = EngagementTime;
         Physics2D.IgnoreLayerCollision(6, 7);
         //_currentHealth = EnemyHealth;
         _facingRight = true;
@@ -117,12 +118,12 @@ public class AiSoldier : MonoBehaviour
             Debug.Log("target dissapear");
         }
 
-        if(_canShoot == false)
-        {
-            MyAnimator.SetBool("isAttacking", false);
-            MyAnimator.SetBool("isReloading", true);
-            StartCoroutine(ResetShootingTime());
-        }
+        //if(_canShoot == false)
+        //{
+        //    MyAnimator.SetBool("isAttacking", false);
+        //    MyAnimator.SetBool("isReloading", true);
+        //    StartCoroutine(ResetShootingTime());
+        //}
         
 
 
@@ -185,64 +186,76 @@ public class AiSoldier : MonoBehaviour
         _currentState.OntriggerEnter(other);
     }
 
-
+    [SerializeField]
+    private float cooldownTimer;
 
     public void AiShoot()
     {
-
         var Player = GameObject.FindGameObjectWithTag("Player").transform;
 
-         
-            //Behaviour
-            //if withing line of sight 
-            // do function
-            //if enemy too far away to shoot
-            if (Vector2.Distance(transform.position, Player.position) > ShootingRange)
-            {
+        if (Vector2.Distance(transform.position, Player.position) > ShootingRange)
+        {
                 Debug.Log("too far");
                 transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
-            }
+        }
             //if enemy in range to engage player
-            else if (Vector2.Distance(transform.position, Player.position) < ShootingRange &&
+        else if (Vector2.Distance(transform.position, Player.position) < ShootingRange &&
                 Vector2.Distance(transform.position, Player.position) > RetreatDistance)
-            {
+        {
 
 
                 Debug.Log("engage");
                 transform.position = this.transform.position;
-            }
+         }
 
 
             //if enemy too close to player
-            else if (Vector2.Distance(transform.position, Player.position) < RetreatDistance)
-            {
+        else if (Vector2.Distance(transform.position, Player.position) < RetreatDistance)
+        {
                 Debug.Log("too close");
                 transform.position = Vector2.MoveTowards(transform.position, Player.position, -ChaseSpeed * Time.deltaTime);
+        }
+
+
+        cooldownTimer -= Time.deltaTime;
+
+        //if (_canShoot == true)
+        
+
+            if (cooldownTimer <= 0)
+            {
+                _canShoot = false;
+                MyAnimator.SetBool("isAttacking", false);
+                MyAnimator.SetBool("isReloading", true);
+
+            }
+            if (cooldownTimer <= -ReloadingTime)
+            {
+                _canShoot = true;
+                MyAnimator.SetBool("isReloading", false);
+                MyAnimator.SetBool("isAttacking", true);
+                cooldownTimer = EngagementTime;
             }
 
-
-            if(_canShoot == true)
+            if(ShootingTime <= 0 && _canShoot == true)
             {
-                if (ShootingTime <= 0)
-                {
-                //Animation
-                    MyAnimator.SetBool("isReloading", false);
-                    MyAnimator.SetBool("isAttacking", true);
+                    
 
+                MyAnimator.SetBool("isAttacking", true);
+                GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
 
-                    GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
+                ShootingTime = RateOfFire;
 
-                    ShootingTime = RateOfFire;
+                    
 
-                    StartCoroutine(BooleanShootingTime());
-
-                }
-                else
-                {
+            }
+            else
+            {
                     
                     ShootingTime -= Time.deltaTime;
-                }
             }
+
+         
   
 
         
@@ -300,7 +313,7 @@ public class AiSoldier : MonoBehaviour
 
     private IEnumerator BooleanShootingTime()
     {
-        yield return new WaitForSeconds(FiringTime);
+        yield return new WaitForSeconds(EngagementTime);
 
         _canShoot = false;
         //ChangeDirection();
