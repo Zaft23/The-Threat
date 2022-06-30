@@ -18,16 +18,19 @@ public class Upgrade : MonoBehaviour
 
     public Button BuySkill;
 
-    public AudioClip ButtonPress;
+    //public UpgradeManager manager;
 
-    [SerializeField]
-    private GameObject _upgrade;
-    UpgradeManager upgradeManager;
+    //
+
+
+    //
+
+
+
 
     private void Awake()
     {
-        _upgrade = GameObject.FindGameObjectWithTag("Upgrade");
-        upgradeManager = _upgrade.GetComponent<UpgradeManager>();
+
     }
 
 
@@ -36,7 +39,7 @@ public class Upgrade : MonoBehaviour
         
     }
 
-   
+   //upgrade shit
 
 
 

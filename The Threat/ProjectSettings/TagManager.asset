@@ -16,6 +16,7 @@ TagManager:
   - Boss
   - Recoil
   - Upgrade
+  - UpgradeManager
   layers:
   - Default
   - TransparentFX

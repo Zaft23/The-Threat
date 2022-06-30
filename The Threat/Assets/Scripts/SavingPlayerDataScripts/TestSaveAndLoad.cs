@@ -9,7 +9,9 @@ public class TestSaveAndLoad : MonoBehaviour
     private GameObject _player;
     Player playerStats;
     LevelSystem playerLevel;
-    
+    int playerSP;
+
+
     Transform playerPos;
     private void Start()
     {
@@ -17,7 +19,9 @@ public class TestSaveAndLoad : MonoBehaviour
         playerStats = _player.GetComponent<Player>();
         playerLevel = _player.GetComponent<LevelSystem>();
         playerPos = _player.GetComponent<Transform>();
-        
+
+        playerSP = _player.GetComponent<Player>().SkillPoint;
+
     }
 
 
@@ -52,6 +56,23 @@ public class TestSaveAndLoad : MonoBehaviour
         Pos.y = data.YPosition;
         Pos.z = data.ZPosition;
         playerPos.transform.position = Pos;
+
+    }
+
+    //public void SaveSkillPoints()
+    //{
+    //    SavePlayerData.playerSP;
+
+
+    //}
+    
+
+    public void LoadSkillPoint()
+    {
+        PlayerData data = SavePlayerData.LoadPlayer();
+
+        playerStats.SkillPoint = data.SkillPoints;
+
 
     }
 

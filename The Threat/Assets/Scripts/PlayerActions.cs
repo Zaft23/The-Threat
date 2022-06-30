@@ -30,6 +30,8 @@ public class PlayerActions : MonoBehaviour
     public Transform FirePoint;
     public GameObject MuzzleFlash;
 
+    public float reloadSpeed;
+
     private float _lastShootTime = 0;
 
     [SerializeField] private int _primaryCurrentAmmo;
@@ -464,7 +466,7 @@ public class PlayerActions : MonoBehaviour
 
             if (slot == 0)
             {
-                yield return new WaitForSeconds(_inventory.GetItem(0).ReloadTime);
+                yield return new WaitForSeconds(_inventory.GetItem(0).ReloadTime - reloadSpeed);
                 int ammoToReload = _inventory.GetItem(0).BulletAmount - _primaryCurrentAmmo;
 
                 if (PrimaryStoredAmmo >= ammoToReload)
@@ -521,7 +523,7 @@ public class PlayerActions : MonoBehaviour
 
             if (slot == 1)
             {
-                yield return new WaitForSeconds(_inventory.GetItem(1).ReloadTime);
+                yield return new WaitForSeconds(_inventory.GetItem(1).ReloadTime - reloadSpeed);
 
                 int ammoToReload = _inventory.GetItem(1).BulletAmount - _secondaryCurrentAmmo;
                 if (SecondaryStoredAmmo >= ammoToReload)

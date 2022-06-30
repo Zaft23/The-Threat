@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour
 {
 
-    public int SkillPoints;
+    //public int SkillPoints;
 
     public int Level;
     public float maxLevel;
@@ -29,6 +29,7 @@ public class LevelSystem : MonoBehaviour
     public Image backXpBar;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI XpText;
+    public TextMeshProUGUI SP;
 
     //Audio  
     [Header("Audio")]
@@ -88,6 +89,8 @@ public class LevelSystem : MonoBehaviour
 
         }
         XpText.text = currentXp + "/" + nextLevelXp;
+        var player = GetComponent<Player>().SkillPoint;
+        SP.text = "SP: " + player.ToString();
     }
 
     public void GainExperienceFlatRate(float xpGained)
