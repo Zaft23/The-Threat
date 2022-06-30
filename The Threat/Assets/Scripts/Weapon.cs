@@ -9,6 +9,7 @@ public class Weapon : ScriptableObject
     public GameObject WeaponPrefab;
     public GameObject BulletPrefab;
     public GameObject PickAble;
+    public AudioClip ShootingSound;
     public _WeaponType WeaponType;
     public _WeaponSlot WeaponSlot;
 

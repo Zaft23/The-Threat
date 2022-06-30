@@ -10,6 +10,12 @@ public class Player : MonoBehaviour
     #region
     public float Health;
     public float MaxHealth;
+    public float HealthRegenPerSecond;
+    public float StartHealthRegen;
+
+    [SerializeField]
+    private bool _canHeal;
+
     public float BaseDamage;
     public float BaseSpeed;
     public Vector3 Direction;
@@ -47,21 +53,12 @@ public class Player : MonoBehaviour
     // PlayerUpgrades PlayerUpgrades;
     private PlayerSkills playerSkills;
 
-    //public event EventHandler OnHealthMaxChanged;
-    //public event EventHandler OnHealthChanged;
-
-
-
-
 
 
 
     //delegate
     public int SkillPoint;
     public int LvlUpSkillPoint = 10;
-
-
-
 
 
     private void Awake()
@@ -73,12 +70,66 @@ public class Player : MonoBehaviour
     void Start()
     {
         GetRefrence();
-
+        //cooldownTimer = 0f;
     }
+
+
+    //[SerializeField]
+    //private float cooldownTimer;
+    [SerializeField]
+    private float canHealTimer;
 
     // Update is called once per frame
     void Update()
     {
+
+        //start health regen
+
+        //Health += HealthRegenPerSecond * Time.deltaTime;
+        
+
+        //HealthRegen
+        if (Health >= MaxHealth)
+        {
+            Health = MaxHealth;
+            //cooldownTimer = 0;
+
+        }
+
+        if (_canHeal == false)
+        {
+            canHealTimer += Time.deltaTime;
+            if (canHealTimer >= StartHealthRegen )
+            {
+                _canHeal = true;
+                canHealTimer = 0;
+            }
+
+        }
+
+        else if (Health < MaxHealth && _canHeal == true)
+        {
+            //cooldownTimer += Time.deltaTime;
+            //if (cooldownTimer >= StartHealthRegen)
+            //{
+                Health += HealthRegenPerSecond * Time.deltaTime;
+                
+            //}
+        }
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         #region
@@ -173,8 +224,9 @@ public class Player : MonoBehaviour
         #region Handles Damage
         public void TakeDamage(float Damage)
         {
-
+            _canHeal = false;
             Health -= Damage;
+            canHealTimer = 0;
 
             //do animation
 
@@ -207,8 +259,8 @@ public class Player : MonoBehaviour
 
         private void GetRefrence()
         {
-            //_facingRight = true;
-
+        //_facingRight = true;
+            _canHeal = true;
             Holstered = true;
             MyAnimator = GetComponent<Animator>();
             Gm.OnToggleUpgradeMenu += OnUpgradeMenuToggle;

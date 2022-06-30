@@ -23,7 +23,7 @@ public class AbbasAttackState : IEAbbasBossStates
         {
             Debug.Log("Normal Attack");
             // Debug.Log("ATAAAACK");
-            _enemy.LookAtTarget();
+            //_enemy.LookAtTarget();
             _enemy.AiChase();
             _enemy.AiMelee();
 

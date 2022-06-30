@@ -10,15 +10,23 @@ using System.IO;
 public class UpgradeManager : MonoBehaviour
 {
 
+    public AudioSource audioSource;
+    public AudioClip ButtonPress;
+
     public UnlockableMatrix unlockableMatrix;
 
     private GameObject _player;
     LevelSystem playerLevel;
     Player playerStats;
+ 
 
-    public Sprite LockedImage, UnlockedImage;
+
+
+    //public Sprite LockedImage, UnlockedImage;
+    public GameObject SkillWindow;
+    public GameObject OpenIncreaseBase;
     public Button IncreaseBaseButton, IncreasHealthButton;
-    public Image IncreaseBaseIcon, IncreaseHealthIcon;
+    //public Image IncreaseBaseIcon, IncreaseHealthIcon;
 
     private string unlockMatrixPath;
 
@@ -69,31 +77,55 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
+
+
+
     //this is an upgrade
+
+    #region IncreaseBase
+    public void ToggleOnIncreaseBase()
+    {
+        OpenIncreaseBase.SetActive(true);
+        audioSource.PlayOneShot(ButtonPress);
+        audioSource.volume = 0.7f;
+    }
+    public void ToggleOffIncreaseBase()
+    {
+        OpenIncreaseBase.SetActive(false);
+        audioSource.PlayOneShot(ButtonPress);
+        audioSource.volume = 0.7f;
+    }
+
     public void BuyIncreaseBase()
     {
+        audioSource.PlayOneShot(ButtonPress);
+        audioSource.volume = 0.7f;
         //true matrix
-        if(playerStats.SkillPoint >= 2 && playerLevel.Level >= 1)
+        if (playerStats.SkillPoint >= 4 && playerLevel.Level >= 1)
         {
             playerStats.SkillPoint -= 2;
 
             unlockableMatrix.HasIncreaseBase = true;
             playerStats.MaxHealth = playerStats.MaxHealth + 100;
             playerStats.Health = playerStats.Health +  100;
+            playerStats.BaseDamage = 10;
             RerenderShop();
             SaveJson();
             //Debug.Log("SHIT");
         }
         else
         {
-            Debug.Log("SHIT");
+           // Debug.Log("SHIT");
         }
 
     }
+    #endregion
 
     public void BuyIncreaseHealth()
     {
-        if(playerStats.SkillPoint >= 2 && playerLevel.Level >= 2)
+        audioSource.PlayOneShot(ButtonPress);
+        audioSource.volume = 0.7f;
+        if (playerStats.SkillPoint >= 2 && playerLevel.Level >= 2)
         {
             playerStats.SkillPoint -= 2;
 
@@ -106,11 +138,12 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Fuck");
+          // Debug.Log("Fuck");
         }
         
     }
 
+    
 
 
 
@@ -118,24 +151,45 @@ public class UpgradeManager : MonoBehaviour
 
 
 
+
+
     public void RerenderShop()
     {
         if(unlockableMatrix.HasIncreaseBase)
         {
-            IncreaseBaseIcon.sprite = UnlockedImage;
+            //IncreaseBaseIcon.sprite = UnlockedImage;
             IncreaseBaseButton.interactable = false;
 
         }
 
         if (unlockableMatrix.HasIncreaseHealth)
         {
-           IncreaseHealthIcon.sprite = UnlockedImage;
+           //IncreaseHealthIcon.sprite = UnlockedImage;
            IncreasHealthButton.interactable = false;
 
         }
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void SaveJson()
     {

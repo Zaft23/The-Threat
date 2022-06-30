@@ -21,6 +21,7 @@ public class EnemyStats : MonoBehaviour
     public GameObject _player;
     public LevelSystem _playerLevel;
 
+    public GameObject Supply;
 
 
     // Start is called before the first frame update
@@ -111,7 +112,7 @@ public class EnemyStats : MonoBehaviour
 
     void Die()
     {
-        //Instantiate()
+        Instantiate(Supply, transform.position, Quaternion.identity);
         _playerLevel.GainExperienceScalable(enemyXp, 1);
         Destroy(gameObject);
     }

@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
+
+
 
 public class PlayerActions : MonoBehaviour
 {
@@ -24,6 +28,7 @@ public class PlayerActions : MonoBehaviour
     #region Weapon Details
     [Header("Weapon Details")]
     public Transform FirePoint;
+    public GameObject MuzzleFlash;
 
     private float _lastShootTime = 0;
 
@@ -67,6 +72,13 @@ public class PlayerActions : MonoBehaviour
     public bool PrimaryExist = false;
     public bool SecondaryExist = false;
     #endregion
+
+
+    [Header("Audio Details")]
+    public AudioSource audioSource;
+    public AudioClip ReloadingSound;
+    public AudioClip Sword;
+    
 
 
     //collision for weapon system
@@ -195,8 +207,11 @@ public class PlayerActions : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 Recoil.AddRecoil();
+                //Weapon currentWeapon = _inventory.GetItem(_manager.CurrentlyEquippedWeapon);
+                
 
 
+                //audioSource.Play();
                 Shooting();
 
             }
@@ -393,6 +408,18 @@ public class PlayerActions : MonoBehaviour
         fire.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
         fire.GetComponent<Rigidbody2D>().velocity = FirePoint.right * currWeaponSpeed;
 
+
+
+        GameObject effect = Instantiate(MuzzleFlash);
+        Destroy(effect, 5f);
+        effect.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
+
+        effect.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        //effect.GetComponent<Rigidbody2D>().velocity = FirePoint.right * currWeaponSpeed;
+
+
+
+
     }
     #endregion
 
@@ -411,6 +438,8 @@ public class PlayerActions : MonoBehaviour
 
                 BulletShoot(currentWeapon);
 
+                audioSource.PlayOneShot(currentWeapon.ShootingSound);
+
                 UseAmmo((int)currentWeapon.WeaponSlot, 1, 0);
 
             }
@@ -427,6 +456,9 @@ public class PlayerActions : MonoBehaviour
     {
         if (CanReload)
         {
+
+            audioSource.PlayOneShot(ReloadingSound);
+
             //yield return new WaitForSeconds(_inventory.Get)
             var pAmmoType = _manager.CurrentlEquippedWeaponType;
 
@@ -649,7 +681,21 @@ public class PlayerActions : MonoBehaviour
     #endregion
 
 
+    public void PlaySwordSound()
+    {
 
+
+        audioSource.PlayOneShot(Sword);
+        audioSource.volume = 0.8f;
+        //audioSource.pitch = Random.Range(0.5f, 1.1f);
+
+
+
+
+
+
+
+    }
 
 
     private void GetRefrences()

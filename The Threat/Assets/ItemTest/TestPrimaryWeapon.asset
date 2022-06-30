@@ -17,6 +17,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 3495415152151633840, guid: 240955326a9eb66408bc0bf4693128af, type: 3}
   BulletPrefab: {fileID: 3295582376259988921, guid: d5e1f38fd088ab649bdb9f059b8d280e, type: 3}
   PickAble: {fileID: 3495415152151633840, guid: b8cad5c5cac9e5e468c51ffd96dfb9a8, type: 3}
+  ShootingSound: {fileID: 8300000, guid: f8af2aa28673ea54ebe0e888e558a4b4, type: 3}
   WeaponType: 0
   WeaponSlot: 0
   Damage: 10

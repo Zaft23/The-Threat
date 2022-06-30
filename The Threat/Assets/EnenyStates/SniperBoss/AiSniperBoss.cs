@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 public class AiSniperBoss : MonoBehaviour
 {
-    public Weapon Weapon;
+    public AudioSource audioSource;
+    public AudioClip AttackingSound;
+
+
+
+    //public Weapon Weapon;
+    public GameObject Muzzle;
     public Player Player;
 
     public Animator MyAnimator;
@@ -189,7 +195,7 @@ public class AiSniperBoss : MonoBehaviour
     {
         Debug.Log("amkiiiiiiiiiiiiiinh");
         GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
-
+        GameObject effect = Instantiate(Muzzle, FirePoint.position, Quaternion.identity);
         _ShootingTIme = RateOfFire;
 
         //StartCoroutine(BooleanShootingTime());
@@ -200,7 +206,7 @@ public class AiSniperBoss : MonoBehaviour
     {
         Debug.Log("second Staaaaaaaaaaage");
         GameObject bullet = Instantiate(Bullet2, FirePoint.position, Quaternion.identity);
-
+        GameObject effect = Instantiate(Muzzle, FirePoint.position, Quaternion.identity);
         _ShootingTIme = RateOfFire;
 
         //StartCoroutine(BooleanShootingTime());
@@ -483,6 +489,18 @@ public class AiSniperBoss : MonoBehaviour
     }
 
 
+    public void PlayShootSound()
+    {
+
+        audioSource.PlayOneShot(AttackingSound);
+        audioSource.volume = 0.05f;
+        //audioSource.pitch = Random.Range(0.5f, 1.1f);
+
+
+
+
+
+    }
 
 
 }

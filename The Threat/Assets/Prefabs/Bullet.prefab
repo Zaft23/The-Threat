@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 11400000, guid: bc795941dece0d64ea63b009d58e0ddf, type: 2}
+  Impact: {fileID: 7323420678053356291, guid: 0c419d0023d6db143b0af953cfbb930e, type: 3}

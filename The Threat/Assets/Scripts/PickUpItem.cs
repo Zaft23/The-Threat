@@ -6,6 +6,9 @@ public class PickUpItem : MonoBehaviour
 {
     //PlayerActions PlayerAmmo;
 
+    //public AudioSource audioSource;
+    //public AudioClip PickUpSound;
+
     public bool IsRifle;
     public bool IsSmg;
     public bool IsShotgun;
@@ -29,6 +32,9 @@ public class PickUpItem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D target)
     {
+        //audioSource.PlayOneShot(PickUpSound);
+
+
         //if(PlayerAmmo == null)
         //{
         //    return;
@@ -43,6 +49,7 @@ public class PickUpItem : MonoBehaviour
         {
             if (target.gameObject.tag == "Player")
             {
+                //audioSource.PlayOneShot(PickUpSound);
                 if (IsRifle == true)
                 {
                     PlayerAmmo.StoredRifleAmmo += Rifle;

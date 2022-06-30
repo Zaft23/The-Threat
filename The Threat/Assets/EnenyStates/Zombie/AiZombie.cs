@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AiZombie : MonoBehaviour
 {
+    public AudioSource audioSource;
+    //public AudioSource audioSource2;
+    public AudioClip AttackingSound;
+    public AudioClip IdleSound;
+
+
 
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
@@ -19,6 +25,8 @@ public class AiZombie : MonoBehaviour
     private float cooldownTimer = Mathf.Infinity;
 
     public Animator MyAnimator;
+
+
 
     private Player playerHealth;
 
@@ -86,14 +94,28 @@ public class AiZombie : MonoBehaviour
 
         CanAttack = true;
         
-}
+    }
 
-
+    [SerializeField]
+    private float SoundTimer;
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if(Target != null)
+        {
+            SoundTimer += Time.deltaTime;
+            if (SoundTimer >= 5f)
+            {
+                PlayAngrySound();
+                SoundTimer = 0;
+            }
+           
+
+
+        }
+    
 
         //ignore collision
 
@@ -298,9 +320,42 @@ public class AiZombie : MonoBehaviour
 
 
     }
-    
 
 
+    public void PlayAttackSound()
+    {
+
+        if (Target != null)
+        {
+            audioSource.PlayOneShot(AttackingSound);
+            audioSource.volume = 0.3f;
+            //audioSource.pitch = Random.Range(0.5f, 1.1f);
+        }
+
+
+
+
+
+
+    }
+
+
+    public void PlayAngrySound()
+    {
+
+        if(Target != null)
+        {
+            audioSource.PlayOneShot(IdleSound);
+            audioSource.volume = 0.6f;
+            //audioSource.pitch = Random.Range(0.5f, 1.1f);
+        }
+
+
+
+
+
+
+    }
 
 
 

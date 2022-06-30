@@ -10,6 +10,9 @@ public class GameMaster : MonoBehaviour
     public GameObject EscMenu;
     public GameObject CrossHair;
 
+    public AudioSource audioSource;
+    public AudioClip BGM;
+
     //delegate
     public delegate void UpgradeMenuCallBack(bool active);
     public UpgradeMenuCallBack OnToggleUpgradeMenu;
@@ -22,6 +25,10 @@ public class GameMaster : MonoBehaviour
     public static int Level;
     public static float Exp;
 
+    private void Awake()
+    {
+        audioSource.PlayOneShot(BGM);
+    }
 
 
     // Start is called before the first frame update
@@ -33,9 +40,13 @@ public class GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //audioSource.PlayOneShot(BGM);
+
+
         if (Input.GetKeyDown(KeyCode.U))
         {
-            
+            Cursor.visible = true;
             UpgradeMenuToggle();
             if(GameIsPaused)
             {
@@ -51,7 +62,7 @@ public class GameMaster : MonoBehaviour
 
         if (GameIsPaused == false)
         {
-            CrossHair.SetActive(true);
+           CrossHair.SetActive(true);
         }
         else if(GameIsPaused == true)
         {
@@ -60,7 +71,7 @@ public class GameMaster : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            Cursor.visible = true;
             EscapeMenuToggle();
             if (GameIsPaused == true)
             {
@@ -101,6 +112,7 @@ public class GameMaster : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameIsPaused = false;
-        
+        Cursor.visible = false;
+
     }
 }

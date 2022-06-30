@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
+    
+
     public Weapon Weapon;
+    public GameObject Impact;
     private float _BulletDestroy = 5f;
     private GameObject _player;
     Player playerStats;
+
+    
 
 
     private void Awake()
@@ -29,11 +34,17 @@ public class BulletBehaviour : MonoBehaviour
         Physics2D.IgnoreLayerCollision(9, 10);
     }
 
+
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
+        GameObject effect = Instantiate(Impact, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+
         //effect
         //GameObject bullet = Weapon.BulletPrefab;
-        
+
 
         //if (other.CompareTag("Sight"))
         //{

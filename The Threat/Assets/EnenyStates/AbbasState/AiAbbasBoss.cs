@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class AiAbbasBoss : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip AttackingSound;
+    public AudioClip IdleSound;
+    public AudioClip DashTelegraphSound;
+    public AudioClip BreathingSound;
+    public AudioClip WalkingSound;
+
+
+
+
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
@@ -19,6 +29,8 @@ public class AiAbbasBoss : MonoBehaviour
 
     [SerializeField] private Player playerHealth;
     [SerializeField] private EnemyStats enemyStats;
+
+    public Animator MyAnimator;
 
     public float Damage;
     public float RushDamage;
@@ -73,7 +85,7 @@ public class AiAbbasBoss : MonoBehaviour
     {
         enemyStats = GetComponent<EnemyStats>();
         Rb2d = GetComponent<Rigidbody2D>();
-
+        MyAnimator = GetComponent<Animator>();
     }
 
 
@@ -91,12 +103,24 @@ public class AiAbbasBoss : MonoBehaviour
 
     }
 
-
+    [SerializeField]
+    private float SoundTimer;
 
     // Update is called once per frame
     void Update()
     {
+        if (Target != null)
+        {
+            SoundTimer += Time.deltaTime;
+            if (SoundTimer >= 5f)
+            {
+                PlayAngrySound();
+                SoundTimer = 0;
+            }
 
+
+
+        }
 
         //ignore collision
 
@@ -115,9 +139,9 @@ public class AiAbbasBoss : MonoBehaviour
             RushDamage = 100f;
             Damage = 40f;
             ChaseSpeed = 5f;
-            AttackDuration = 10f;
+            AttackDuration = 20f;
             IdleDuration = 2f;
-            RushDuration = 7f;
+            RushDuration = 20f;
 
 
         }
@@ -155,7 +179,7 @@ public class AiAbbasBoss : MonoBehaviour
 
     public void RushMove()
     {
-
+        MyAnimator.SetBool("isDashing", true);
         transform.Translate(GetDirection() * (RushSpeed * Time.deltaTime));
 
     }
@@ -213,16 +237,19 @@ public class AiAbbasBoss : MonoBehaviour
 
     public void AiChase()
     {
+        LookAtTarget();
 
         var Player = GameObject.FindGameObjectWithTag("Player").transform;
 
-
-        //Behaviour
-        //if withing line of sight 
-        // do function
+        MyAnimator.SetFloat("speed", 1);
+      
+  
+   
         //if enemy too far away to shoot
         if (Vector2.Distance(transform.position, Player.position) > range)
         {
+            //MyAnimator.SetFloat("speed", 1f);
+            //MyAnimator.SetBool("isAttacking", false);
             //Debug.Log("too far");
             transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
         }
@@ -231,7 +258,8 @@ public class AiAbbasBoss : MonoBehaviour
             Vector2.Distance(transform.position, Player.position) > RetreatDistance)
         {
 
-
+            MyAnimator.SetFloat("speed", 0);
+        
             //Debug.Log("engage");
             transform.position = this.transform.position;
         }
@@ -277,33 +305,175 @@ public class AiAbbasBoss : MonoBehaviour
     private void DamagePlayer()
     {
         if (PlayerInSight())
+        {
+
+
             playerHealth.TakeDamage(Damage);
+            
+            MyAnimator.SetBool("isAttacking", false);
+        }
+            
     }
 
     public void AiMelee()
     {
-        cooldownTimer += Time.deltaTime;
 
 
-        //Attack only when player in sight?
-        if (PlayerInSight())
+
+
+        //MyAnimator.SetFloat("speed", 0f);
+        //MyAnimator.SetBool("isAttacking", true);
+
+
+
+
+
+        //cooldownTimer += Time.deltaTime;
+        if (enemyStats.EnemyHealth > enemyStats.SecondStageHealth)
         {
-            if (cooldownTimer >= attackCooldown)
+            //Attack only when player in sight?
+            if (PlayerInSight())
             {
-                cooldownTimer = 0;
-                DamagePlayer();
-                //anim.SetTrigger("meleeAttack");
+
+
+                //if (cooldownTimer >= attackCooldown)
+                MyAnimator.SetFloat("attackSpeed", 1f);
+                //{
+                MyAnimator.SetFloat("speed", 0f);
+                MyAnimator.SetBool("isAttacking", true);
+
+
+
+
+                //cooldownTimer = 0;
+                //DamagePlayer();
+                ////anim.SetTrigger("meleeAttack");
+                //}
             }
         }
+        //Attack only when player in sight?
+        if (enemyStats.EnemyHealth <= enemyStats.SecondStageHealth)
+        {
+            //Attack only when player in sight?
+            if (PlayerInSight())
+            {
+
+
+                //if (cooldownTimer >= attackCooldown)
+                //{
+                MyAnimator.SetFloat("attackSpeed", 1.5f);
+                MyAnimator.SetFloat("speed", 0f);
+                MyAnimator.SetBool("isAttacking", true);
+
+
+
+
+                //cooldownTimer = 0;
+                //DamagePlayer();
+                ////anim.SetTrigger("meleeAttack");
+                //}
+            }
+        }
+
+
 
 
     }
 
     public void RushMelee()
     {
+        cooldownTimer += Time.deltaTime;
 
         if (PlayerInSight())
-            playerHealth.TakeDamage(RushDamage);
+        {
+            if (cooldownTimer >= 2)
+            {
+
+                playerHealth.TakeDamage(RushDamage);
+
+                cooldownTimer = 0;
+
+            }
+                
+
+
+
+        }
+            
+
+
+    }
+
+
+    public void PlayAttackSound()
+    {
+
+        if (Target != null)
+        {
+            audioSource.PlayOneShot(AttackingSound);
+            audioSource.volume = 0.3f;
+            //audioSource.pitch = Random.Range(0.5f, 1.1f);
+        }
+
+
+
+
+
+
+    }
+
+    public void TelegraphSound()
+    {
+        audioSource.PlayOneShot(IdleSound);
+        audioSource.volume = 0.8f;
+    }
+
+
+    public void PlayAngrySound()
+    {
+
+        if (Target != null)
+        {
+            audioSource.PlayOneShot(IdleSound);
+            audioSource.volume = 0.6f;
+            //audioSource.pitch = Random.Range(0.5f, 1.1f);
+        }
+
+
+
+
+
+
+    }
+
+    public void PlayBreathingSound()
+    {
+
+
+            //audioSource.PlayOneShot(BreathingSound);
+            audioSource.volume = 0.4f;
+            //audioSource.pitch = Random.Range(0.5f, 1.1f);
+     
+
+
+
+
+
+
+    }
+
+    public void PlayWalkingSound()
+    {
+
+
+            audioSource.PlayOneShot(WalkingSound);
+            audioSource.volume = 0.7f;
+            //audioSource.pitch = 0.3f;
+     
+
+
+
+
 
 
     }

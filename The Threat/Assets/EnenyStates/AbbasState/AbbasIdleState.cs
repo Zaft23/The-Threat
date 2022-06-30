@@ -48,8 +48,9 @@ public class AbbasIdleState : IEAbbasBossStates
     {
         //access component of enemy
         //enemy.*something
-
-
+        _enemy.MyAnimator.SetFloat("speed", 0);
+        _enemy.MyAnimator.SetBool("isAttacking", false);
+        _enemy.MyAnimator.SetBool("isDashing", false);
         _idleTimer += Time.deltaTime;
 
         if (_idleTimer >= _enemy.IdleDuration)

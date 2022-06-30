@@ -6,8 +6,11 @@ public class AiSoldier : MonoBehaviour
 {
     //private float _lastShootTime;
 
-    public Weapon Weapon;
-
+    //public Weapon Weapon;
+    public GameObject Muzzle;
+    public AudioSource audioSource;
+    public AudioClip AttackingSound;
+    //public AudioClip WalkingSound;
     //public float EnemyHealth;
     //private float _currentHealth;
     //public float Damage;
@@ -29,7 +32,7 @@ public class AiSoldier : MonoBehaviour
 
     public Transform ShootPos;
     public Transform FirePoint;
-    public Vector3 Direction ;
+    public Vector3 Direction;
 
 
 
@@ -45,7 +48,7 @@ public class AiSoldier : MonoBehaviour
     //public float StartEngagementTime;
 
     public GameObject Bullet;
-    
+
 
     public bool Attack { get; set; }
     private bool _facingRight;
@@ -95,7 +98,7 @@ public class AiSoldier : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         //ignore collision
 
 
@@ -114,7 +117,7 @@ public class AiSoldier : MonoBehaviour
         if (ChaseSpeed == 0 && Target == null)
         {
             StartCoroutine(ResetChaseSpeed());
-            
+
             Debug.Log("target dissapear");
         }
 
@@ -124,7 +127,7 @@ public class AiSoldier : MonoBehaviour
         //    MyAnimator.SetBool("isReloading", true);
         //    StartCoroutine(ResetShootingTime());
         //}
-        
+
 
 
     }
@@ -149,6 +152,10 @@ public class AiSoldier : MonoBehaviour
 
     public void MovePatrol()
     {
+        //audioSource.PlayOneShot(WalkingSound);
+
+        audioSource.volume = 0.2f;
+
         MyAnimator.SetFloat("speed", 1);
         transform.Translate(GetDirection() * (MoveSpeed * Time.deltaTime));
         MyAnimator.SetBool("isAttacking", false);
@@ -195,32 +202,22 @@ public class AiSoldier : MonoBehaviour
 
         if (Vector2.Distance(transform.position, Player.position) > ShootingRange)
         {
-                Debug.Log("too far");
-                transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
+            MyAnimator.SetFloat("speed", 1);
+            MyAnimator.SetBool("isAttacking", false);
+
+            Debug.Log("too far");
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
         }
-            //if enemy in range to engage player
+        //if enemy in range to engage player
         else if (Vector2.Distance(transform.position, Player.position) < ShootingRange &&
                 Vector2.Distance(transform.position, Player.position) > RetreatDistance)
         {
+            MyAnimator.SetFloat("speed", 0);
 
+            cooldownTimer -= Time.deltaTime;
 
-                Debug.Log("engage");
-                transform.position = this.transform.position;
-         }
+            //if (_canShoot == true)
 
-
-            //if enemy too close to player
-        else if (Vector2.Distance(transform.position, Player.position) < RetreatDistance)
-        {
-                Debug.Log("too close");
-                transform.position = Vector2.MoveTowards(transform.position, Player.position, -ChaseSpeed * Time.deltaTime);
-        }
-
-
-        cooldownTimer -= Time.deltaTime;
-
-        //if (_canShoot == true)
-        
 
             if (cooldownTimer <= 0)
             {
@@ -237,30 +234,46 @@ public class AiSoldier : MonoBehaviour
                 cooldownTimer = EngagementTime;
             }
 
-            if(ShootingTime <= 0 && _canShoot == true)
+            if (ShootingTime <= 0 && _canShoot == true)
             {
-                    
+                audioSource.PlayOneShot(AttackingSound);
+                audioSource.volume = 0.5f;
 
                 MyAnimator.SetBool("isAttacking", true);
                 GameObject bullet = Instantiate(Bullet, FirePoint.position, Quaternion.identity);
-
+                GameObject effect = Instantiate(Muzzle, FirePoint.position, Quaternion.identity);
                 ShootingTime = RateOfFire;
 
-                    
+
 
             }
             else
             {
-                    
-                    ShootingTime -= Time.deltaTime;
+
+                ShootingTime -= Time.deltaTime;
             }
 
-         
-  
+
+
+            Debug.Log("engage");
+            transform.position = this.transform.position;
+        }
+
+
+        //if enemy too close to player
+        else if (Vector2.Distance(transform.position, Player.position) < RetreatDistance)
+        {
+            Debug.Log("too close");
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -ChaseSpeed * Time.deltaTime);
+        }
+
 
         
 
-        
+
+
+
+
 
     }
 
@@ -281,7 +294,7 @@ public class AiSoldier : MonoBehaviour
 
     //            Die();
     //        }
-            
+
     //    }
 
     //}
@@ -300,7 +313,7 @@ public class AiSoldier : MonoBehaviour
 
     public Vector2 GetPosition()
     {
-       return transform.position;
+        return transform.position;
     }
 
     private IEnumerator ResetChaseSpeed()
@@ -330,9 +343,16 @@ public class AiSoldier : MonoBehaviour
 
 
 
+    //public void PlayStepSound()
+    //{
+
+    //    audioSource.PlayOneShot(WalkingSound);
+    //    audioSource.volume = 0.2f;
+    //    //audioSource.pitch = Random.Range(0.5f, 1.1f);
 
 
 
 
 
+    //}
 }

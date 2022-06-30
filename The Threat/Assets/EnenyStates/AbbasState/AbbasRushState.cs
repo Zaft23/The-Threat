@@ -17,9 +17,25 @@ public class AbbasRushState : IEAbbasBossStates
     public void Execute()
     {
         Debug.Log("RushState");
-        _enemy.RushMove();
-        _enemy.RushMelee();
-        AttackDuration();
+        
+        if(_attackTimer == 0)
+        {
+            _enemy.MyAnimator.SetBool("isTelegraph", true);
+        }
+        
+
+        _attackTimer += Time.deltaTime;
+
+        if (_attackTimer >= 2)
+        {
+            _enemy.MyAnimator.SetBool("isTelegraph", false);
+            _enemy.RushMove();
+            _enemy.RushMelee();
+            AttackDuration();
+        }
+
+
+
     }
 
     public void Exit()
@@ -34,6 +50,10 @@ public class AbbasRushState : IEAbbasBossStates
         {
             //Debug.Log("fuck you");
             _enemy.ChangeDirection();
+        }
+        else
+        {
+            _enemy.RushMove();
         }
 
       //  if (other.CompareTag("Bullet"))

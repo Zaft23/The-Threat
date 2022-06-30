@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioSource audioSource2;
+    public AudioClip RunningSound;
+    public AudioClip JumpSound;
+    public AudioClip DashSound;
+    
     #region
     [Header("Components")]
     private Rigidbody2D rb2D;
@@ -92,8 +98,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
-
-
+        if (Input.GetButtonDown("Dash"))
+        {
+            audioSource.PlayOneShot(DashSound);
+            audioSource.volume = 0.5f;
+        }
+      
 
     }
 
@@ -112,12 +122,9 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawLine(transform.position + _innerRaycastOffset + Vector3.up * _topRaycastLength,
                         transform.position + _innerRaycastOffset + Vector3.up * _topRaycastLength + Vector3.right * _topRaycastLength);
     }
-   
+
     void FixedUpdate()
     {
-
-
-
 
 
 
@@ -130,6 +137,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && eulerAngY == 0)
         {
 
+     
+
             //Debug.Log("Forward1");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", 1.0f);
@@ -137,24 +146,33 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.A) && eulerAngY == -180)
         {
+
             //Debug.Log("Forward2");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", 1.0f);
         }
         else if (Input.GetKeyDown(KeyCode.A) && eulerAngY == 0)
         {
-            
-                //Debug.Log("BackWard1");
-                //MyAnimator.SetBool("IsRunning", true);
-                MyAnimator.SetFloat("speed", -1.0f);
+
+            //Debug.Log("BackWard1");
+            //MyAnimator.SetBool("IsRunning", true);
+            MyAnimator.SetFloat("speed", -1.0f);
 
         }
-        else if(Input.GetKeyDown(KeyCode.D) && eulerAngY == -180)
+        else if (Input.GetKeyDown(KeyCode.D) && eulerAngY == -180)
         {
+            //audioSource.Play();
+            //audioSource.loop = true;
+            //audioSource.PlayOneShot(RunningSound);
             //Debug.Log("BackWard2");
             //MyAnimator.SetBool("IsRunning", true);
             MyAnimator.SetFloat("speed", -1.0f);
         }
+        //else
+        //{
+        //    audioSource.loop = false;
+
+        //}
 
 
         XMovement();
@@ -218,6 +236,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded)
         {
+            audioSource.PlayOneShot(DashSound);
+            audioSource.volume = 0.5f;
+
             rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
             //Debug.Log("Jump2");
         }
@@ -262,6 +283,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+   public void PlayRunningSound()
+    {
+        if(IsGrounded == true)
+        {
+            audioSource.PlayOneShot(RunningSound);
+            audioSource.volume = 0.2f;
+            //audioSource.pitch = Random.Range(0.5f, 1.1f);
+        }
+
+
+    }
     
 
     #region

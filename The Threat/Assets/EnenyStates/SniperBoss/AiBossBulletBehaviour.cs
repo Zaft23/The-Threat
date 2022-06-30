@@ -6,6 +6,7 @@ public class AiBossBulletBehaviour : MonoBehaviour
 {
 
     public Weapon Weapon;
+    public GameObject Impact;
     private float _BulletDestroy = 5f;
     public float BulletSpeed;
     //public float 
@@ -67,6 +68,9 @@ public class AiBossBulletBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        GameObject effect = Instantiate(Impact, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+
 
         if (other.CompareTag("Player"))
         {

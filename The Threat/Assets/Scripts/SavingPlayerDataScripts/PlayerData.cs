@@ -13,14 +13,16 @@ public class PlayerData
     public int NextLevelExp;
 
     //test position
-    public float[] position;
+    public float XPosition;
+    public float YPosition;
+    public float ZPosition;
 
     //Upgrades use array maybe?
     //later damage or something
 
     //save player's ammo data
     //save gameobject
- 
+
     public PlayerData(Player player, LevelSystem level)
     {
         Level = level.Level;
@@ -30,17 +32,22 @@ public class PlayerData
         SkillPoints = player.SkillPoint;
 
 
+        XPosition = player.transform.position.x;
+        YPosition = player.transform.position.y;
+        ZPosition = player.transform.position.z;
+
+
         //test position
-        position = new float[3];
-        position[0] = player.transform.position.x;
-        position[1] = player.transform.position.y;
-        position[2] = player.transform.position.z;
+        //position = new float[3];
+        //position[0] = player.transform.position.x;
+        //position[1] = player.transform.position.y;
+        //position[2] = player.transform.position.z;
 
 
 
     }
 
-   
+
 
 
 

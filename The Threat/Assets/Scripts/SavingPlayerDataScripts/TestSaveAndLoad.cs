@@ -9,7 +9,7 @@ public class TestSaveAndLoad : MonoBehaviour
     private GameObject _player;
     Player playerStats;
     LevelSystem playerLevel;
-    Vector3 Pos;
+    
     Transform playerPos;
     private void Start()
     {
@@ -17,7 +17,7 @@ public class TestSaveAndLoad : MonoBehaviour
         playerStats = _player.GetComponent<Player>();
         playerLevel = _player.GetComponent<LevelSystem>();
         playerPos = _player.GetComponent<Transform>();
-        Pos = playerPos.transform.position; 
+        
     }
 
 
@@ -44,12 +44,31 @@ public class TestSaveAndLoad : MonoBehaviour
         playerLevel.currentXp = data.Exp;
         playerLevel.nextLevelXp = data.NextLevelExp;
 
+        Vector3 Pos;
+        Pos = playerPos.transform.position;
+        Debug.Log("LOADDDDD");
         //Vector3 position;
-        Pos.x = data.position[0];
-        Pos.y = data.position[1];
-        Pos.z = data.position[2];
+        Pos.x = data.XPosition;
+        Pos.y = data.YPosition;
+        Pos.z = data.ZPosition;
+        playerPos.transform.position = Pos;
+
+    }
 
 
+    public void LoadPosition()
+    {
+
+        PlayerData data = SavePlayerData.LoadPlayer();
+
+        Vector3 Pos;
+        Pos = playerPos.transform.position;
+        Debug.Log("LOADDDDD");
+        //Vector3 position;
+        Pos.x = data.XPosition;
+        Pos.y = data.YPosition;
+        Pos.z = data.ZPosition;
+        playerPos.transform.position = Pos;
     }
 
 }
