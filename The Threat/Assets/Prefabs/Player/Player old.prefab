@@ -642,7 +642,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  MaxHealth: 0
+  HealthRegenPerSecond: 0
+  StartHealthRegen: 0
+  _canHeal: 0
   BaseDamage: 0
+  BaseSpeed: 0
   Direction: {x: 0, y: 0, z: 0}
   MyRotation: {fileID: 0}
   Actions: {fileID: 0}
@@ -652,8 +657,10 @@ MonoBehaviour:
   _facingRight: 0
   Gm: {fileID: 0}
   _playerMovement: {fileID: 0}
+  _playerActions: {fileID: 0}
   SkillPoint: 0
   LvlUpSkillPoint: 10
+  canHealTimer: 0
 --- !u!114 &3571424947988934288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +673,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fecc0c2c0371fd4ca166e3ca366c67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioSource2: {fileID: 0}
+  RunningSound: {fileID: 0}
+  JumpSound: {fileID: 0}
+  DashSound: {fileID: 0}
   Actions: {fileID: 0}
   Speed: 5
   horizontalMovement: 0
@@ -707,6 +719,7 @@ MonoBehaviour:
   IsMelee: 0
   MeleeTime: 0
   FirePoint: {fileID: 3571424946308637320}
+  MuzzleFlash: {fileID: 0}
   _primaryCurrentAmmo: 0
   PrimaryStoredAmmo: 0
   _secondaryCurrentAmmo: 0
@@ -732,6 +745,9 @@ MonoBehaviour:
     m_Bits: 64
   PrimaryExist: 0
   SecondaryExist: 0
+  audioSource: {fileID: 0}
+  ReloadingSound: {fileID: 0}
+  Sword: {fileID: 0}
 --- !u!114 &3571424947988934281
 MonoBehaviour:
   m_ObjectHideFlags: 0

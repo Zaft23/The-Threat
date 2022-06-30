@@ -43,10 +43,10 @@ public class Weapon : ScriptableObject
     public float Damage;
     public float RateOfFire;
     public float ReloadTime;
-    public int StoredAmmo;
+    //public int StoredAmmo;
     public int BulletAmount;
-    public float BulletSpread;
-    public int Mags;
+    //public float BulletSpread;
+    //public int Mags;
     public float BulletSpeed;
 
 

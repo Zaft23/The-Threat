@@ -82,7 +82,9 @@ public class UpgradeManager : MonoBehaviour
 
     //this is an upgrade
 
-    #region IncreaseBase
+            
+    #region 
+
     public void ToggleOnIncreaseBase()
     {
         OpenIncreaseBase.SetActive(true);
@@ -95,6 +97,9 @@ public class UpgradeManager : MonoBehaviour
         audioSource.PlayOneShot(ButtonPress);
         audioSource.volume = 0.7f;
     }
+    #endregion
+
+
 
     public void BuyIncreaseBase()
     {
@@ -106,8 +111,8 @@ public class UpgradeManager : MonoBehaviour
             playerStats.SkillPoint -= 2;
 
             unlockableMatrix.HasIncreaseBase = true;
-            playerStats.MaxHealth = playerStats.MaxHealth + 100;
-            playerStats.Health = playerStats.Health +  100;
+            playerStats.MaxHealth = playerStats.MaxHealth + 50;
+            playerStats.Health = playerStats.Health +  50;
             playerStats.BaseDamage = 10;
             RerenderShop();
             SaveJson();
@@ -119,7 +124,7 @@ public class UpgradeManager : MonoBehaviour
         }
 
     }
-    #endregion
+   
 
     public void BuyIncreaseHealth()
     {
@@ -130,8 +135,8 @@ public class UpgradeManager : MonoBehaviour
             playerStats.SkillPoint -= 2;
 
             unlockableMatrix.HasIncreaseHealth = true;
-            playerStats.MaxHealth = playerStats.MaxHealth + 50;
-            playerStats.Health = playerStats.Health + 50;
+            playerStats.MaxHealth = playerStats.MaxHealth + 100;
+            playerStats.Health = playerStats.Health + 100;
             RerenderShop();
             SaveJson();
             
