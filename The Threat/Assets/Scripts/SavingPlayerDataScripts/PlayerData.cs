@@ -7,10 +7,21 @@ using UnityEngine;
 public class PlayerData 
 {
     public float Health;
+    public float MaxHP;
+    //public float HealthRegen;
+    public float Speed;
+    public float Damage;
+    public int RifleAmmo;
+    public int SMGAmmo;
+    public int ShotgunAmmo;
+    public int SniperAmmo;
+
+    //
     public int Level;
     public float Exp;
     public int SkillPoints;
     public int NextLevelExp;
+
 
     //test position
     public float XPosition;
@@ -23,10 +34,20 @@ public class PlayerData
     //save player's ammo data
     //save gameobject
 
-    public PlayerData(Player player, LevelSystem level)
+    public PlayerData(Player player, LevelSystem level, PlayerActions actions)
     {
         Level = level.Level;
         Health = player.Health;
+        MaxHP = player.MaxHealth;
+
+        Speed = player.BaseSpeed;
+        Damage = player.BaseDamage;
+        RifleAmmo = actions.StoredRifleAmmo;
+        SMGAmmo = actions.StoredSmgAmmo;
+        ShotgunAmmo = actions.StoredShotgunAmmo;
+        SniperAmmo = actions.StoredSniperAmmo;
+
+
         Exp = level.currentXp;
         NextLevelExp = level.nextLevelXp;
         SkillPoints = player.SkillPoint;

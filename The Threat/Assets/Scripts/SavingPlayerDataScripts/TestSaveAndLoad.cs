@@ -9,6 +9,7 @@ public class TestSaveAndLoad : MonoBehaviour
     private GameObject _player;
     Player playerStats;
     LevelSystem playerLevel;
+    PlayerActions actions;
     int playerSP;
 
 
@@ -19,7 +20,7 @@ public class TestSaveAndLoad : MonoBehaviour
         playerStats = _player.GetComponent<Player>();
         playerLevel = _player.GetComponent<LevelSystem>();
         playerPos = _player.GetComponent<Transform>();
-
+        actions = _player.GetComponent<PlayerActions>();
         playerSP = _player.GetComponent<Player>().SkillPoint;
 
     }
@@ -28,7 +29,7 @@ public class TestSaveAndLoad : MonoBehaviour
 
     public void SavePlayer()
     {
-        SavePlayerData.SavePlayer(playerStats, playerLevel);
+        SavePlayerData.SavePlayer(playerStats, playerLevel, actions);
     }
 
 
@@ -47,6 +48,16 @@ public class TestSaveAndLoad : MonoBehaviour
         playerLevel.Level = data.Level;
         playerLevel.currentXp = data.Exp;
         playerLevel.nextLevelXp = data.NextLevelExp;
+
+        playerStats.MaxHealth = data.MaxHP;
+        playerStats.BaseDamage = data.Damage;
+        playerStats.BaseSpeed = data.Speed;
+        actions.StoredRifleAmmo = data.RifleAmmo;
+        actions.StoredSmgAmmo = data.SMGAmmo;
+        actions.StoredShotgunAmmo = data.ShotgunAmmo;
+        actions.StoredSniperAmmo = data.SniperAmmo;
+
+
 
         Vector3 Pos;
         Pos = playerPos.transform.position;

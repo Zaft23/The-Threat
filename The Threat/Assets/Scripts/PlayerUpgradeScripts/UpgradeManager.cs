@@ -111,7 +111,7 @@ public class UpgradeManager : MonoBehaviour
         //true matrix
         if (playerStats.SkillPoint >= 4 && playerLevel.Level >= 1 && unlockableMatrix.HasIncreaseBase == false)
         {
-            playerStats.SkillPoint -= 2;
+            playerStats.SkillPoint -= 4;
 
             unlockableMatrix.HasIncreaseBase = true;
             playerStats.MaxHealth = playerStats.MaxHealth + 50;
@@ -156,7 +156,7 @@ public class UpgradeManager : MonoBehaviour
     {
         audioSource.PlayOneShot(ButtonPress);
         audioSource.volume = 0.7f;
-        if (playerStats.SkillPoint >= 5 && playerLevel.Level >= 5 && unlockableMatrix.HasIncreaseHealth2 == false && unlockableMatrix.HasIncreaseHealth == true)
+        if (playerStats.SkillPoint >= 5 && playerLevel.Level >= 7 && unlockableMatrix.HasIncreaseHealth2 == false && unlockableMatrix.HasIncreaseHealth == true)
         {
             playerStats.SkillPoint -= 5;
 
@@ -243,7 +243,7 @@ public class UpgradeManager : MonoBehaviour
 
         audioSource.PlayOneShot(ButtonPress);
         audioSource.volume = 0.7f;
-        if (playerStats.SkillPoint >= 3 && playerLevel.Level >= 5 && unlockableMatrix.HasMoveSpeed == false)
+        if (playerStats.SkillPoint >= 4 && playerLevel.Level >= 5 && unlockableMatrix.HasMoveSpeed == false)
         {
             playerStats.SkillPoint -= 4;
 
