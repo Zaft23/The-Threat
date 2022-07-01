@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 500
   MaxHealth: 500
-  HealthRegenPerSecond: 5
+  HealthRegenPerSecond: 15
   StartHealthRegen: 5
   _canHeal: 0
   BaseDamage: 0
@@ -413,9 +413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d680a02f5eac1ea45ab62d2a1c7dc0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillPoints: 0
   Level: 1
-  maxLevel: 50
+  maxLevel: 20
   currentXp: 0
   nextLevelXp: 100
   additionMultiplier: 128
@@ -426,6 +425,7 @@ MonoBehaviour:
   backXpBar: {fileID: 0}
   levelText: {fileID: 0}
   XpText: {fileID: 0}
+  SP: {fileID: 0}
   levelUpSound: {fileID: 0}
 --- !u!114 &3414017805676298680
 MonoBehaviour:
@@ -486,6 +486,7 @@ MonoBehaviour:
   MeleeTime: 0.8
   FirePoint: {fileID: 3414017805236792960}
   MuzzleFlash: {fileID: 8927199345315814125, guid: 830671dc5faf7734e9afc2723df958f2, type: 3}
+  reloadSpeed: 0
   _primaryCurrentAmmo: 0
   PrimaryStoredAmmo: 0
   _secondaryCurrentAmmo: 0

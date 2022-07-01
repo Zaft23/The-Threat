@@ -90,7 +90,7 @@ public class LevelSystem : MonoBehaviour
         }
         XpText.text = currentXp + "/" + nextLevelXp;
         var player = GetComponent<Player>().SkillPoint;
-        //SP.text = "SP: " + player.ToString();
+        SP.text = player.ToString();
     }
 
     public void GainExperienceFlatRate(float xpGained)

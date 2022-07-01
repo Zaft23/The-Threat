@@ -94,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5845606213334412795
 Transform:
   m_ObjectHideFlags: 0
@@ -248,9 +248,10 @@ MonoBehaviour:
   EnemyHealth: 100
   SecondStageHealth: 0
   CanMove: 0
-  enemyXp: 100
+  enemyXp: 25
   _player: {fileID: 0}
   _playerLevel: {fileID: 0}
+  Supply: {fileID: 0}
 --- !u!114 &5845606213334412794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +279,7 @@ MonoBehaviour:
   FirePoint: {fileID: 5845606214578420715}
   Direction: {x: 0, y: 0, z: 0}
   Gun: {fileID: 0}
-  RateOfFire: 0.1
+  RateOfFire: 0.2
   ShootingTime: 5
   IdleDuration: 3
   PatrolDuration: 5

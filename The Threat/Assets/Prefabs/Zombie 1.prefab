@@ -219,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6624526250002996204
 Transform:
   m_ObjectHideFlags: 0
@@ -370,12 +370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee35d5116c2f5a044b7bb6236d87050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHealth: 20
+  EnemyHealth: 50
   SecondStageHealth: 0
   CanMove: 0
-  enemyXp: 100
+  enemyXp: 20
   _player: {fileID: 0}
   _playerLevel: {fileID: 0}
+  Supply: {fileID: 6791023647136536629, guid: e6859a376d989874bae290aefd3d6339, type: 3}
 --- !u!114 &6624526250002996242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268b8ce5d7ffbd84485953de399e79a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 34989227}
   AttackingSound: {fileID: 8300000, guid: ecda8a27dc7b3d84d9cecc3ef57e4c4b, type: 3}
   IdleSound: {fileID: 8300000, guid: c950a26497ee6e948834e6f7bd7609c3, type: 3}
   attackCooldown: 3
@@ -399,7 +400,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   MyAnimator: {fileID: 0}
-  Damage: 20
+  Damage: 60
   MoveSpeed: 0.5
   ChaseSpeed: 2
   ChaseSpeedR: 2

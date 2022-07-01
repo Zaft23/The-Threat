@@ -101,6 +101,15 @@ public class GameMaster : MonoBehaviour
         OnToggleUpgradeMenu.Invoke(EscMenu.activeSelf);
     }
 
+    public void ToggleOffSkillMenu()
+    {
+        UpgradeMenu.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        Cursor.visible = false;
+    }
+
+
     public void Pause()
     {
         Time.timeScale = 0f;
