@@ -29,6 +29,7 @@ public class UpgradeButton : MonoBehaviour
     Player playerStats;
     LevelSystem playerLevel;
     PlayerActions actions;
+    Inventory inventory;
     int playerSP;
 
 
@@ -40,13 +41,14 @@ public class UpgradeButton : MonoBehaviour
         playerLevel = _player.GetComponent<LevelSystem>();
         playerPos = _player.GetComponent<Transform>();
         actions = _player.GetComponent<PlayerActions>();
+        inventory = _player.GetComponent<Inventory>();
         playerSP = _player.GetComponent<Player>().SkillPoint;
 
     }
 
     public void SavePlayer()
     {
-        SavePlayerData.SavePlayer(playerStats, playerLevel, actions);
+        SavePlayerData.SavePlayer(playerStats, playerLevel, actions, inventory);
     }
 
     //

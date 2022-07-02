@@ -9,6 +9,10 @@ public class GameMaster : MonoBehaviour
     public GameObject UpgradeMenu;
     public GameObject EscMenu;
     public GameObject CrossHair;
+    public GameObject DeadUI;
+    TestSaveAndLoad saveAndLoad;
+
+    public GameObject Player;
 
     public AudioSource audioSource;
     public AudioClip BGM;
@@ -17,7 +21,8 @@ public class GameMaster : MonoBehaviour
     public delegate void UpgradeMenuCallBack(bool active);
     public UpgradeMenuCallBack OnToggleUpgradeMenu;
 
-    public static bool GameIsPaused = false;
+    //public static bool GameIsPaused = false;
+    public bool GameIsPaused = false;
 
     [SerializeField]
 
@@ -27,6 +32,8 @@ public class GameMaster : MonoBehaviour
 
     private void Awake()
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        saveAndLoad = GetComponent<TestSaveAndLoad>();
         audioSource.PlayOneShot(BGM);
     }
 
@@ -37,11 +44,53 @@ public class GameMaster : MonoBehaviour
         GameIsPaused = false;
     }
 
+    [SerializeField] float DeadTimer = 2f;
+    [SerializeField] float Timer = 0;
+
     // Update is called once per frame
     void Update()
     {
 
         //audioSource.PlayOneShot(BGM);
+        //Player = GameObject.FindGameObjectWithTag("Player");
+        if (GameIsPaused == true)
+        {
+            Time.timeScale = 0f;
+            Cursor.visible = true;
+        }
+        if (GameIsPaused == false)
+        {
+            Time.timeScale = 1f;
+            Cursor.visible = false;
+        }
+
+
+        if (Player.activeInHierarchy == false)
+        {
+            Timer += Time.deltaTime;
+            if(Timer >= DeadTimer)
+            {
+                CrossHair.SetActive(false);
+                Time.timeScale = 0f;
+                DeadUI.SetActive(true);
+                Cursor.visible = true;
+            }
+        
+        }
+
+        if(Player.activeInHierarchy == true)
+        {
+
+            Time.timeScale = 1f;
+            DeadUI.SetActive(false);
+            CrossHair.SetActive(true);
+            Cursor.visible = false;
+            Timer = 0;
+
+        }
+
+
+
 
 
         if (Input.GetKeyDown(KeyCode.U))
@@ -71,7 +120,7 @@ public class GameMaster : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.visible = true;
+            //Cursor.visible = true;
             EscapeMenuToggle();
             if (GameIsPaused == true)
             {
@@ -110,6 +159,12 @@ public class GameMaster : MonoBehaviour
     }
 
 
+    public void ResumeGame()
+    {
+        EscMenu.SetActive(false);
+        Resume();
+    }
+
     public void Pause()
     {
         Time.timeScale = 0f;
@@ -124,4 +179,14 @@ public class GameMaster : MonoBehaviour
         Cursor.visible = false;
 
     }
+
+    //private IEnumerator ActivateDeadUI()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    //_trailRenderer.emitting = false;
+    //    DeadUI.SetActive(true);
+
+
+    //}
+
 }

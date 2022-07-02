@@ -433,14 +433,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee35d5116c2f5a044b7bb6236d87050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBoss: 0
   EnemyHealth: 500
+  _enemyMaxHealth: 0
   SecondStageHealth: 200
   CanMove: 0
   enemyXp: 1000
+  Blood: {fileID: 0}
   _player: {fileID: 0}
   _playerLevel: {fileID: 0}
+  playerS: {fileID: 0}
   RandomPercent: 0
   Supply: {fileID: 0}
+  DropWeapon: 0
   Ak47: {fileID: 0}
   M4A1: {fileID: 0}
   BerettaM9: {fileID: 0}
@@ -449,6 +454,7 @@ MonoBehaviour:
   AutoShotgun: {fileID: 0}
   HuntingRifle: {fileID: 0}
   FiftyCalSniper: {fileID: 0}
+  timer: 60
 --- !u!114 &3482370379806253229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +513,7 @@ AudioSource:
   m_GameObject: {fileID: 3482370379806253226}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1bdd9245b85e5d341a5065aac5ce256b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee35d5116c2f5a044b7bb6236d87050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBoss: 0
   EnemyHealth: 100
   _enemyMaxHealth: 0
   SecondStageHealth: 0
@@ -265,6 +266,7 @@ MonoBehaviour:
   AutoShotgun: {fileID: 3495415152151633840, guid: 279c4031fb5da0d4090d800a8ef4faf1, type: 3}
   HuntingRifle: {fileID: 3495415152151633840, guid: 549d8ae075023d3428107365dcdb6125, type: 3}
   FiftyCalSniper: {fileID: 3495415152151633840, guid: 4b890130e71e7114cbe1bfa1edff98d3, type: 3}
+  timer: 60
 --- !u!114 &5845606213334412794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +315,7 @@ AudioSource:
   m_GameObject: {fileID: 5845606213334412774}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1bdd9245b85e5d341a5065aac5ce256b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

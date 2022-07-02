@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class PlayerData 
+public class PlayerData
 {
     public float Health;
     public float MaxHP;
@@ -28,13 +28,20 @@ public class PlayerData
     public float YPosition;
     public float ZPosition;
 
+    //
+    //public Weapon weapon1;
+    //public Weapon weapon2;
+
+    //
+
+
     //Upgrades use array maybe?
     //later damage or something
 
     //save player's ammo data
     //save gameobject
 
-    public PlayerData(Player player, LevelSystem level, PlayerActions actions)
+    public PlayerData(Player player, LevelSystem level, PlayerActions actions, Inventory inventory)
     {
         Level = level.Level;
         Health = player.Health;
@@ -57,6 +64,14 @@ public class PlayerData
         YPosition = player.transform.position.y;
         ZPosition = player.transform.position.z;
 
+
+        //
+        //weapon1 = inventory.IWeapons[0];
+        //weapon2 = inventory.IWeapons[1];
+
+
+
+        //
 
         //test position
         //position = new float[3];

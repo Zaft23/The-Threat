@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d207580634b8cdc43af1f67a8ba3ef7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b23181985195af7478e020a9c03f24a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.38034198, y: 0.42735043}
+    pivot: {x: 0.37906894, y: 0.4169425}
     oldSize: {x: 2.4, y: 2.4}
     newSize: {x: 0.31, y: 0.79}
     adaptiveTilingThreshold: 0.5
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e175fdeb6905c4499d758ca9dd0f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 11400000, guid: 2bb6d4546f2664742bd1f71992e44df0, type: 2}
+  Weapon: {fileID: 11400000, guid: 194ba774eb4933b449e0b57bb717dd45, type: 2}
 --- !u!114 &-3008410459556244362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,12 +160,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d2db1260443ab40bd73e0a2774b99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsRifle: 0
-  IsSmg: 1
+  IsRifle: 1
+  IsSmg: 0
   IsShotgun: 0
   IsSniper: 0
-  IsPrimary: 0
-  isSecondary: 1
+  IsPrimary: 1
+  isSecondary: 0
   Rifle: 10
   Smg: 15
   Shotgun: 2

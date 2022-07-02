@@ -14,7 +14,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         _actions = GetComponent<PlayerActions>();
-        IniVariables();
+
+        AddItem(IWeapons[0]);
+        AddItem(IWeapons[1]);
+
+        //IniVariables();
     }
 
 
@@ -42,7 +46,7 @@ public class Inventory : MonoBehaviour
         //{
         //    IWeapons[newItemIndex] = newItem;
 
-        //    _actions.InitAmmo((int)newItem.WeaponSlot, newItem);
+            //_actions.InitAmmo((int)newItem.WeaponSlot, newItem);
         //}
 
 

@@ -68,6 +68,19 @@ public class EnemyStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(_player.activeInHierarchy == false)
+        {
+            EnemyHealth = _enemyMaxHealth;
+        }
+
+        if(IsBoss && _player.activeInHierarchy == false)
+        {
+            //transform.position == FirstPos
+        }
+
+
+
         if(playerS.Health == 0)
         {
             EnemyHealth = _enemyMaxHealth;

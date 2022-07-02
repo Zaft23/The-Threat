@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float Health;
     public float MaxHealth;
 
+    public GameObject Blood;
     //
 
     //public HealthBarScripts healthBar;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
+
+
     //
     public float HealthRegenPerSecond;
     public float StartHealthRegen;
@@ -47,7 +50,8 @@ public class Player : MonoBehaviour
     private bool _facingRight;
 
 
-    public static Player Instance { get; private set; }
+    //public static Player Instance { get; private set; }
+
     #endregion
 
     //private LevelSystemAnimator _levelSystemAnimator;
@@ -56,6 +60,9 @@ public class Player : MonoBehaviour
     //public TMPro.TextMeshProUGUI levelText;
 
     public GameMaster Gm;
+    //public GameObject DeadUI;
+
+
 
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerActions _playerActions;
@@ -281,10 +288,32 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        //StartCoroutine(ActivateDeadUI());
+
+        this.gameObject.SetActive(false);
+
+        //GameObject blood = Instantiate(Blood, transform.position, Quaternion.identity);
+
+        //SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        //sprite.enabled = false;
+        //_playerMovement.enabled = false;
+        //Actions.enabled = false;
+            
+
+       
         //stop time
         //show go to checkpoint menu
 
     }
+
+    //private IEnumerator ActivateDeadUI()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    //_trailRenderer.emitting = false;
+    //    //DeadUI.SetActive(true);
+
+
+    
 
 
 

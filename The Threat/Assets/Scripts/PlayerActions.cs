@@ -732,8 +732,9 @@ public class PlayerActions : MonoBehaviour
 
     private void GetRefrences()
     {
-
-
+        
+        //CheckAmmo((int)weapon.WeaponSlot, 0, 1);
+        
 
         _canShoot = true;
         CanReload = true;
@@ -747,10 +748,27 @@ public class PlayerActions : MonoBehaviour
         IsMelee = false;
 
 
+        //InitAmmo(_inventory.IWeapons[0].BulletAmount, _inventory.GetItem(0));
+        //InitAmmo(_inventory.IWeapons[1].BulletAmount, _inventory.GetItem(1));
         //Test
 
 
     }
+
+    public void CheckGun()
+    {
+        _inventory.IWeapons[0] = _inventory.IWeapons[0];
+        _inventory.IWeapons[1] = _inventory.IWeapons[1];
+
+    }
+
+
+
+
+
+ 
+
+
 
 
 }

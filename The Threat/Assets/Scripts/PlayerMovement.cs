@@ -11,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip RunningSound;
     public AudioClip JumpSound;
     public AudioClip DashSound;
-    
+
+    //public GameObject DashTrail;
+
     #region
     [Header("Components")]
     private Rigidbody2D rb2D;
@@ -42,8 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _dashingDir;
     private bool _isDashing;
     private bool _canDash = true;
-    //private TrailRenderer _trailRenderer;
-    //TEST
+    public TrailRenderer TrailRenderer;
 
 
     [Header("Jump Gravity")]
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump details")]
     public float JumpForce;
     //[SerializeField] private float _yVelJumpReleasedMod = 2F;
-    [SerializeField] private float _fJumpPressedRememberTime = 0.2f;
+    [SerializeField] private float _fJumpPressedRememberTime;
     [SerializeField] private float _fJumpPressedRemember = 0;
     [SerializeField] float _coyoteRemember = 0;
     [SerializeField] float _coyoteRememberTime = 0.3f;
@@ -91,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
 
-       
+        TrailRenderer = GetComponent<TrailRenderer>();
 
     }
 
@@ -182,8 +183,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (dashInput && _canDash)
         {
+           
+
             _isDashing = true;
             _canDash = false;
+            TrailRenderer.emitting = true;
+
             _dashingDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             //_trailRenderer.emitting = true;
             if (_dashingDir == Vector2.zero)
@@ -228,19 +233,19 @@ public class PlayerMovement : MonoBehaviour
 
         //better code
         _fJumpPressedRemember -= Time.deltaTime;
-        if (Input.GetButtonDown("Jump"))
-        {
-            _fJumpPressedRemember = _fJumpPressedRememberTime;
-            //Debug.Log("Jump");
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    _fJumpPressedRemember = _fJumpPressedRememberTime;
+        //    //Debug.Log("Jump");
+        //}
 
         if (Input.GetButtonDown("Jump") && IsGrounded)
         {
             audioSource.PlayOneShot(DashSound);
             audioSource.volume = 0.5f;
-
+            _fJumpPressedRemember = _fJumpPressedRememberTime;
             rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
-            //Debug.Log("Jump2");
+            Debug.Log("Jump2");
         }
 
         //Allow player to jump a few cm off from ground after jump
@@ -338,9 +343,9 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator StopDashing()
     {
         yield return new WaitForSeconds(_dashingTime);
-        //_trailRenderer.emitting = false;
+        TrailRenderer.emitting = false;
         _isDashing = false;
-
+      
 
     }
 

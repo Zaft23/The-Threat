@@ -10,7 +10,13 @@ public class TestSaveAndLoad : MonoBehaviour
     Player playerStats;
     LevelSystem playerLevel;
     PlayerActions actions;
+    Inventory inventory;
     int playerSP;
+
+    public GameObject PlayerHierarchy;
+
+   
+
 
 
     Transform playerPos;
@@ -21,6 +27,8 @@ public class TestSaveAndLoad : MonoBehaviour
         playerLevel = _player.GetComponent<LevelSystem>();
         playerPos = _player.GetComponent<Transform>();
         actions = _player.GetComponent<PlayerActions>();
+        inventory = _player.GetComponent<Inventory>();
+
         playerSP = _player.GetComponent<Player>().SkillPoint;
 
     }
@@ -29,7 +37,7 @@ public class TestSaveAndLoad : MonoBehaviour
 
     public void SavePlayer()
     {
-        SavePlayerData.SavePlayer(playerStats, playerLevel, actions);
+        SavePlayerData.SavePlayer(playerStats, playerLevel, actions, inventory);
     }
 
 
@@ -68,6 +76,54 @@ public class TestSaveAndLoad : MonoBehaviour
         Pos.z = data.ZPosition;
         playerPos.transform.position = Pos;
 
+        //
+        //inventory.IWeapons[0] = data.weapon1;
+        //inventory.IWeapons[1] = data.weapon2;
+
+
+        //
+
+
+
+    }
+
+    public void LoadPlayerAlive()
+    {
+        PlayerHierarchy.SetActive(true);
+
+        PlayerData data = SavePlayerData.LoadPlayer();
+
+        playerStats.Health = data.Health;
+        playerStats.SkillPoint = data.SkillPoints;
+        playerLevel.Level = data.Level;
+        playerLevel.currentXp = data.Exp;
+        playerLevel.nextLevelXp = data.NextLevelExp;
+
+        playerStats.MaxHealth = data.MaxHP;
+        playerStats.BaseDamage = data.Damage;
+        playerStats.BaseSpeed = data.Speed;
+        actions.StoredRifleAmmo = data.RifleAmmo;
+        actions.StoredSmgAmmo = data.SMGAmmo;
+        actions.StoredShotgunAmmo = data.ShotgunAmmo;
+        actions.StoredSniperAmmo = data.SniperAmmo;
+
+
+
+        Vector3 Pos;
+        Pos = playerPos.transform.position;
+        Debug.Log("LOADDDDD");
+        //Vector3 position;
+        Pos.x = data.XPosition;
+        Pos.y = data.YPosition;
+        Pos.z = data.ZPosition;
+        playerPos.transform.position = Pos;
+
+
+
+        //inventory.IWeapons[0] = data.weapon1;
+        //inventory.IWeapons[1] = data.weapon2;
+
+
     }
 
     //public void SaveSkillPoints()
@@ -76,7 +132,7 @@ public class TestSaveAndLoad : MonoBehaviour
 
 
     //}
-    
+
 
     public void LoadSkillPoint()
     {
@@ -102,5 +158,7 @@ public class TestSaveAndLoad : MonoBehaviour
         Pos.z = data.ZPosition;
         playerPos.transform.position = Pos;
     }
+
+
 
 }
