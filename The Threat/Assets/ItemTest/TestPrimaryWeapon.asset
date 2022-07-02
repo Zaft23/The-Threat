@@ -23,8 +23,5 @@ MonoBehaviour:
   Damage: 10
   RateOfFire: 0.1
   ReloadTime: 2
-  StoredAmmo: 180
   BulletAmount: 30
-  BulletSpread: 0
-  Mags: 0
-  BulletSpeed: 20
+  BulletSpeed: 30

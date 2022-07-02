@@ -52,7 +52,8 @@ public class LevelSystem : MonoBehaviour
 
     void Update()
     {
-        levelText.text = "Level " + Level;
+        //levelText.text = "Level " + Level;
+        levelText.text = Level.ToString();
 
         UpdateXpUI();
         if (Level != maxLevel)

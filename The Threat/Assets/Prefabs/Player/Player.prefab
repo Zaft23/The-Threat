@@ -30,9 +30,10 @@ Transform:
   m_LocalPosition: {x: -0.374, y: 0.379, z: -0.03112099}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3414017806134202888}
   m_Father: {fileID: 3414017805676298682}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3414017805086841730
 SpriteRenderer:
@@ -143,7 +144,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3414017805676298682}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3414017805112323824
 SpriteRenderer:
@@ -343,7 +344,6 @@ Transform:
   - {fileID: 3414017805236792960}
   - {fileID: 3414017805910340450}
   - {fileID: 3414017805599357787}
-  - {fileID: 3414017806134202888}
   - {fileID: 3414017805086841735}
   - {fileID: 3414017805112323829}
   m_Father: {fileID: 0}
@@ -383,6 +383,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 500
   MaxHealth: 500
+  chipSpeed: 2
+  frontHealthBar: {fileID: 0}
+  backHealthBar: {fileID: 0}
   HealthRegenPerSecond: 15
   StartHealthRegen: 5
   _canHeal: 0
@@ -486,6 +489,10 @@ MonoBehaviour:
   MeleeTime: 0.8
   FirePoint: {fileID: 3414017805236792960}
   MuzzleFlash: {fileID: 8927199345315814125, guid: 830671dc5faf7734e9afc2723df958f2, type: 3}
+  CurrentPrimaryAmmoText: {fileID: 0}
+  CurrentPrimaryMagText: {fileID: 0}
+  CurrentSecondaryAmmoText: {fileID: 0}
+  CurrentSecondaryMagText: {fileID: 0}
   reloadSpeed: 0
   _primaryCurrentAmmo: 0
   PrimaryStoredAmmo: 0
@@ -896,6 +903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3414017806134202888}
   - component: {fileID: 3414017806134202889}
+  - component: {fileID: 1111026031}
   m_Layer: 7
   m_Name: Hand?
   m_TagString: Untagged
@@ -910,13 +918,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3414017806134202895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.3, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.696, y: -0.295, z: 0.03112099}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3414017805676298682}
-  m_RootOrder: 4
+  m_Father: {fileID: 3414017805086841735}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3414017806134202889
 MonoBehaviour:
@@ -925,11 +933,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3414017806134202895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: deb5d3db69e08e04e97cba219a843def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1111026031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414017806134202895}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea57209b00351594ba3707b62e3d2dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyPlayer: {fileID: 0}
 --- !u!1 &3414017806333917248
 GameObject:
   m_ObjectHideFlags: 0

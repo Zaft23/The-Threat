@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
-
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     #region
     public float Health;
     public float MaxHealth;
+
+    //
+
+    //public HealthBarScripts healthBar;
+    private float lerpTimer;
+    public float chipSpeed = 2f;
+    public Image frontHealthBar;
+    public Image backHealthBar;
+    //
     public float HealthRegenPerSecond;
     public float StartHealthRegen;
 
@@ -70,6 +79,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         GetRefrence();
+        Health = MaxHealth;
+        //healthBar.SetMaxHealth(MaxHealth);
+
         //cooldownTimer = 0f;
     }
 
@@ -117,7 +129,9 @@ public class Player : MonoBehaviour
             //}
         }
 
-      
+        //
+        Health = Mathf.Clamp(Health, 0, MaxHealth);
+        UpdateHealthUI();
 
 
 
@@ -125,12 +139,7 @@ public class Player : MonoBehaviour
 
 
 
-
-
-
-
-
-
+        //
 
         #region
         float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
@@ -228,19 +237,78 @@ public class Player : MonoBehaviour
             Health -= Damage;
             canHealTimer = 0;
 
-            //do animation
+        lerpTimer = 0f;
 
-            if (Health <= 0)
+        //healthBar.SetHealth(Health);
+
+        //do animation
+
+        if (Health <= 0)
             {
                 Debug.Log("i die");
-                //Die();
+                Die();
             }
 
         }
-        #endregion
+    #endregion
 
-        #region misc
-        public Vector3 GetPosition()
+    public void UpdateHealthUI()
+    {
+        //  Debug.Log(health);
+        float fillF = frontHealthBar.fillAmount;
+        float fillB = backHealthBar.fillAmount;
+        float hFraction = Health / MaxHealth;
+        if (fillB > hFraction)
+        {
+            frontHealthBar.fillAmount = hFraction;
+            backHealthBar.color = Color.red;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
+        }
+        if (fillF < hFraction)
+        {
+            backHealthBar.color = Color.green;
+            backHealthBar.fillAmount = hFraction;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentComplete);
+        }
+        //healthText.text = health + "/" + maxHealth;
+    }
+
+    public void Die()
+    {
+        //stop time
+        //show go to checkpoint menu
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #region misc
+    public Vector3 GetPosition()
         {
             return transform.position;
         }
@@ -256,6 +324,14 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
         #endregion
+
+
+
+
+
+
+
+
 
         private void GetRefrence()
         {
@@ -284,4 +360,22 @@ public class Player : MonoBehaviour
         }
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

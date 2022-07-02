@@ -17,6 +17,7 @@ TagManager:
   - Recoil
   - Upgrade
   - UpgradeManager
+  - GameMaster
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - AiBullet
   - EnemyGroundCheck
   - Cover
-  - 
+  - Ammo
   - 
   - 
   - 

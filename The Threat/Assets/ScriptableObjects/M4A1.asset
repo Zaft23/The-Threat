@@ -13,17 +13,15 @@ MonoBehaviour:
   m_Name: M4A1
   m_EditorClassIdentifier: 
   WeaponName: M4A1
-  WeaponSprite: {fileID: 21300000, guid: cec8e324f73120545bc2201e4f867c76, type: 3}
-  WeaponPrefab: {fileID: 0}
-  BulletPrefab: {fileID: 3295582376259988921, guid: 6dc794d37d7b8154d9022af7a7966d4b, type: 3}
-  PickAble: {fileID: 0}
+  WeaponSprite: {fileID: 21300000, guid: b23181985195af7478e020a9c03f24a0, type: 3}
+  WeaponPrefab: {fileID: 3495415152151633840, guid: 0ec5832634c296e48b0ea0bbcb3accae, type: 3}
+  BulletPrefab: {fileID: 3295582376259988921, guid: 4c58bfb7ca65a3e44a7530075a3fba78, type: 3}
+  PickAble: {fileID: 3495415152151633840, guid: 86b64d7b4de2b4c499e336903600344b, type: 3}
+  ShootingSound: {fileID: 8300000, guid: f8af2aa28673ea54ebe0e888e558a4b4, type: 3}
   WeaponType: 0
   WeaponSlot: 0
-  Damage: 0
-  RateOfFire: 0
-  ReloadTime: 0
-  StoredAmmo: 0
-  BulletAmount: 0
-  BulletSpread: 0
-  Mags: 0
-  BulletSpeed: 0
+  Damage: 4
+  RateOfFire: 0.1
+  ReloadTime: 2.2
+  BulletAmount: 30
+  BulletSpeed: 30

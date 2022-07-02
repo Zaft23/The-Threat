@@ -135,13 +135,13 @@ public class AiAbbasBoss : MonoBehaviour
             Debug.Log("Second Stage");
 
 
-            RushSpeed = 10f;
+            RushSpeed = 15f;
             RushDamage = 100f;
-            Damage = 40f;
+            Damage = 70f;
             ChaseSpeed = 5f;
-            AttackDuration = 20f;
+            AttackDuration = 10f;
             IdleDuration = 2f;
-            RushDuration = 20f;
+            RushDuration = 32f;
 
 
         }

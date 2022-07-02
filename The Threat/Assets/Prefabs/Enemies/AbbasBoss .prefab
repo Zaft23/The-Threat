@@ -192,7 +192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7342600948329635672}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7342600948676378797
 Transform:
   m_ObjectHideFlags: 0
@@ -319,13 +319,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee35d5116c2f5a044b7bb6236d87050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHealth: 500
-  SecondStageHealth: 480
+  EnemyHealth: 1000
+  _enemyMaxHealth: 0
+  SecondStageHealth: 500
   CanMove: 0
-  enemyXp: 10000
+  enemyXp: 2000
+  Blood: {fileID: 0}
   _player: {fileID: 0}
   _playerLevel: {fileID: 0}
+  playerS: {fileID: 0}
+  RandomPercent: 0
   Supply: {fileID: 0}
+  DropWeapon: 0
+  Ak47: {fileID: 0}
+  M4A1: {fileID: 0}
+  BerettaM9: {fileID: 0}
+  Uzi: {fileID: 0}
+  PumpShotgun: {fileID: 0}
+  AutoShotgun: {fileID: 0}
+  HuntingRifle: {fileID: 0}
+  FiftyCalSniper: {fileID: 0}
 --- !u!114 &7342600948676378794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,13 +367,13 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   enemyStats: {fileID: 0}
   MyAnimator: {fileID: 0}
-  Damage: 20
-  RushDamage: 10
-  RushSpeed: 10
-  ChaseSpeed: 2
+  Damage: 50
+  RushDamage: 70
+  RushSpeed: 12
+  ChaseSpeed: 3
   ChaseSpeedR: 0
   AttackDuration: 10
-  RushDuration: 10
+  RushDuration: 22
   IdleDuration: 4
   AttackRange: 0
   RetreatDistance: 0

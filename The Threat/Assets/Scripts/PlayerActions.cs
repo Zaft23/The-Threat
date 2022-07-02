@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+using TMPro;
+using UnityEngine.UI;
 
 
 
@@ -30,6 +31,18 @@ public class PlayerActions : MonoBehaviour
     public Transform FirePoint;
     public GameObject MuzzleFlash;
 
+    //
+
+    public TextMeshProUGUI CurrentPrimaryAmmoText;
+    public TextMeshProUGUI CurrentPrimaryMagText;
+
+    public TextMeshProUGUI CurrentSecondaryAmmoText;
+    public TextMeshProUGUI CurrentSecondaryMagText;
+
+
+
+
+    //
     public float reloadSpeed;
 
     private float _lastShootTime = 0;
@@ -91,7 +104,14 @@ public class PlayerActions : MonoBehaviour
         //    return;
         //}
 
-        newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
+        if (target.collider.gameObject.layer == LayerMask.NameToLayer("Ammo"))
+        {
+
+            Destroy(target.transform.gameObject);
+
+        }
+
+            newItem = target.transform.GetComponent<WeaponPickUp>().Weapon;
 
         var newSlot = target.transform.GetComponent<PickUpItem>();
         // after the && part apparently that fixes the still can grab weapon problem.. holy fuck i don't know how i did it but thank God.. i did it
@@ -161,8 +181,11 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
+        //Weapon currentWeapon = _inventory.GetItem(_manager.CurrentlyEquippedWeapon);
 
+        //UseAmmo((int)currentWeapon.WeaponSlot, 1, 0);
 
+        AmmoUI();
 
 
         #region
@@ -201,14 +224,14 @@ public class PlayerActions : MonoBehaviour
         ////    Debug.Log("No recoil");
         //}
 
-        Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
+        //Recoil = GameObject.Find("Recoil").GetComponent<WeaponRecoil>();
 
         //try
-        if (Recoil != null)
-        {
+        //if (Recoil != null)
+        //{
             if (Input.GetButton("Fire1"))
             {
-                Recoil.AddRecoil();
+                //Recoil.AddRecoil();
                 //Weapon currentWeapon = _inventory.GetItem(_manager.CurrentlyEquippedWeapon);
                 
 
@@ -217,18 +240,18 @@ public class PlayerActions : MonoBehaviour
                 Shooting();
 
             }
-            else if (Input.GetButtonUp("Fire1"))
-            {
-                Recoil.StopRecoil();
+            //else if (Input.GetButtonUp("Fire1"))
+            //{
+                //Recoil.StopRecoil();
 
-            }
+            //}
 
-        }
-        else
+        //}
+        //else
         //catch
-        {
-            Debug.Log("69");
-        }
+        //{
+            //Debug.Log("69");
+        //}
         //if (!Recoil)
         //return;
 
@@ -413,7 +436,7 @@ public class PlayerActions : MonoBehaviour
 
 
         GameObject effect = Instantiate(MuzzleFlash);
-        Destroy(effect, 5f);
+        //Destroy(effect, 5f);
         effect.transform.position = GameObject.Find("NewFirePoint/Recoil/NewPoint").transform.position;
 
         effect.transform.rotation = Quaternion.Euler(0, 0, lookAngle);
@@ -691,11 +714,18 @@ public class PlayerActions : MonoBehaviour
         audioSource.volume = 0.8f;
         //audioSource.pitch = Random.Range(0.5f, 1.1f);
 
+    }
 
 
+    public void AmmoUI()
+    {
+        CurrentPrimaryMagText.text = _primaryCurrentAmmo.ToString();
+        CurrentPrimaryAmmoText.text = PrimaryStoredAmmo.ToString();
 
+        CurrentSecondaryMagText.text = _secondaryCurrentAmmo.ToString();
+        CurrentSecondaryAmmoText.text = SecondaryStoredAmmo.ToString();
 
-
+        
 
     }
 

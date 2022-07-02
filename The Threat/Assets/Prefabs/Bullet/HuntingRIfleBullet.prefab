@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1531294636815042863}
   - component: {fileID: 8469033859454271365}
   - component: {fileID: 5108522154836076635}
-  - component: {fileID: 3156475234113467874}
-  m_Layer: 12
-  m_Name: Ai Bullet 1
+  - component: {fileID: -4856609826182485543}
+  m_Layer: 9
+  m_Name: HuntingRIfleBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92892253, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,16 +115,16 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3156475234113467874
+--- !u!114 &-4856609826182485543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,10 +133,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3295582376259988921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02aad9602c5bdc54e89c719ea80d0dbd, type: 3}
+  m_Script: {fileID: 11500000, guid: b9b994788e61e50499a1ff95293af41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 11400000, guid: bc795941dece0d64ea63b009d58e0ddf, type: 2}
+  Weapon: {fileID: 11400000, guid: e56d449e5d18c624185673cca252e17a, type: 2}
   Impact: {fileID: 7323420678053356291, guid: 0c419d0023d6db143b0af953cfbb930e, type: 3}
-  BulletSpeed: 40
-  Damage: 50

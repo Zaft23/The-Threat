@@ -283,7 +283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3482370379806253216
 Transform:
   m_ObjectHideFlags: 0
@@ -434,12 +434,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 500
-  SecondStageHealth: 480
+  SecondStageHealth: 200
   CanMove: 0
-  enemyXp: 0
+  enemyXp: 1000
   _player: {fileID: 0}
   _playerLevel: {fileID: 0}
+  RandomPercent: 0
   Supply: {fileID: 0}
+  Ak47: {fileID: 0}
+  M4A1: {fileID: 0}
+  BerettaM9: {fileID: 0}
+  Uzi: {fileID: 0}
+  PumpShotgun: {fileID: 0}
+  AutoShotgun: {fileID: 0}
+  HuntingRifle: {fileID: 0}
+  FiftyCalSniper: {fileID: 0}
 --- !u!114 &3482370379806253229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +467,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   MyAnimator: {fileID: 0}
   EnemyStats: {fileID: 0}
-  SuppressionHealth: 10
+  SuppressionHealth: 100
   RSuppressionHealth: 0
   CurrentSuppressionHealth: 0
   CanTakeDamage: 0
