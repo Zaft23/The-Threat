@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d443456976d7148b9ea98d1d1faf8e, type: 3}
+  m_Name: AK47
+  m_EditorClassIdentifier: 
+  WeaponName: AK47
+  WeaponSprite: {fileID: 21300000, guid: f211fe918a4e0fc4b802524531843a22, type: 3}
+  WeaponPrefab: {fileID: 3495415152151633840, guid: b55a6b58ecda34e44b3670293382f33e, type: 3}
+  BulletPrefab: {fileID: 3295582376259988921, guid: 83101f47071fe36409960a7bab0cf5f4, type: 3}
+  PickAble: {fileID: 3495415152151633840, guid: 3c3aefe836d667842aa319f576fc267f, type: 3}
+  ShootingSound: {fileID: 8300000, guid: f8af2aa28673ea54ebe0e888e558a4b4, type: 3}
+  WeaponType: 0
+  WeaponSlot: 0
+  Damage: 5
+  RateOfFire: 0.2
+  ReloadTime: 2.4
+  BulletAmount: 30
+  BulletSpeed: 30

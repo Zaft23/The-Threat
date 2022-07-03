@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d443456976d7148b9ea98d1d1faf8e, type: 3}
+  m_Name: 50cal Sniper
+  m_EditorClassIdentifier: 
+  WeaponName: 50cal Sniper
+  WeaponSprite: {fileID: 21300000, guid: 867354fbd0f20c348bbe446d6d2663f2, type: 3}
+  WeaponPrefab: {fileID: 3495415152151633840, guid: b2afd7f42a7a10e479cb1b8e25adbac7, type: 3}
+  BulletPrefab: {fileID: 3295582376259988921, guid: 5ba31ee90f63515408b43d6df2c3c357, type: 3}
+  PickAble: {fileID: 3495415152151633840, guid: 4b890130e71e7114cbe1bfa1edff98d3, type: 3}
+  ShootingSound: {fileID: 8300000, guid: 0aaf7ad55c0de314a94ec6e8871ee6e1, type: 3}
+  WeaponType: 3
+  WeaponSlot: 0
+  Damage: 25
+  RateOfFire: 1.2
+  ReloadTime: 5
+  BulletAmount: 5
+  BulletSpeed: 30
