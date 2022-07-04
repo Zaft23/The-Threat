@@ -58,6 +58,11 @@ public class SettingsMenu : MonoBehaviour
         AudioSetting.SetActive(false);
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 
 
 

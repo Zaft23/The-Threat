@@ -165,7 +165,7 @@ MonoBehaviour:
   TrailRenderer: {fileID: 0}
   FallMupltiplier: 2.5
   LowJumpMultiplier: 2
-  JumpForce: 10
+  JumpForce: 20
   _fJumpPressedRememberTime: 0.1
   _fJumpPressedRemember: 0
   _coyoteRemember: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   MaxShotgunSize: 32
   MaxSniperSize: 20
   ThrowPoint: {fileID: 8271758244535635888}
-  MeleeDamage: 10
+  MeleeDamage: 60
   MeleePoint: {fileID: 8271758243920594825}
   AttackRange: 1
   EnemyLayers:
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IWeapons:
-  - {fileID: 11400000, guid: 194ba774eb4933b449e0b57bb717dd45, type: 2}
+  - {fileID: 11400000, guid: 94764dc66b531ba4e9d16c522a9df60e, type: 2}
   - {fileID: 11400000, guid: 2bb6d4546f2664742bd1f71992e44df0, type: 2}
 --- !u!212 &8271758243619861847
 SpriteRenderer:
@@ -839,7 +839,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f99e3e891ebd1844d9b4d9b3450a3eae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -951,7 +951,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 666ddab84b460ce46b9e5973ef78b9b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

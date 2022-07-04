@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2235ef9a970fb5944b3e99aebabfd5f2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 733edea8f4850484c935f9e0713dbb69, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -84,7 +84,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crossfade
+  m_Name: Ch2
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Start

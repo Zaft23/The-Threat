@@ -13,7 +13,7 @@ public class TestMessage : MonoBehaviour
     {
         var dialogTexts = new List<DialogData>();
 
-        dialogTexts.Add(new DialogData("/size:up/Hi, /size:init/my name is Li.", "Li"));
+        dialogTexts.Add(new DialogData("/size:up/Hi, /size:init/my name is Li.", "Zaki"));
 
         dialogTexts.Add(new DialogData("I am Sa. Popped out to let you know Asset can show other characters.", "Sa"));
         

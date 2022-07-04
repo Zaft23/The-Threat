@@ -6,7 +6,7 @@ public class ActivateGameObject : MonoBehaviour
 {
     public GameObject Dialogue;
     public GameObject Die;
-
+    public GameObject Obj;
     public GameObject InviSWall;
 
     // Start is called before the first frame update
@@ -19,12 +19,27 @@ public class ActivateGameObject : MonoBehaviour
     void Update()
     {
 
+
+
     }
 
-    public void ActivateObject()
+    public void ActivateDialogueObject()
     {
        Dialogue.SetActive(true);
     }
+
+    public void DeactivateObj()
+    {
+        Obj.SetActive(false);
+    }
+
+    public void DeactivateInvisWall()
+    {
+        InviSWall.SetActive(false);
+    }
+
+
+
 
     public void ToggleInvisWall()
     {

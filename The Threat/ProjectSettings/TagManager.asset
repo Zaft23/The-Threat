@@ -19,6 +19,7 @@ TagManager:
   - UpgradeManager
   - GameMaster
   - CrossHair
+  - LevelLoader
   - Outside
   layers:
   - Default
@@ -37,7 +38,7 @@ TagManager:
   - EnemyGroundCheck
   - Cover
   - Ammo
-  - 
+  - Confiner
   - 
   - 
   - 

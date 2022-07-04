@@ -12,6 +12,8 @@ public class GameMaster : MonoBehaviour
     public GameObject DeadUI;
     TestSaveAndLoad saveAndLoad;
 
+    public GameObject DialoguePrinter;
+
     public GameObject Player;
 
     public AudioSource audioSource;
@@ -41,6 +43,8 @@ public class GameMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        saveAndLoad.LoadPlayerTwice();
+
         GameIsPaused = false;
     }
 
@@ -50,6 +54,16 @@ public class GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        //if(DialoguePrinter.activeInHierarchy == true)
+        //{
+        //    Pause();
+        //}
+        //else
+        //{
+        //    Resume();
+        //}
 
         //audioSource.PlayOneShot(BGM);
         //Player = GameObject.FindGameObjectWithTag("Player");

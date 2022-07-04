@@ -6,10 +6,16 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
-    public GameObject DialogTrigger;
+    //public GameObject DialogTrigger;
 
 
     public float transitionTime = 1f;
+
+
+    private void Start()
+    {
+        Debug.Log(Application.persistentDataPath);
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,17 +24,17 @@ public class LevelLoader : MonoBehaviour
         //{
            // LoadNextLevel();
         //}
-        if(DialogTrigger != null)
-        {
-            if (DialogTrigger.activeInHierarchy == false)
-            {
-                LoadNextLevel();
-            }
-        }
-        else
-        {
-            Debug.Log("Dialog trigger not exist");
-        }
+        //if(DialogTrigger != null)
+        //{
+        //    if (DialogTrigger.activeInHierarchy == false)
+        //    {
+        //        LoadNextLevel();
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.Log("Dialog trigger not exist");
+        //}
 
 
     }

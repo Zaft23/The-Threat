@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7644527122466556230}
   - component: {fileID: 1622514456158765535}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 7323420678053356289}
   - component: {fileID: 7323420678053356288}
   - component: {fileID: 5486094667044604109}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Impact Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

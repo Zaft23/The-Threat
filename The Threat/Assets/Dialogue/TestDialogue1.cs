@@ -15,6 +15,8 @@ public class TestDialogue1 : MonoBehaviour
 
     void Start()
     {
+        
+
         var dialogTexts = new List<DialogData>();
 
         dialogTexts.Add(new DialogData("Hey, Soldier Welcome to the Prototype", "Reza"));
@@ -24,6 +26,8 @@ public class TestDialogue1 : MonoBehaviour
         dialogTexts.Add(new DialogData("Okay my friend", "Zaki"));
 
         DialogManager.Show(dialogTexts);
+
+        
     }
 
     // Update is called once per frame

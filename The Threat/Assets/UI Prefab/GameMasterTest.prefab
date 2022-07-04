@@ -50,9 +50,11 @@ MonoBehaviour:
   EscMenu: {fileID: 0}
   CrossHair: {fileID: 0}
   DeadUI: {fileID: 0}
+  DialoguePrinter: {fileID: 0}
   Player: {fileID: 0}
   audioSource: {fileID: 1081496662973330932}
   BGM: {fileID: 8300000, guid: 6aa94692d57e4a442885cfb520789981, type: 3}
+  GameIsPaused: 0
   DeadTimer: 2
   Timer: 0
 --- !u!114 &1081496662973330931

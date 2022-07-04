@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 
 public class Interactable : MonoBehaviour
@@ -12,21 +13,69 @@ public class Interactable : MonoBehaviour
     public bool IsDie;
     public bool IsTimed;
     public bool StartTime;
-    public float Time;
-    
+    public float IsTime;
+    public bool IsChangeScene;
+    public bool IsBoss;
+
 
     public KeyCode InteractKey;
+    public GameObject Object;
+
     public UnityEvent InteractionAction;
     public GameObject Dialogue;
+    //public GameObject Printer;
     public GameObject Die;
+    public GameObject Boss;
+    public GameObject InvisWall;
+    public GameObject Loader;
+    public LevelLoader LoaderScript;
+
 
 
     //if inrange show outline or particle
     //Timed Is Dependable on Passable
+    private void Start()
+    {
+        Loader = GameObject.FindGameObjectWithTag("LevelLoader");
+        LoaderScript = Loader.GetComponent<LevelLoader>();
+
+
+    }
+
+    public void ActiveateDialogue()
+    {
+        Object.SetActive(true);
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+
+        if(Boss == null && IsBoss)
+        {
+            InvisWall.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("no Boss");
+        }
+        //forgot what this for
+        //if(InvisWall.activeInHierarchy == true)
+        //{
+        //    Dialogue.SetActive(false);
+        //}
+
+        //if(Printer.activeInHierarchy == true)
+        //{
+        //    Time.timeScale = 0f;
+        //}
+        //if(Printer.activeInHierarchy == false)
+        //{
+        //    Time.timeScale = 1f;
+        //}
+
+
         if(IsInRange)
         {
             if(Input.GetKeyDown(InteractKey))
@@ -34,6 +83,13 @@ public class Interactable : MonoBehaviour
                 InteractionAction.Invoke();
             }
         }
+
+        if(IsInRange)
+        {
+            LoaderScript.LoadNextLevel();
+
+        }
+
 
         if(Die == null && IsDie == true)
         {
@@ -74,6 +130,12 @@ public class Interactable : MonoBehaviour
             IsInRange = true;
         }
 
+        //if (collision.gameObject.CompareTag("Player") && IsChangeScene == true)
+        //{
+        //    LoaderScript.LoadNextLevel();
+        //}
+
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -94,7 +156,7 @@ public class Interactable : MonoBehaviour
 
     public IEnumerator TimedDialog()
     {
-        yield return new WaitForSeconds(Time);
+        yield return new WaitForSeconds(IsTime);
         //_trailRenderer.emitting = false;
         ActivateObject();
         Passable = false;
@@ -102,7 +164,7 @@ public class Interactable : MonoBehaviour
     }
 
 
-
+  
 
 
 

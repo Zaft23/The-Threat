@@ -120,6 +120,11 @@ public class PlayerActions : MonoBehaviour
         if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
         //if (target.collider.gameObject.layer == LayerMask.NameToLayer("PickUp"))
         {
+
+
+
+
+
             if (newSlot.IsPrimary == true && _inventory.IWeapons[0] == null && PrimaryExist == false)
             {
                 //Debug.Log("1");
@@ -137,7 +142,6 @@ public class PlayerActions : MonoBehaviour
                 Destroy(target.transform.gameObject);
                 SecondaryExist = true;
             }
-
 
 
         }
@@ -229,7 +233,7 @@ public class PlayerActions : MonoBehaviour
         //try
         //if (Recoil != null)
         //{
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Fire1") && _manager.Arm1.activeInHierarchy == true)
             {
                 //Recoil.AddRecoil();
                 //Weapon currentWeapon = _inventory.GetItem(_manager.CurrentlyEquippedWeapon);

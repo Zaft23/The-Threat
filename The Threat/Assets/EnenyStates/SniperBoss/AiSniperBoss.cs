@@ -8,8 +8,7 @@ public class AiSniperBoss : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip AttackingSound;
-
-
+    public GameObject _player;
 
     //public Weapon Weapon;
     public GameObject Muzzle;
@@ -98,6 +97,8 @@ public class AiSniperBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
+
         //spawn here/location
         cooldownTimer = EngagementTime;
         Physics2D.IgnoreLayerCollision(6, 7);
@@ -133,6 +134,17 @@ public class AiSniperBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+ 
+
+        if (EnemyStats.IsBoss == true && _player.activeInHierarchy == false)
+        {
+            MoveSpeed = 4f;
+            //RateOfFire = 2;
+            //transform.position == FirstPos
+        }
+
+
         _currentState.Execute();
         LookAtTarget();
 
@@ -154,8 +166,8 @@ public class AiSniperBoss : MonoBehaviour
         {
 
             Debug.Log("Second Stage");
-            MoveSpeed = 10f;
-            RateOfFire = 1f;
+            MoveSpeed = 5f;
+            //RateOfFire = 1.5f;
             
             //longer
             //EngagementTime = ;
@@ -264,7 +276,7 @@ public class AiSniperBoss : MonoBehaviour
                 //MyAnimator.SetBool("isAttacking", false);
                 MyAnimator.SetBool("isAttacking2", true);
                 //MyAnimator.SetFloat("speed", 0);
-                MyAnimator.SetFloat("rateoffire", 3f);
+                MyAnimator.SetFloat("rateoffire", 1.5f);
 
                
                 //ReloadCountDown();

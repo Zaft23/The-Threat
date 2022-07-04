@@ -63,11 +63,14 @@ public class EnemyStats : MonoBehaviour
     }
 
     [SerializeField]
-    private float timer = 60;
+    private float timer = 0;
 
     // Update is called once per frame
     void Update()
     {
+
+
+    
 
         if(_player.activeInHierarchy == false)
         {
@@ -86,13 +89,13 @@ public class EnemyStats : MonoBehaviour
             EnemyHealth = _enemyMaxHealth;
         }
 
-        RandomPercent = Random.Range(0, 100);
+        
 
 
         if (IsBoss == true)
         {
             timer += Time.deltaTime;
-            if (timer >= 60f)
+            if (timer >= 40f)
             {
                 //_canHeal = true; spawn shit
 
@@ -122,8 +125,14 @@ public class EnemyStats : MonoBehaviour
             _currentHealth = EnemyHealth;
             //do animation
 
+            if(EnemyHealth <= 1)
+            {
+            DropSupply();
+            }
+
             if (EnemyHealth <= 0)
             {
+                //DropSupply();
                 Debug.Log("enemy die");
                 //do animation
 
@@ -154,7 +163,7 @@ public class EnemyStats : MonoBehaviour
 
                 if (_currentHealth <= 0)
                 {
-
+                
                     Die();
                 }
 
@@ -175,56 +184,67 @@ public class EnemyStats : MonoBehaviour
 
     public void DropSupply()
     {
+        RandomPercent = Random.Range(0, 100);
         GameObject gun;
 
-        if(DropWeapon == true)
-        {
+        GameObject ammo = Instantiate(Supply, transform.position, Quaternion.identity);
+        //ammo.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+
+ 
             if (RandomPercent >= 0 && RandomPercent <= 5)
             {
                 gun = Instantiate(FiftyCalSniper, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                //gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                DropWeapon = false;
             }
             else if (RandomPercent >= 6 && RandomPercent <= 20)
             {
                 gun = Instantiate(Ak47, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                //gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                DropWeapon = false;
             }
             else if (RandomPercent >= 21 && RandomPercent <= 30)
             {
                 gun = Instantiate(AutoShotgun, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                //gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                DropWeapon = false;
             }
             else if (RandomPercent >= 31 && RandomPercent <= 50)
             {
                 gun = Instantiate(BerettaM9, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                //gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                DropWeapon = false;
             }
             else if (RandomPercent >= 51 && RandomPercent <= 60)
             {
                 gun = Instantiate(HuntingRifle, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                //gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+                DropWeapon = false;
 
             }
             else if (RandomPercent >= 61 && RandomPercent <= 75)
             {
                 gun = Instantiate(M4A1, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+            //gun.GetComponent<Rigidbody2D>().velocity = transform.position;
+                DropWeapon = false;
 
             }
             else if (RandomPercent >= 76 && RandomPercent <= 90)
             {
                 gun = Instantiate(PumpShotgun, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+            //gun.GetComponent<Rigidbody2D>().velocity = transform.position;
+                DropWeapon = false;
 
             }
             else if (RandomPercent >= 91 && RandomPercent <= 100)
             {
                 gun = Instantiate(Uzi, transform.position, Quaternion.identity);
-                gun.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+            //gun.GetComponent<Rigidbody2D>().velocity = transform.position;
+                DropWeapon = false;
 
             }
 
-        }
+        
         else
         {
             Debug.Log("Enemy does not drop weapon");
@@ -233,8 +253,7 @@ public class EnemyStats : MonoBehaviour
 
 
 
-        GameObject ammo = Instantiate(Supply, transform.position, Quaternion.identity);
-        ammo.GetComponent<Rigidbody2D>().velocity = transform.position * force;
+        
 
         //GameObject ammo2 = Instantiate(Supply, transform.position, Quaternion.identity);
         //ammo2.GetComponent<Rigidbody2D>().velocity = transform.position * force;
@@ -246,8 +265,8 @@ public class EnemyStats : MonoBehaviour
 
     void Die()
     {
-        DropSupply();
-
+        //DropSupply();
+        
 
         GameObject blood= Instantiate(Blood, transform.position, Quaternion.identity);
         Destroy(blood, 5f);
