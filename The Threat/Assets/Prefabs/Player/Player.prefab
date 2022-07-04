@@ -422,9 +422,9 @@ MonoBehaviour:
   maxLevel: 20
   currentXp: 0
   nextLevelXp: 100
-  additionMultiplier: 128
-  powerMultiplier: 3.15
-  divisionMultiplier: 10.19
+  additionMultiplier: 300
+  powerMultiplier: 2
+  divisionMultiplier: 7
   levelUpEffect: {fileID: 0}
   frontXpBar: {fileID: 0}
   backXpBar: {fileID: 0}
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f230cbb7246b3b742863ee5e479fc1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentlyEquippedWeapon: 0
+  CurrentlyEquippedWeapon: 1
   CurrentlEquippedWeaponType: 0
   CurrentWeaponObject: {fileID: 0}
   Arm1: {fileID: 3414017805086841734}

@@ -283,7 +283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3482370379806253216
 Transform:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.079257965, y: -0.047554493}
+  m_Offset: {x: 4.45333, y: 0.032449245}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -398,7 +398,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.602356, y: 2.1168528}
+  m_Size: {x: 10.3505, y: 2.2768602}
   m_EdgeRadius: 0
 --- !u!50 &3482370379806253231
 Rigidbody2D:
@@ -488,8 +488,8 @@ MonoBehaviour:
   RateOfFire: 2
   EngagementTime: 7
   ReloadingTime: 3
-  Bullet: {fileID: 3295582376259988921, guid: 9a0237b9a5b35bd499dc9a9f89b5b140, type: 3}
-  Bullet2: {fileID: 3295582376259988921, guid: f663fc43c3382bf4183675276bd521b6, type: 3}
+  Bullet: {fileID: 3295582376259988921, guid: 07273c89d284fe244a57ae79ef48c55c, type: 3}
+  Bullet2: {fileID: 3295582376259988921, guid: 5c06e8c0ef3f8bb41b6be9ce170bbda3, type: 3}
   BulletSpeed: 0
   Target: {fileID: 0}
   Sight: {fileID: 3482370379056521670}

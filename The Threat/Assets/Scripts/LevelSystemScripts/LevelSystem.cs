@@ -17,9 +17,9 @@ public class LevelSystem : MonoBehaviour
     public int nextLevelXp = 100;
     [Header("Multipliers")]
     [Range(1f, 300f)]
-    public float additionMultiplier;
+    public float additionMultiplier = 300;
     [Range(2f, 4f)]
-    public float powerMultiplier = 20f;
+    public float powerMultiplier = 2f;
     [Range(7f, 14f)]
     public float divisionMultiplier = 7f;
     public GameObject levelUpEffect;

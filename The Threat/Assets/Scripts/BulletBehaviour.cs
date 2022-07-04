@@ -40,7 +40,7 @@ public class BulletBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         GameObject effect = Instantiate(Impact, transform.position, Quaternion.identity);
-        Destroy(effect, 5f);
+        Destroy(effect, 0.5f);
 
         //effect
         //GameObject bullet = Weapon.BulletPrefab;
@@ -58,7 +58,7 @@ public class BulletBehaviour : MonoBehaviour
             enemy.TakeDamage(Weapon.Damage + playerStats.BaseDamage);
 
 
-
+            Destroy(gameObject);
         }
 
 
@@ -82,7 +82,7 @@ public class BulletBehaviour : MonoBehaviour
                 Debug.Log("taiiiiiiiiiiiiiii");
             }
 
-
+            Destroy(gameObject);
 
         }
         Destroy(gameObject);

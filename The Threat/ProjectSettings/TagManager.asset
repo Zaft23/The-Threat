@@ -19,6 +19,7 @@ TagManager:
   - UpgradeManager
   - GameMaster
   - CrossHair
+  - Outside
   layers:
   - Default
   - TransparentFX

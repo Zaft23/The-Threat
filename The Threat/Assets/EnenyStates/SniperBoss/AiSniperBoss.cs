@@ -89,8 +89,9 @@ public class AiSniperBoss : MonoBehaviour
         //transform.position = _waypoints[rand].transform.position;
         //WPintIndex.transform.position = _waypoints[rand].transform.position;
         //rand = Random.Range(1, 3);
-        RandomWayPoint = Random.Range(0, 3);
-        
+        //RandomWayPoint = Random.Range(0, 3);
+        //RandomWayPoint = 0;
+
     }
 
 
@@ -113,7 +114,7 @@ public class AiSniperBoss : MonoBehaviour
 
         //transform.position = _waypoints[rand.transform.position;
         //transform.position = _waypoints[1];
-        transform.position = Waypoints[WaypointIndex].transform.position;
+        transform.position = Waypoints[0].transform.position;
         //WPintIndex.transform.position = _waypoints[rand].transform.position;
         ChangeNumber = false;
         

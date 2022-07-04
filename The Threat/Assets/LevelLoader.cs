@@ -6,16 +6,31 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
+    public GameObject DialogTrigger;
+
 
     public float transitionTime = 1f;
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        //if(Input.GetMouseButtonDown(0))
+        //{
+           // LoadNextLevel();
+        //}
+        if(DialogTrigger != null)
         {
-            LoadNextLevel();
+            if (DialogTrigger.activeInHierarchy == false)
+            {
+                LoadNextLevel();
+            }
         }
+        else
+        {
+            Debug.Log("Dialog trigger not exist");
+        }
+
+
     }
 
     public void LoadNextLevel()

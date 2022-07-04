@@ -112,7 +112,7 @@ Animator:
   m_GameObject: {fileID: 102507250607647226}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 61de8af506957e044ae4536b803c45ff, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6600b28882c14ff499a896a6f16314db, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -227,7 +227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &102507251921139041
 Transform:
   m_ObjectHideFlags: 0
@@ -257,4 +257,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 102507250607647228}
+  DialogTrigger: {fileID: 0}
   transitionTime: 1

@@ -550,7 +550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The THreat
+  m_text: The Threat
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 22ddeff9c3072804abe600638aa61b6d, type: 2}
   m_sharedMaterial: {fileID: 3162497534594318467, guid: 22ddeff9c3072804abe600638aa61b6d, type: 2}
