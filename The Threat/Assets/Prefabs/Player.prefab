@@ -165,7 +165,7 @@ MonoBehaviour:
   TrailRenderer: {fileID: 0}
   FallMupltiplier: 2.5
   LowJumpMultiplier: 2
-  JumpForce: 20
+  JumpForce: 15
   _fJumpPressedRememberTime: 0.1
   _fJumpPressedRemember: 0
   _coyoteRemember: 0

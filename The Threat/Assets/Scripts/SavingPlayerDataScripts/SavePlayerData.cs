@@ -18,6 +18,14 @@ public static class SavePlayerData
 
     }
 
+    public static void DeleteSave()
+    {
+        string path = Application.persistentDataPath + "/Player.txt";
+        File.Delete(path);
+        
+    }
+
+
     public static PlayerData LoadPlayer()
     {
         string path = Application.persistentDataPath + "/Player.txt";

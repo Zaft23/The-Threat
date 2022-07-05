@@ -35,6 +35,8 @@ public class GameMaster : MonoBehaviour
     public static float Exp;
 
     public bool IsNotGameScene;
+    public bool PlayerDead;
+
 
     private void Awake()
     {
@@ -50,7 +52,7 @@ public class GameMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        PlayerDead = false;
         
         GameIsPaused = false;
     }
@@ -94,6 +96,8 @@ public class GameMaster : MonoBehaviour
 
         if (Player.activeInHierarchy == false && IsNotGameScene == false)
         {
+            PlayerDead = true;
+
             Timer += Time.deltaTime;
             if(Timer >= DeadTimer)
             {
@@ -110,28 +114,21 @@ public class GameMaster : MonoBehaviour
             Debug.Log("not game scene");
         }
 
-        if(Player.activeInHierarchy == true)
+        if(Player.activeInHierarchy == true && PlayerDead == true)
         {
+            PlayerDead = false;
 
             Time.timeScale = 1f;
             DeadUI.SetActive(false);
             CrossHair.SetActive(true);
             //Cursor.visible = false;
-            Resume();
+            //Resume();
             Timer = 0;
 
         }
 
 
-        if(UpgradeMenu.activeInHierarchy == true)
-        {
-            Pause();
-
-        }
-        else if(UpgradeMenu.activeInHierarchy == false)
-        {
-            Resume();
-        }
+    
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -143,14 +140,26 @@ public class GameMaster : MonoBehaviour
 
         }
 
-        if (GameIsPaused == false)
-        {
-           CrossHair.SetActive(true);
-        }
-        else if(GameIsPaused == true)
-        {
-            CrossHair.SetActive(false);
-        }
+        //if (UpgradeMenu.activeInHierarchy == true)
+        //{
+        //    Pause();
+        //    //CrossHair.SetActive(false);
+
+        //}
+        //else if (UpgradeMenu.activeInHierarchy == false)
+        //{
+        //    Resume();
+        //    //CrossHair.SetActive(true);
+        //}
+
+        //if (GameIsPaused == false)
+        //{
+        //   CrossHair.SetActive(true);
+        //}
+        //else if(GameIsPaused == true)
+        //{
+        //    CrossHair.SetActive(false);
+        //}
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -160,13 +169,15 @@ public class GameMaster : MonoBehaviour
 
         }
 
-        if(EscMenu.activeInHierarchy == true)
+        if(EscMenu.activeInHierarchy == true || UpgradeMenu.activeInHierarchy == true)
         {
             Pause();
+            CrossHair.SetActive(false);
         }
-        else if(EscMenu.activeInHierarchy == false)
+        else if(EscMenu.activeInHierarchy == false || UpgradeMenu.activeInHierarchy == false)
         {
             Resume();
+            CrossHair.SetActive(true);
         }
 
 
@@ -206,7 +217,7 @@ public class GameMaster : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         Cursor.visible = true;
-
+        CrossHair.SetActive(false);
     }
 
     public void Resume()
@@ -214,7 +225,7 @@ public class GameMaster : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.visible = false;
-
+        CrossHair.SetActive(true);
 
     }
 

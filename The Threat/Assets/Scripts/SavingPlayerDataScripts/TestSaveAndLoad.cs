@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class TestSaveAndLoad : MonoBehaviour
 {
@@ -45,6 +47,12 @@ public class TestSaveAndLoad : MonoBehaviour
     {
         LoadPlayerComplete();
         LoadPlayerComplete();
+    }
+
+    public static void DeleteSave()
+    {
+        string path = Application.persistentDataPath + "/Player.txt";
+        File.Delete(path);
     }
 
     public void LoadPlayer()

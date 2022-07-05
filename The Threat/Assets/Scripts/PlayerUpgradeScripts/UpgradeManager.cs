@@ -70,13 +70,13 @@ public class UpgradeManager : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            Debug.Log("please begone");
-            DeleteJson();
+        //if(Input.GetKeyDown(KeyCode.K))
+        //{
+        //    Debug.Log("please begone");
+        //    DeleteJson();
 
 
-        }
+        //}
 
 
     }
@@ -384,7 +384,7 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    private void DeleteJson()
+    public void DeleteJson()
     {
         string json = JsonUtility.ToJson(unlockableMatrix);
         File.Delete(Application.persistentDataPath + "/UnlockMatrix.json");
