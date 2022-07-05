@@ -59,49 +59,71 @@ public class TestSaveAndLoad : MonoBehaviour
     {
         PlayerData data = SavePlayerData.LoadPlayer();
 
-        playerStats.Health = data.Health;
-        playerStats.SkillPoint = data.SkillPoints;
-        playerLevel.Level = data.Level;
-        playerLevel.currentXp = data.Exp;
-        playerLevel.nextLevelXp = data.NextLevelExp;
+        string path = Application.persistentDataPath + "/Player.txt";
+        if (File.Exists(path))
+        {
+            playerStats.Health = data.Health;
+            playerStats.SkillPoint = data.SkillPoints;
+            playerLevel.Level = data.Level;
+            playerLevel.currentXp = data.Exp;
+            playerLevel.nextLevelXp = data.NextLevelExp;
 
-        playerStats.MaxHealth = data.MaxHP;
-        playerStats.BaseDamage = data.Damage;
-        playerStats.BaseSpeed = data.Speed;
-        actions.StoredRifleAmmo = data.RifleAmmo;
-        actions.StoredSmgAmmo = data.SMGAmmo;
-        actions.StoredShotgunAmmo = data.ShotgunAmmo;
-        actions.StoredSniperAmmo = data.SniperAmmo;
+            playerStats.MaxHealth = data.MaxHP;
+            playerStats.BaseDamage = data.Damage;
+            playerStats.BaseSpeed = data.Speed;
+            actions.StoredRifleAmmo = data.RifleAmmo;
+            actions.StoredSmgAmmo = data.SMGAmmo;
+            actions.StoredShotgunAmmo = data.ShotgunAmmo;
+            actions.StoredSniperAmmo = data.SniperAmmo;
+        }
+        else
+        {
+            Debug.LogError("Data Save File Not Found in" + path);
+            //return null;
+        }
+       
     }
 
     public void LoadPlayerComplete()
     {
         PlayerData data = SavePlayerData.LoadPlayer();
 
-        playerStats.Health = data.Health;
-        playerStats.SkillPoint = data.SkillPoints;
-        playerLevel.Level = data.Level;
-        playerLevel.currentXp = data.Exp;
-        playerLevel.nextLevelXp = data.NextLevelExp;
+        string path = Application.persistentDataPath + "/Player.txt";
+        if (File.Exists(path))
+        {
+            playerStats.Health = data.Health;
+            playerStats.SkillPoint = data.SkillPoints;
+            playerLevel.Level = data.Level;
+            playerLevel.currentXp = data.Exp;
+            playerLevel.nextLevelXp = data.NextLevelExp;
 
-        playerStats.MaxHealth = data.MaxHP;
-        playerStats.BaseDamage = data.Damage;
-        playerStats.BaseSpeed = data.Speed;
-        actions.StoredRifleAmmo = data.RifleAmmo;
-        actions.StoredSmgAmmo = data.SMGAmmo;
-        actions.StoredShotgunAmmo = data.ShotgunAmmo;
-        actions.StoredSniperAmmo = data.SniperAmmo;
+            playerStats.MaxHealth = data.MaxHP;
+            playerStats.BaseDamage = data.Damage;
+            playerStats.BaseSpeed = data.Speed;
+            actions.StoredRifleAmmo = data.RifleAmmo;
+            actions.StoredSmgAmmo = data.SMGAmmo;
+            actions.StoredShotgunAmmo = data.ShotgunAmmo;
+            actions.StoredSniperAmmo = data.SniperAmmo;
 
 
 
-        Vector3 Pos;
-        Pos = playerPos.transform.position;
-        Debug.Log("LOADDDDD");
-        //Vector3 position;
-        Pos.x = data.XPosition;
-        Pos.y = data.YPosition;
-        Pos.z = data.ZPosition;
-        playerPos.transform.position = Pos;
+            Vector3 Pos;
+            Pos = playerPos.transform.position;
+            Debug.Log("LOADDDDD");
+            //Vector3 position;
+            Pos.x = data.XPosition;
+            Pos.y = data.YPosition;
+            Pos.z = data.ZPosition;
+            playerPos.transform.position = Pos;
+
+        }
+        else
+        {
+            Debug.LogError("Data Save File Not Found in" + path);
+            //return null;
+        }
+       
+            
 
         //
         //inventory.IWeapons[0] = data.weapon1;
@@ -120,32 +142,41 @@ public class TestSaveAndLoad : MonoBehaviour
 
         PlayerData data = SavePlayerData.LoadPlayer();
 
-        playerStats.Health = data.Health;
-        playerStats.SkillPoint = data.SkillPoints;
-        playerLevel.Level = data.Level;
-        playerLevel.currentXp = data.Exp;
-        playerLevel.nextLevelXp = data.NextLevelExp;
-
-        playerStats.MaxHealth = data.MaxHP;
-        playerStats.BaseDamage = data.Damage;
-        playerStats.BaseSpeed = data.Speed;
-        actions.StoredRifleAmmo = data.RifleAmmo;
-        actions.StoredSmgAmmo = data.SMGAmmo;
-        actions.StoredShotgunAmmo = data.ShotgunAmmo;
-        actions.StoredSniperAmmo = data.SniperAmmo;
+        string path = Application.persistentDataPath + "/Player.txt";
+        if (File.Exists(path))
+        {
 
 
+            playerStats.Health = data.Health;
+            playerStats.SkillPoint = data.SkillPoints;
+            playerLevel.Level = data.Level;
+            playerLevel.currentXp = data.Exp;
+            playerLevel.nextLevelXp = data.NextLevelExp;
 
-        Vector3 Pos;
-        Pos = playerPos.transform.position;
-        Debug.Log("LOADDDDD");
-        //Vector3 position;
-        Pos.x = data.XPosition;
-        Pos.y = data.YPosition;
-        Pos.z = data.ZPosition;
-        playerPos.transform.position = Pos;
+            playerStats.MaxHealth = data.MaxHP;
+            playerStats.BaseDamage = data.Damage;
+            playerStats.BaseSpeed = data.Speed;
+            actions.StoredRifleAmmo = data.RifleAmmo;
+            actions.StoredSmgAmmo = data.SMGAmmo;
+            actions.StoredShotgunAmmo = data.ShotgunAmmo;
+            actions.StoredSniperAmmo = data.SniperAmmo;
 
 
+
+            Vector3 Pos;
+            Pos = playerPos.transform.position;
+            Debug.Log("LOADDDDD");
+            //Vector3 position;
+            Pos.x = data.XPosition;
+            Pos.y = data.YPosition;
+            Pos.z = data.ZPosition;
+            playerPos.transform.position = Pos;
+        }
+        else
+        {
+            Debug.LogError("Data Save File Not Found in" + path);
+            //return null;
+        }
 
         //inventory.IWeapons[0] = data.weapon1;
         //inventory.IWeapons[1] = data.weapon2;
@@ -173,17 +204,28 @@ public class TestSaveAndLoad : MonoBehaviour
 
     public void LoadPosition()
     {
+        string path = Application.persistentDataPath + "/Player.txt";
+        if (File.Exists(path))
+        {
+            PlayerData data = SavePlayerData.LoadPlayer();
 
-        PlayerData data = SavePlayerData.LoadPlayer();
+            Vector3 Pos;
+            Pos = playerPos.transform.position;
+            Debug.Log("LOADDDDD");
+            //Vector3 position;
+            Pos.x = data.XPosition;
+            Pos.y = data.YPosition;
+            Pos.z = data.ZPosition;
+            playerPos.transform.position = Pos;
 
-        Vector3 Pos;
-        Pos = playerPos.transform.position;
-        Debug.Log("LOADDDDD");
-        //Vector3 position;
-        Pos.x = data.XPosition;
-        Pos.y = data.YPosition;
-        Pos.z = data.ZPosition;
-        playerPos.transform.position = Pos;
+        }
+
+        else
+        {
+            Debug.LogError("Data Save File Not Found in" + path);
+            //return null;
+        }
+
     }
 
 

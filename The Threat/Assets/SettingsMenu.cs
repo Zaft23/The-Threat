@@ -10,6 +10,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private int sceneToContinue;
     public AudioMixer audioMixer;
     public GameObject AudioSetting;
+    public GameObject ControlMenu;
     public bool GameStart;
     [SerializeField] TestSaveAndLoad saveAndLoad;
 
@@ -74,6 +75,16 @@ public class SettingsMenu : MonoBehaviour
     public void ToggleOffAudioSetting()
     {
         AudioSetting.SetActive(false);
+    }
+
+    public void ToggleOnControl()
+    {
+        ControlMenu.SetActive(true);
+    }
+
+    public void ToggleOffControl()
+    {
+        ControlMenu.SetActive(false);
     }
 
     public void ExitGame()
