@@ -43,11 +43,30 @@ public class TestSaveAndLoad : MonoBehaviour
 
     public void LoadPlayerTwice()
     {
-        LoadPlayer();
-        LoadPlayer();
+        LoadPlayerComplete();
+        LoadPlayerComplete();
     }
 
     public void LoadPlayer()
+    {
+        PlayerData data = SavePlayerData.LoadPlayer();
+
+        playerStats.Health = data.Health;
+        playerStats.SkillPoint = data.SkillPoints;
+        playerLevel.Level = data.Level;
+        playerLevel.currentXp = data.Exp;
+        playerLevel.nextLevelXp = data.NextLevelExp;
+
+        playerStats.MaxHealth = data.MaxHP;
+        playerStats.BaseDamage = data.Damage;
+        playerStats.BaseSpeed = data.Speed;
+        actions.StoredRifleAmmo = data.RifleAmmo;
+        actions.StoredSmgAmmo = data.SMGAmmo;
+        actions.StoredShotgunAmmo = data.ShotgunAmmo;
+        actions.StoredSniperAmmo = data.SniperAmmo;
+    }
+
+    public void LoadPlayerComplete()
     {
         PlayerData data = SavePlayerData.LoadPlayer();
 

@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour
     public GameObject EscMenu;
     public GameObject CrossHair;
     public GameObject DeadUI;
-    TestSaveAndLoad saveAndLoad;
+    [SerializeField]TestSaveAndLoad saveAndLoad;
 
     public GameObject DialoguePrinter;
 
@@ -26,6 +26,8 @@ public class GameMaster : MonoBehaviour
     //public static bool GameIsPaused = false;
     public bool GameIsPaused = false;
 
+    public bool GameStart;
+
     [SerializeField]
 
     public static int SkillPoints;
@@ -36,15 +38,18 @@ public class GameMaster : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         saveAndLoad = GetComponent<TestSaveAndLoad>();
-        audioSource.PlayOneShot(BGM);
-    }
+        GameStart = true;
 
+
+
+    audioSource.PlayOneShot(BGM);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        saveAndLoad.LoadPlayerTwice();
 
+        
         GameIsPaused = false;
     }
 
@@ -54,8 +59,13 @@ public class GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        
+        if(GameStart == true)
+        {
+            saveAndLoad.LoadPlayer();
+            GameStart = false;
+        }
+        
         //if(DialoguePrinter.activeInHierarchy == true)
         //{
         //    Pause();
@@ -71,6 +81,7 @@ public class GameMaster : MonoBehaviour
         {
             Time.timeScale = 0f;
             Cursor.visible = true;
+            
         }
         if (GameIsPaused == false)
         {
@@ -88,6 +99,7 @@ public class GameMaster : MonoBehaviour
                 Time.timeScale = 0f;
                 DeadUI.SetActive(true);
                 Cursor.visible = true;
+
             }
         
         }
@@ -98,27 +110,29 @@ public class GameMaster : MonoBehaviour
             Time.timeScale = 1f;
             DeadUI.SetActive(false);
             CrossHair.SetActive(true);
-            Cursor.visible = false;
+            //Cursor.visible = false;
+            Resume();
             Timer = 0;
 
         }
 
 
+        if(UpgradeMenu.activeInHierarchy == true)
+        {
+            Pause();
 
-
+        }
+        else if(UpgradeMenu.activeInHierarchy == false)
+        {
+            Resume();
+        }
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            Cursor.visible = true;
+           
+            //Cursor.visible = true;
             UpgradeMenuToggle();
-            if(GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+          
             
 
         }
@@ -136,17 +150,19 @@ public class GameMaster : MonoBehaviour
         {
             //Cursor.visible = true;
             EscapeMenuToggle();
-            if (GameIsPaused == true)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
 
 
         }
+
+        if(EscMenu.activeInHierarchy == true)
+        {
+            Pause();
+        }
+        else if(EscMenu.activeInHierarchy == false)
+        {
+            Resume();
+        }
+
 
 
     }
@@ -183,7 +199,8 @@ public class GameMaster : MonoBehaviour
     {
         Time.timeScale = 0f;
         GameIsPaused = true;
-        
+        Cursor.visible = true;
+
     }
 
     public void Resume()
@@ -191,6 +208,7 @@ public class GameMaster : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.visible = false;
+
 
     }
 
