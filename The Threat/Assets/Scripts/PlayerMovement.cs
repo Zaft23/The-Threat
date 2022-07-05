@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class PlayerMovement : MonoBehaviour
 {
     public AudioSource audioSource;
@@ -131,7 +130,14 @@ public class PlayerMovement : MonoBehaviour
 
         #region
         var dashInput = Input.GetButtonDown("Dash");
-        float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
+
+
+        float eulerAngY = transform.eulerAngles.y;
+
+        
+
+
+
         //if(Actions.)
         //
         //else if(eulerAngY == -180 && Input.GetKeyDown(KeyCode.D))

@@ -5,6 +5,7 @@ using System;
 using TMPro;
 using UnityEngine.UI;
 
+
 public class Player : MonoBehaviour
 {
     #region
@@ -148,8 +149,9 @@ public class Player : MonoBehaviour
 
         //
 
-        #region
-        float eulerAngY = UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).y;
+
+        float eulerAngY = transform.eulerAngles.y;
+
 
         if (Input.GetKeyDown(KeyCode.D) && eulerAngY == 0)
         {
@@ -208,7 +210,7 @@ public class Player : MonoBehaviour
         //{
         //ChangeDirection();
         //}
-        #endregion
+        
 
     }
 

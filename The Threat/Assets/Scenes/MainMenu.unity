@@ -400,6 +400,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 667854693}
+  - {fileID: 919103261}
   - {fileID: 1245311112}
   - {fileID: 524908709}
   m_Father: {fileID: 1266777109}
@@ -578,7 +579,7 @@ RectTransform:
   m_Children:
   - {fileID: 330909938}
   m_Father: {fileID: 315671371}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -843,8 +844,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 919103261}
+  m_Children: []
   m_Father: {fileID: 315671371}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1498,7 +1498,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919103260}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1506,12 +1506,12 @@ RectTransform:
   - {fileID: 891595642}
   - {fileID: 1453342429}
   - {fileID: 121673205}
-  m_Father: {fileID: 667854693}
-  m_RootOrder: 0
+  m_Father: {fileID: 315671371}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.6614, y: -30.994404}
+  m_AnchoredPosition: {x: 255.28592, y: 63.99586}
   m_SizeDelta: {x: 1076.9932, y: 81.9888}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &919103262
@@ -2043,7 +2043,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 315671371}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2398,6 +2398,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6716203611312775382, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6823328516238062585, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2416,19 +2420,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6917305346871582869, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6917305346871582869, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6917305346871582869, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6917305346871582869, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -410
       objectReference: {fileID: 0}
     - target: {fileID: 7194170310953126043, guid: 0ab91b4a9b9c7d64a908f00ad9a4bea8, type: 3}
       propertyPath: m_Name
@@ -3316,7 +3320,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1bdd9245b85e5d341a5065aac5ce256b, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6879543da4535e242ad1fec7b7ec8df6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3607,10 +3611,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A\t\t: Move Left\nD\t\t: Move Right\nSpace\t: Jump\r\nLeft Click\t: Fire
-    Weapon\nE \t\t: Melee\r\n1 \t\t: Change primary weapon\r\n2 \t\t:  Change Secondary
-    weapon\r\n3 \t\t: Holster\r\nG \t\t: Throw Weapon\r\nF \t\t: Interact\r\nU \t\t:
-    Upgrade Menu\r\nEsc \t\t: Open/Close Menu\n"
+  m_text: "A\t\t: Move Left\nD\t\t: Move Right\nShift\t\t: Dash\nSpace\t: Jump\r\nLeft
+    Click\t: Fire Weapon\nE \t\t: Melee\r\n1 \t\t: Change primary weapon\r\n2 \t\t: 
+    Change Secondary weapon\r\n3 \t\t: Holster\r\nG \t\t: Throw Weapon\r\nF \t\t:
+    Interact\r\nU \t\t: Upgrade Menu\r\nEsc \t\t: Open/Close Menu\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 17d3e01ef14a80041b78de8f7b729cc7, type: 2}
   m_sharedMaterial: {fileID: 4434605584602674254, guid: 17d3e01ef14a80041b78de8f7b729cc7, type: 2}
