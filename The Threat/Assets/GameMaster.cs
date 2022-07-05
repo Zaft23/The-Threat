@@ -34,6 +34,8 @@ public class GameMaster : MonoBehaviour
     public static int Level;
     public static float Exp;
 
+    public bool IsNotGameScene;
+
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -60,7 +62,7 @@ public class GameMaster : MonoBehaviour
     void Update()
     {
         
-        if(GameStart == true)
+        if(GameStart == true && IsNotGameScene == false)
         {
             saveAndLoad.LoadPlayer();
             GameStart = false;
@@ -90,7 +92,7 @@ public class GameMaster : MonoBehaviour
         }
 
 
-        if (Player.activeInHierarchy == false)
+        if (Player.activeInHierarchy == false && IsNotGameScene == false)
         {
             Timer += Time.deltaTime;
             if(Timer >= DeadTimer)
@@ -102,6 +104,10 @@ public class GameMaster : MonoBehaviour
 
             }
         
+        }
+        else if(Player == null)
+        {
+            Debug.Log("not game scene");
         }
 
         if(Player.activeInHierarchy == true)
