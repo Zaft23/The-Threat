@@ -230,15 +230,15 @@ public class PlayerMovement : MonoBehaviour
         // Jump Physics
         IsGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radOCircle, _whatIsGround);
 
-        _coyoteRemember -= Time.deltaTime;
-        if (IsGrounded)
-        {
-            _coyoteRemember = _coyoteRememberTime;
-        }
+        //_coyoteRemember -= Time.deltaTime;
+        //if (IsGrounded)
+        //{
+        //    _coyoteRemember = _coyoteRememberTime;
+        //}
 
 
         //better code
-        _fJumpPressedRemember -= Time.deltaTime;
+        //_fJumpPressedRemember -= Time.deltaTime;
         //if (Input.GetButtonDown("Jump"))
         //{
         //    _fJumpPressedRemember = _fJumpPressedRememberTime;
@@ -247,21 +247,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded)
         {
-            audioSource.PlayOneShot(DashSound);
+            //audioSource.PlayOneShot(DashSound);
             audioSource.volume = 0.5f;
-            _fJumpPressedRemember = _fJumpPressedRememberTime;
+            //_fJumpPressedRemember = _fJumpPressedRememberTime;
             rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
             Debug.Log("Jump2");
         }
 
         //Allow player to jump a few cm off from ground after jump
-        if ((_fJumpPressedRemember > 0) && (_coyoteRemember > 0))
-        {
-           _fJumpPressedRemember = 0;
-            _coyoteRemember = 0;
-            rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
+        //if ((_fJumpPressedRemember > 0) && (_coyoteRemember > 0))
+        //{
+        //   _fJumpPressedRemember = 0;
+        //    _coyoteRemember = 0;
+        //    rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
 
-        }
+        //}
 
         if (rb2D.velocity.y < 0)
         {

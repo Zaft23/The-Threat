@@ -130,10 +130,10 @@ public class Interactable : MonoBehaviour
             IsInRange = true;
         }
 
-        //if (collision.gameObject.CompareTag("Player") && IsChangeScene == true)
-        //{
-        //    LoaderScript.LoadNextLevel();
-        //}
+        if (collision.gameObject.CompareTag("Player") && IsChangeScene == true)
+        {
+            LoaderScript.LoadNextLevel();
+        }
 
 
     }

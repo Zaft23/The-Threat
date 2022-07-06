@@ -59,9 +59,9 @@ public class TestSaveAndLoad : MonoBehaviour
     {
         PlayerData data = SavePlayerData.LoadPlayer();
 
-        string path = Application.persistentDataPath + "/Player.txt";
-        if (File.Exists(path))
-        {
+        //string path = Application.persistentDataPath + "/Player.txt";
+        //if (File.Exists(path))
+        //{
             playerStats.Health = data.Health;
             playerStats.SkillPoint = data.SkillPoints;
             playerLevel.Level = data.Level;
@@ -75,12 +75,12 @@ public class TestSaveAndLoad : MonoBehaviour
             actions.StoredSmgAmmo = data.SMGAmmo;
             actions.StoredShotgunAmmo = data.ShotgunAmmo;
             actions.StoredSniperAmmo = data.SniperAmmo;
-        }
-        else
-        {
-            Debug.LogError("Data Save File Not Found in" + path);
+        //}
+        //else
+        //{
+            //Debug.LogError("Data Save File Not Found in" + path);
             //return null;
-        }
+        //}
        
     }
 
@@ -88,9 +88,9 @@ public class TestSaveAndLoad : MonoBehaviour
     {
         PlayerData data = SavePlayerData.LoadPlayer();
 
-        string path = Application.persistentDataPath + "/Player.txt";
-        if (File.Exists(path))
-        {
+        //string path = Application.persistentDataPath + "/Player.txt";
+        //if (File.Exists(path))
+        //{
             playerStats.Health = data.Health;
             playerStats.SkillPoint = data.SkillPoints;
             playerLevel.Level = data.Level;
@@ -116,12 +116,12 @@ public class TestSaveAndLoad : MonoBehaviour
             Pos.z = data.ZPosition;
             playerPos.transform.position = Pos;
 
-        }
-        else
-        {
-            Debug.LogError("Data Save File Not Found in" + path);
+        //}
+        //else
+        //{
+            //Debug.LogError("Data Save File Not Found in" + path);
             //return null;
-        }
+        //}
        
             
 
@@ -142,9 +142,9 @@ public class TestSaveAndLoad : MonoBehaviour
 
         PlayerData data = SavePlayerData.LoadPlayer();
 
-        string path = Application.persistentDataPath + "/Player.txt";
-        if (File.Exists(path))
-        {
+        //string path = Application.persistentDataPath + "/Player.txt";
+        //if (File.Exists(path))
+        //{
 
 
             playerStats.Health = data.Health;
@@ -171,12 +171,12 @@ public class TestSaveAndLoad : MonoBehaviour
             Pos.y = data.YPosition;
             Pos.z = data.ZPosition;
             playerPos.transform.position = Pos;
-        }
-        else
-        {
-            Debug.LogError("Data Save File Not Found in" + path);
-            //return null;
-        }
+        //}
+        //else
+        //{
+        //    Debug.LogError("Data Save File Not Found in" + path);
+        //    //return null;
+        //}
 
         //inventory.IWeapons[0] = data.weapon1;
         //inventory.IWeapons[1] = data.weapon2;
@@ -204,9 +204,9 @@ public class TestSaveAndLoad : MonoBehaviour
 
     public void LoadPosition()
     {
-        string path = Application.persistentDataPath + "/Player.txt";
-        if (File.Exists(path))
-        {
+        //string path = Application.persistentDataPath + "/Player.txt";
+        //if (File.Exists(path))
+        //{
             PlayerData data = SavePlayerData.LoadPlayer();
 
             Vector3 Pos;
@@ -218,13 +218,13 @@ public class TestSaveAndLoad : MonoBehaviour
             Pos.z = data.ZPosition;
             playerPos.transform.position = Pos;
 
-        }
+        //}
 
-        else
-        {
-            Debug.LogError("Data Save File Not Found in" + path);
-            //return null;
-        }
+        //else
+        //{
+        //    Debug.LogError("Data Save File Not Found in" + path);
+        //    //return null;
+        //}
 
     }
 

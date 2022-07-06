@@ -139,7 +139,7 @@ public class AiAbbasBoss : MonoBehaviour
             RushDamage = 100f;
             Damage = 70f;
             ChaseSpeed = 5f;
-            AttackDuration = 10f;
+            AttackDuration = 15f;
             IdleDuration = 2f;
             RushDuration = 32f;
 

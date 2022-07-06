@@ -46,7 +46,7 @@ public class GameMaster : MonoBehaviour
 
 
 
-    audioSource.PlayOneShot(BGM);
+    audioSource.Play();
     }
 
     // Start is called before the first frame update
