@@ -43,7 +43,7 @@ public class GameMaster2 : MonoBehaviour
 
 
 
-    private void EscapeMenuToggle()
+    public void EscapeMenuToggle()
     {
         EscMenu.SetActive(!EscMenu.activeSelf);
         

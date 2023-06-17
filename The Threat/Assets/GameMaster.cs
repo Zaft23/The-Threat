@@ -184,14 +184,14 @@ public class GameMaster : MonoBehaviour
 
     }
 
-    private void UpgradeMenuToggle()
+    public void UpgradeMenuToggle()
     {
         UpgradeMenu.SetActive(!UpgradeMenu.activeSelf);
         OnToggleUpgradeMenu.Invoke(UpgradeMenu.activeSelf);
         
     }
 
-    private void EscapeMenuToggle()
+    public void EscapeMenuToggle()
     {
         EscMenu.SetActive(!EscMenu.activeSelf);
         OnToggleUpgradeMenu.Invoke(EscMenu.activeSelf);

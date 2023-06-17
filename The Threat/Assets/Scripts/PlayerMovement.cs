@@ -103,7 +103,15 @@ public class PlayerMovement : MonoBehaviour
             audioSource.PlayOneShot(DashSound);
             audioSource.volume = 0.5f;
         }
-      
+
+        if (Input.GetButtonDown("Jump") && IsGrounded)
+        {
+            //audioSource.PlayOneShot(DashSound);
+            audioSource.volume = 0.5f;
+            //_fJumpPressedRemember = _fJumpPressedRememberTime;
+            rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
+            Debug.Log("Jump2");
+        }
 
     }
 
@@ -245,14 +253,14 @@ public class PlayerMovement : MonoBehaviour
         //    //Debug.Log("Jump");
         //}
 
-        if (Input.GetButtonDown("Jump") && IsGrounded)
-        {
-            //audioSource.PlayOneShot(DashSound);
-            audioSource.volume = 0.5f;
-            //_fJumpPressedRemember = _fJumpPressedRememberTime;
-            rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
-            Debug.Log("Jump2");
-        }
+        //if (Input.GetButtonDown("Jump") && IsGrounded)
+        //{
+        //    //audioSource.PlayOneShot(DashSound);
+        //    audioSource.volume = 0.5f;
+        //    //_fJumpPressedRemember = _fJumpPressedRememberTime;
+        //    rb2D.velocity = new Vector2(rb2D.velocity.x, y: JumpForce);
+        //    Debug.Log("Jump2");
+        //}
 
         //Allow player to jump a few cm off from ground after jump
         //if ((_fJumpPressedRemember > 0) && (_coyoteRemember > 0))

@@ -1710,10 +1710,30 @@ PrefabInstance:
     - target: {fileID: 3097194923163442507, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 386192717}
     - target: {fileID: 3097194923163442507, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Resume
+      value: EscapeMenuToggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097194923163442507, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameMaster2, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701286111653581735, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701286111653581735, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701286111653581735, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701286111653581735, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 4904627308968243071, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1831,6 +1851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6359398043258500189, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6359398043550972032, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1839,6 +1863,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 6359398043550972039, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043550972039, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043550972039, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043550972039, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -215
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043643224149, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043643224149, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043643224149, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359398043643224149, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -125
+      objectReference: {fileID: 0}
     - target: {fileID: 6359398043643224150, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1846,6 +1902,38 @@ PrefabInstance:
     - target: {fileID: 6359398043643224150, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SavePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235307180600695891, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235307180600695891, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235307180600695891, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235307180600695891, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -305
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288680421478420287, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288680421478420287, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288680421478420287, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288680421478420287, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -395
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
@@ -2516,6 +2604,7 @@ MonoBehaviour:
   sceneToContinue: 0
   audioMixer: {fileID: 0}
   AudioSetting: {fileID: 0}
+  ControlMenu: {fileID: 0}
   GameStart: 0
   saveAndLoad: {fileID: 0}
 --- !u!1 &2052748257

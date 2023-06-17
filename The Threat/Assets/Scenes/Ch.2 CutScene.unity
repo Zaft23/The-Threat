@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 522903729}
     - target: {fileID: 3097194923163442507, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Resume
+      value: EscapeMenuToggle
       objectReference: {fileID: 0}
     - target: {fileID: 4904627308968243071, guid: 7d584e5f239ef234281dde8092002f98, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2156,6 +2156,7 @@ MonoBehaviour:
   sceneToContinue: 0
   audioMixer: {fileID: 0}
   AudioSetting: {fileID: 0}
+  ControlMenu: {fileID: 0}
   GameStart: 0
   saveAndLoad: {fileID: 0}
 --- !u!114 &1692176159
